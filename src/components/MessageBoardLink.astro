@@ -1,0 +1,25 @@
+---
+import restingReader from '../../design-assets/page5/人物侧卧读书_透明背景.png';
+import awakeReader from '../../design-assets/page5/人物坐起读书_透明背景.png';
+---
+<a class="message-board-link" href="/messages/" aria-label="进入留言板">
+  <span>留言板</span>
+  <span class="reader" aria-hidden="true">
+    <img class="reader-rest" src={restingReader.src} alt="" />
+    <img class="reader-awake" src={awakeReader.src} alt="" />
+  </span>
+</a>
+<style>
+  .message-board-link{position:fixed;top:clamp(21px,3vh,34px);right:clamp(13px,calc(3.2vw - 5px),49px);z-index:9000;display:flex;align-items:flex-start;gap:3px;height:32px;padding-top:8px;color:rgba(48,45,40,.64);font-family:"STDongGuanTi Bld","PING FANG GONG ZI TI","Songti SC",serif;font-size:clamp(.75rem,1vw,.94rem);line-height:1.2;letter-spacing:.13em;text-decoration:none;transition:color .28s ease,transform .35s cubic-bezier(.2,.75,.25,1)}
+  .message-board-link:hover,.message-board-link:focus-visible{color:#302d28;outline:none;transform:translateY(-2px)}
+  .message-board-link span:first-child{position:relative;white-space:nowrap}
+  .message-board-link span:first-child::after{content:"";position:absolute;left:0;right:.14em;bottom:-5px;height:1px;background:linear-gradient(90deg,transparent,rgba(166,78,66,.62),transparent);transform:scaleX(.2);transition:transform .32s ease}
+  .message-board-link:hover span:first-child::after,.message-board-link:focus-visible span:first-child::after{transform:scaleX(1)}
+  .reader{position:relative;display:block;width:108px;height:32px;margin-left:-5px}
+  .reader img{position:absolute;left:50%;top:8px;display:block;width:116px;height:96px;object-fit:contain;transform:translate(-50%,-50%);transition:opacity .32s ease,transform .45s cubic-bezier(.2,.75,.25,1)}
+  .reader-awake{opacity:0}
+  .message-board-link:hover .reader-rest,.message-board-link:focus-visible .reader-rest{opacity:0;transform:translate(-50%,-45%) scale(.96)}
+  .message-board-link:hover .reader-awake,.message-board-link:focus-visible .reader-awake{opacity:1;transform:translate(-50%,-54%) scale(1.04)}
+  @media(max-width:760px){.message-board-link{top:auto;right:5px;bottom:10px;height:58px;padding:18px 8px 3px 12px;background:rgba(246,237,220,.7);border-radius:999px;backdrop-filter:blur(5px);font-size:clamp(.75rem,1vw,.94rem)}.reader{width:72px;height:32px;margin-left:-5px}.reader img{top:0;width:78px;height:64px}}
+  @media(prefers-reduced-motion:reduce){.message-board-link,.reader img{transition:none}}
+</style>

@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.name,
+  description = site.description,
+} = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="stylesheet" href="/fonts/pingfang-gongzi/result.css" />
+    <link rel="stylesheet" href="/fonts/shangtudongguan-bold/result.css" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="page-shell py-6 sm:py-8 lg:py-10">
+      <header class="surface rounded-3xl px-5 py-4 sm:px-6 sm:py-5">
+        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <a href="/" class="font-semibold tracking-wide text-[color:var(--text)]">
+            {site.name}
+          </a>
+          <nav class="flex flex-wrap gap-2 text-sm text-[color:var(--muted)]">
+            {site.nav.map((item) => (
+              <a
+                href={item.href}
+                class="rounded-full border border-[color:var(--line)] px-3 py-1.5 transition hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      <main class="py-6 sm:py-8 lg:py-10">
+        <slot />
+      </main>
+
+      <footer class="surface rounded-3xl px-5 py-4 sm:px-6 sm:py-5 text-sm text-[color:var(--muted)]">
+        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} {site.author}</p>
+          <div class="flex flex-wrap gap-4">
+            {site.links.map((item) => (
+              <a href={item.href} target="_blank" rel="noreferrer" class="hover:text-[color:var(--accent)]">
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

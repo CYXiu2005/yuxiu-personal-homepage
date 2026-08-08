@@ -1,0 +1,20 @@
+---
+import gauze from '../../design-assets/page1/lian.png';
+const layers=['first','second','upper','sixth','third','fourth'];
+---
+<div class="message-gauze message-gauze--left" aria-hidden="true">{layers.map(layer=><div class={`gauze gauze--${layer}`}><img src={gauze.src} alt=""/></div>)}</div>
+<div class="message-gauze message-gauze--right" aria-hidden="true">{layers.map(layer=><div class={`gauze gauze--${layer}`}><img src={gauze.src} alt=""/></div>)}</div>
+<style>
+.message-gauze{position:fixed;inset:0 auto 0 0;z-index:6;width:min(31vw,480px);overflow:hidden;pointer-events:none;user-select:none}.message-gauze--right{right:0;left:auto;transform:scaleX(-1)}
+.gauze{position:absolute;top:-155px;left:-40px;width:clamp(167px,16.67vw,260px);opacity:.78;transform-origin:93% 0;will-change:transform;animation:gauze-breeze-first 6.75s ease-in-out infinite alternate}.gauze img{display:block;width:100%;height:auto;transform:scaleX(-1) scaleY(1.5);transform-origin:50% 0;filter:sepia(.14) saturate(.62) brightness(.91) contrast(1.15)}
+.gauze--second{top:-188px;left:-1px;width:clamp(191px,19.07vw,299px);opacity:.56;transform-origin:0 0;animation:gauze-breeze-second 7.83s -2.67s ease-in-out infinite alternate}.gauze--second img{transform:scaleX(-1) scaleY(2)}
+.gauze--third,.gauze--fourth{top:clamp(425px,calc(45vh + 5px),525px);left:-2px;width:clamp(225px,22.5vw,345px);opacity:.48;transform-origin:0 0;animation:gauze-breeze-third 8.5s -3.42s ease-in-out infinite alternate}.gauze--third img,.gauze--fourth img{transform:scaleX(1) scaleY(1.65);transform-origin:0 0}.gauze--fourth{left:-37px;z-index:-1;opacity:.4;animation:gauze-breeze-fourth 7.42s -2.25s ease-in-out infinite alternate}
+.gauze--upper{top:-165px;left:clamp(-190px,-15vw,-128px);width:clamp(308px,28.5vw,443px);opacity:.72;transform-origin:93% 0;animation:gauze-breeze-upper-fill 7.5s -1.5s ease-in-out infinite alternate}.gauze--sixth{top:-165px;left:calc(clamp(-330px,calc(-30vw - 3000px),-168px) - 50px);width:calc(clamp(308px,28.5vw,443px) + 100px);opacity:.72;transform-origin:93% 0;animation:gauze-breeze-upper-fill 7.5s -1.5s ease-in-out infinite alternate}
+@keyframes gauze-breeze-first{0%{transform:rotate(-1.44deg) skewX(-.3deg)}52%{transform:rotate(1.74deg) skewX(.42deg) translate3d(6px,2.4px,0)}100%{transform:rotate(-.66deg) skewX(-.144deg) translate3d(-2.4px,4.8px,0)}}
+@keyframes gauze-breeze-second{0%{transform:rotate(1.26deg) skewX(.264deg)}47%{transform:rotate(-1.86deg) skewX(-.408deg) translate3d(-6px,4.8px,0)}100%{transform:rotate(2.04deg) skewX(.48deg) translate3d(4.8px,2.4px,0)}}
+@keyframes gauze-breeze-third{0%{transform:rotate(19.34deg) skewX(-.144deg)}51%{transform:rotate(20.984deg) skewX(.216deg) translate3d(3.6px,3.6px,0)}100%{transform:rotate(19.64deg) skewX(-.096deg) translate3d(-1.2px,6px,0)}}
+@keyframes gauze-breeze-fourth{0%{transform:rotate(20.744deg) skewX(.168deg) translate3d(0,1.2px,0)}46%{transform:rotate(18.776deg) skewX(-.276deg) translate3d(-4.8px,6px,0)}100%{transform:rotate(20.456deg) skewX(.12deg) translate3d(2.4px,2.4px,0)}}
+@keyframes gauze-breeze-upper-fill{0%{transform:rotate(-.864deg) skewX(-.18deg)}49%{transform:rotate(1.296deg) skewX(.288deg) translate3d(4.8px,2.4px,0)}100%{transform:rotate(-.48deg) skewX(-.12deg) translate3d(-2.4px,4.8px,0)}}
+@media(max-width:760px){.message-gauze{width:24vw;opacity:.62}.gauze--third,.gauze--fourth{display:none}}
+@media(prefers-reduced-motion:reduce){.gauze{animation:none}}
+</style>

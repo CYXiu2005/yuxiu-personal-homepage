@@ -1,0 +1,65 @@
+---
+import DailyGalleryRows from '../../components/react/DailyGalleryRows.jsx';
+import SideRays from '../../components/react/SideRays.jsx';
+import SplashCursor from '../../components/react/SplashCursor.jsx';
+import bg1 from '../../../design-assets/page5/page5-bg-01.png';
+import bg2 from '../../../design-assets/page5/page5-bg-02.png';
+import bg3 from '../../../design-assets/page5/page5-bg-03.png';
+import titleSeal from '../../../design-assets/home/home-bg-yin.png';
+import MessageBoardLink from '../../components/MessageBoardLink.astro';
+
+const photoModules = import.meta.glob('../../../design-assets/page5/日常小品/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' }) as Record<string, { src: string; width: number; height: number }>;
+const photos = Object.entries(photoModules).map(([path, image]) => {
+  const fileName = path.split('/').pop() ?? '';
+  return {
+    image: image.src,
+    width: image.width,
+    height: image.height,
+    label: decodeURIComponent(fileName.replace(/\.[^.]+$/, '')),
+  };
+}).sort((a, b) => a.label.localeCompare(b.label, 'zh-CN', { numeric: true }));
+const portraits = photos.filter((item) => item.width < item.height);
+const others = photos.filter((item) => item.width >= item.height);
+const frames = [bg1, bg2, bg3];
+---
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="云岫的日常小品"/><title>日常小品 · Daily Notes</title>
+<link rel="stylesheet" href="/fonts/pingfang-gongzi/result.css"/><link rel="stylesheet" href="/fonts/shangtudongguan-bold/result.css"/></head>
+<body><MessageBoardLink/><main class="page"><div class="page5-bg" aria-hidden="true">{frames.map((frame, i) => <img class:list={['page5-bg__frame', { active: i === 0 }]} src={frame.src} alt="" />)}</div>
+<div class="page5-rays" aria-hidden="true"><SideRays client:only="react" speed={.54} rayColor1="#f0ad27" rayColor2="#ffe5a0" intensity={3.35} spread={1.28} origin="top-left" tilt={4} saturation={1.42} blend={.6} falloff={1.55} opacity={1}/></div>
+<SplashCursor client:load RAINBOW_MODE={false} COLOR="#fff8df" SECONDARY_COLOR="#ffffff" COLOR_INTENSITY={.24} SPLAT_RADIUS={.32} DENSITY_DISSIPATION={1.8} VELOCITY_DISSIPATION={1.2}/>
+<header class="nav-wrap"><nav aria-label="主要导航"><ul><li><a href="/">首页</a></li><li><a href="/page1/">个人介绍</a></li><li><a href="/experience/">工作经历</a></li><li><a href="/projects/">项目经历</a></li><li><a href="/page4/">我的文字</a></li><li><a href="/daily/" aria-current="page">日常小品</a></li></ul></nav></header>
+<section class="daily-shell"><header class="heading"><p>Daily Fragments</p><span class="heading-title"><h1>我自人间漫浪，平生事、南北东西</h1><img class="heading-seal" src={titleSeal.src} alt="云岫印" /></span><span class="heading-note" aria-label="拾取寻常光景，留作细碎注脚">{[...'拾取寻常光景，留作细碎注脚'].map((char, i) => <i aria-hidden="true" style={`--i:${i};--drop-x:${(i % 3 - 1) * 7}px;--drop-rotate:${i % 2 === 0 ? -7 : 7}deg`}>{char}</i>)}</span></header>
+<div class="gallery-stack"><DailyGalleryRows client:only="react" portraits={portraits} others={others} /></div>
+</section></main>
+<script>
+const frames = [...document.querySelectorAll('.page5-bg__frame')];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+let frameIndex = 0;
+if (!reduced.matches && frames.length > 1) setInterval(() => {
+  frames[frameIndex].classList.remove('active');
+  frameIndex = (frameIndex + 1) % frames.length;
+  frames[frameIndex].classList.add('active');
+}, 750);
+</script></body></html>
+<style>
+:root{--ink:#302d28;--red:#a64e42;--green:#718578;--paper:#f1e5d3;--cn:"STDongGuanTi Bld","PING FANG GONG ZI TI","Songti SC",serif;--display:"PING FANG GONG ZI TI","STKaiti",serif;--en:"Iowan Old Style",Georgia,serif}*{box-sizing:border-box}html,body{min-width:320px;min-height:100%;margin:0;background:var(--paper);color:var(--ink);font-family:var(--cn)}.page{position:relative;min-height:100svh;overflow:hidden;isolation:isolate}.page5-bg{position:fixed;inset:0;z-index:-1;background:var(--paper)}.page5-bg__frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;visibility:hidden}.page5-bg__frame.active{opacity:1;visibility:visible}.nav-wrap{position:fixed;inset:0 0 auto;z-index:40;display:flex;justify-content:center;padding:clamp(21px,3vh,34px) 24px 8px;pointer-events:none}.nav-wrap nav{pointer-events:auto;animation:float 6.8s ease-in-out infinite}.nav-wrap ul{display:flex;gap:clamp(20px,3vw,48px);margin:0;padding:0;list-style:none}.nav-wrap a{position:relative;display:block;padding:8px 1px 10px;color:rgba(48,45,40,.64);font-size:clamp(.75rem,1vw,.94rem);letter-spacing:.13em;text-decoration:none}.nav-wrap a::after{content:"";position:absolute;left:50%;bottom:0;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:0;transform:translate(-50%,5px);transition:.22s}.nav-wrap a:hover,.nav-wrap a[aria-current="page"]{color:var(--ink);transform:translateY(-2px)}.nav-wrap a:hover::after,.nav-wrap a[aria-current="page"]::after{opacity:.76;transform:translate(-50%,0)}.daily-shell{width:min(1360px,calc(100vw - 44px));margin:0 auto;padding:clamp(78px,8vh,92px) 0 24px}.heading{text-align:center;margin-bottom:clamp(10px,1.4vh,16px)}.heading p{margin:0 0 4px;color:var(--green);font-family:var(--en);font-size:.72rem;font-style:italic;letter-spacing:.2em}.heading h1{margin:0;font-family:var(--display);font-size:clamp(1.65rem,2.25vw,2.35rem);font-weight:400;letter-spacing:.16em}.heading-note{display:flex!important;justify-content:center;margin-top:6px;color:rgba(48,45,40,.44);font-size:.7rem;letter-spacing:.12em}.heading-note i{display:inline-block;font-style:normal;opacity:0;animation:note-drop .68s calc(.72s + var(--i)*.085s) cubic-bezier(.2,.82,.3,1.18) forwards}.gallery-stack{width:calc(100% - clamp(70px,8vw,130px));margin:0 auto}.gallery-stack :global(.daily-gallery-rows){display:grid;gap:14px}.footnote{margin:10px 0 0;text-align:center;color:rgba(48,45,40,.45);font-size:.7rem;letter-spacing:.16em}@keyframes float{50%{transform:translateY(-3px)}}@keyframes note-drop{0%{opacity:0;transform:translate3d(var(--drop-x),-38px,0) rotate(var(--drop-rotate))}72%{opacity:1;transform:translate3d(0,3px,0) rotate(0)}100%{opacity:1;transform:none}}@media(max-width:760px){.nav-wrap{justify-content:flex-start;overflow:auto}.nav-wrap ul{min-width:max-content;gap:17px}.daily-shell{width:calc(100vw - 20px);padding-top:84px}.heading{margin-bottom:10px}.gallery-stack{width:calc(100% - 16px)}.gallery-stack :global(.daily-gallery-rows){gap:9px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}.heading-note i{opacity:1!important;animation:none!important}.page5-bg__frame{opacity:0!important;visibility:hidden!important}.page5-bg__frame:first-child{opacity:1!important;visibility:visible!important}}
+</style>
+<style>
+  .page5-rays{position:fixed;inset:0;z-index:100;width:100vw;height:100vh;overflow:hidden;pointer-events:none;opacity:1;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(ellipse 58% 54% at 0 0,#000 0 26%,rgba(0,0,0,.8) 44%,rgba(0,0,0,.24) 66%,transparent 88%);mask-image:radial-gradient(ellipse 58% 54% at 0 0,#000 0 26%,rgba(0,0,0,.8) 44%,rgba(0,0,0,.24) 66%,transparent 88%)}
+  .page5-rays::before{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;background:conic-gradient(from 101deg at 0 0,transparent 0deg 8deg,rgba(242,172,39,.22) 13deg,rgba(255,218,126,.5) 21deg,rgba(255,249,213,.58) 27deg,rgba(244,184,57,.34) 34deg,rgba(255,225,143,.12) 41deg,transparent 49deg 360deg);filter:blur(18px) saturate(1.28) brightness(1.2);transform-origin:0 0;mix-blend-mode:screen;animation:broad-sun-ray 10s ease-in-out infinite alternate}
+  .daily-shell{position:relative;z-index:10}
+  .heading h1{font-size:clamp(1.35rem,2vw,2.08rem);letter-spacing:.11em}
+  @keyframes broad-sun-ray{0%{opacity:.82;transform:translate3d(-3px,1px,0) rotate(-.3deg) scale(1)}50%{opacity:1;transform:translate3d(2px,-2px,0) rotate(.15deg) scale(1.01)}100%{opacity:.9;transform:translate3d(5px,-3px,0) rotate(.42deg) scale(1.018)}}
+  @media(max-width:700px){.page5-rays{width:100vw;height:100vh;opacity:.78}.daily-shell{width:calc(100vw - 20px);padding-top:82px}.heading{margin-bottom:10px}.heading h1{font-size:clamp(1.02rem,4.35vw,1.35rem);line-height:1.42}.gallery-stack{margin-top:2px}}
+  @media(prefers-reduced-motion:reduce){.page5-rays{display:none}}
+
+  .heading-title{position:relative;display:inline-block}
+  .heading-title h1{position:relative;z-index:1;color:var(--ink);opacity:1}
+  .heading-seal{position:absolute;top:-24px;left:-57px;width:clamp(46px,3.8vw,60px);height:auto;object-fit:contain;opacity:0;pointer-events:none;filter:saturate(1.08) contrast(1.04);transform:translate3d(-6px,5px,0) rotate(-5deg) scale(.86);animation:page5-seal-arrive 1.15s .42s cubic-bezier(.2,.78,.25,1) forwards}
+  .gallery-stack{opacity:0;transform:translate3d(0,24px,0) scale(.985);animation:gallery-window-arrive 1.1s .22s cubic-bezier(.2,.76,.25,1) forwards}
+  @keyframes gallery-window-arrive{to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+  @keyframes page5-seal-arrive{to{opacity:.92;transform:translate3d(0,0,0) rotate(-4deg) scale(1)}}
+  @media(max-width:700px){.heading-seal{top:-19px;left:-43px;width:46px}}
+  @media(prefers-reduced-motion:reduce){.heading-seal,.gallery-stack{opacity:1;transform:none;animation:none}}
+</style>

@@ -1,0 +1,7 @@
+---
+import MessageBoard from '../../components/react/MessageBoard';
+import MessageBoardLink from '../../components/MessageBoardLink.astro';
+import MessageGauze from '../../components/MessageGauze.astro';
+---
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="description" content="云岫的宋韵互动留言板"/><title>云中寄书 · 留言板</title><link rel="stylesheet" href="/fonts/pingfang-gongzi/result.css"/><link rel="stylesheet" href="/fonts/shangtudongguan-bold/result.css"/></head><body><a class="back" href="/"><span aria-hidden="true">←</span>归</a><MessageBoardLink/><MessageGauze/><MessageBoard client:only="react"/></body></html>
+<style>html,body{margin:0;min-width:320px;min-height:100%;background:#f1e5d3}.back{position:fixed;top:clamp(25px,3.5vh,40px);left:clamp(20px,3.5vw,58px);z-index:9999;display:inline-flex;align-items:center;gap:10px;color:rgba(48,45,40,.68);font-family:"STDongGuanTi Bld","Songti SC",serif;font-size:clamp(.96rem,1.18vw,1.14rem);letter-spacing:.2em;text-decoration:none;transition:color .25s,transform .25s}.back span{font-family:"Iowan Old Style",Georgia,serif;font-size:1.28em;font-weight:400;letter-spacing:0;transition:transform .25s}.back:hover{color:#a64e42;transform:translateY(-1px)}.back:hover span{transform:translateX(-4px)}@media(max-width:700px){.back{top:14px;left:14px;gap:8px;font-size:.78rem;letter-spacing:.14em}.back span{font-size:1.12em}}</style>

@@ -1,0 +1,167 @@
+:root{--mb-ink:#393630;--mb-soft:#746d62;--mb-red:#a64e42;--mb-paper:#f1e5d3;--mb-font:"STDongGuanTi Bld","Songti SC",serif;--mb-display:"PING FANG GONG ZI TI","STKaiti",serif}
+*{box-sizing:border-box}.message-board{position:relative;min-height:100svh;overflow:hidden;color:var(--mb-ink);font-family:var(--mb-font);background:radial-gradient(circle at 50% 50%,rgba(255,253,246,.55),transparent 55%),linear-gradient(rgba(241,229,211,.7),rgba(238,222,198,.82));isolation:isolate}.message-board::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.21;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.52' numOctaves='4' seed='17'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");mix-blend-mode:multiply}.board-title{position:absolute;top:10.5%;left:50%;z-index:4;text-align:center;transform:translateX(-50%);pointer-events:none}.board-title p{margin:0 0 4px;color:#718578;font-family:Georgia,serif;font-size:.68rem;font-style:italic;letter-spacing:.22em}.board-title h1{margin:0;font-family:var(--mb-display);font-size:clamp(1.75rem,2.5vw,2.55rem);font-weight:400;letter-spacing:.18em}.board-title span{display:block;margin-top:7px;color:rgba(57,54,48,.45);font-size:.68rem;letter-spacing:.16em}.letter-sky{position:absolute;inset:17% 5% 45%;z-index:3}.floating-envelope{--x:50%;--y:20%;--r:0deg;--s:1;--d:7s;position:absolute;left:var(--x);top:var(--y);width:clamp(82px,8.3vw,126px);aspect-ratio:1.58;border:0;padding:0;background:transparent;cursor:pointer;filter:drop-shadow(0 5px 5px rgba(70,54,37,.09));transform:translate(-50%,-50%) rotate(var(--r)) scale(var(--s));animation:envelope-drift var(--d) ease-in-out infinite alternate;transition:filter .3s,opacity .35s}.floating-envelope:hover,.floating-envelope:focus-visible{outline:none;filter:drop-shadow(0 8px 7px rgba(70,54,37,.16)) saturate(1.08)}.env-back,.env-front,.outgoing-letter{background:linear-gradient(145deg,rgba(255,252,243,.97),rgba(225,207,177,.95));border:1px solid rgba(86,69,48,.3)}.env-back{position:absolute;inset:0}.env-lines{position:absolute;inset:0;overflow:hidden}.env-lines::before,.env-lines::after{content:"";position:absolute;bottom:-44%;width:72%;height:105%;border-top:1px solid rgba(86,69,48,.28)}.env-lines::before{left:-11%;transform:rotate(31deg)}.env-lines::after{right:-11%;transform:rotate(-31deg)}.env-flap,.open-flap{position:absolute;left:0;top:0;width:100%;height:58%;background:rgba(239,225,201,.96);clip-path:polygon(0 0,100% 0,50% 100%);border-top:1px solid rgba(86,69,48,.22);transform-origin:top}.floating-envelope i{position:absolute;left:50%;top:55%;width:9px;height:9px;border-radius:50%;background:rgba(166,78,66,.68);transform:translate(-50%,-50%)}.composer{position:absolute;left:50%;bottom:7%;z-index:7;width:min(640px,calc(100% - 38px));transform:translateX(-50%)}.composer label{display:block;margin:0 0 10px;color:rgba(57,54,48,.63);font-size:.78rem;letter-spacing:.18em}.composer textarea{display:block;width:100%;height:clamp(112px,15vh,150px);resize:none;padding:18px 20px;border:0;border-top:1px solid rgba(74,62,48,.18);border-bottom:1px solid rgba(74,62,48,.22);outline:none;color:var(--mb-ink);background:rgba(255,252,244,.22);font:400 .9rem/2 var(--mb-font);letter-spacing:.06em;transition:background .3s}.composer textarea:focus{background:rgba(255,252,244,.42)}.composer textarea::placeholder{color:rgba(57,54,48,.27)}.composer>div{display:flex;align-items:center;justify-content:space-between;padding:8px 3px}.composer small{color:rgba(57,54,48,.34);font-family:Georgia,serif;font-size:.62rem}.composer button,.reading-close{border:0;padding:5px 4px 8px;color:rgba(57,54,48,.72);background:transparent;font-family:var(--mb-font);font-size:.84rem;letter-spacing:.2em;cursor:pointer;border-bottom:1px solid rgba(166,78,66,.38)}.composer button:disabled{opacity:.3;cursor:default}.sent-note{position:absolute;right:58px;bottom:9px;margin:0;color:rgba(113,133,120,.5);font-size:.65rem;letter-spacing:.16em;animation:sent 2.8s both}.outgoing-letter{position:fixed;left:50%;bottom:17%;z-index:30;display:none;width:230px;height:142px}.outgoing-sheet{position:absolute;left:13%;right:13%;bottom:12%;min-height:128px;padding:15px;overflow:hidden;background:#f8f0e2;color:rgba(57,54,48,.7);font-size:.7rem;line-height:1.75;transform-origin:bottom}.outgoing-flaps{position:absolute;inset:0;opacity:0;transform:scale(1.08);background:linear-gradient(30deg,#ead8b9 49%,transparent 50%),linear-gradient(-30deg,#f3e5cc 49%,transparent 50%);clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}.outgoing-seal{position:absolute;left:50%;top:52%;width:17px;height:17px;border-radius:50%;background:rgba(166,78,66,.8);opacity:0;transform:translate(-50%,-50%) scale(.4)}.reading-layer{position:fixed;inset:0;z-index:100;background:rgba(237,225,205,.12);backdrop-filter:blur(2px)}.reading-close{position:absolute;top:16%;right:14%;z-index:4;border-bottom:0;color:rgba(57,54,48,.5)}.opened-envelope{position:absolute;left:50%;top:39%;width:min(430px,78vw);aspect-ratio:1.58;transform:translate(-50%,-50%);filter:drop-shadow(0 13px 14px rgba(72,54,35,.13))}.opened-envelope>.env-back{z-index:0}.open-flap{z-index:0;background:#eee0c7;transform:rotateX(180deg)}.letter-paper{position:absolute;left:8%;right:8%;bottom:32%;z-index:1;min-height:230px;padding:34px clamp(25px,4vw,48px) 24px;background:linear-gradient(90deg,rgba(244,234,215,.96),rgba(255,252,244,.98),rgba(241,228,205,.95));border:1px solid rgba(80,65,47,.15)}.letter-paper p{margin:0;color:rgba(57,54,48,.84);font-size:clamp(.86rem,1.25vw,1.02rem);line-height:2.05;letter-spacing:.08em;text-align:left}.letter-paper p span{display:inline-block;white-space:pre-wrap}.letter-paper time{display:block;margin-top:22px;color:rgba(57,54,48,.35);font-family:Georgia,serif;font-size:.58rem;letter-spacing:.1em;text-align:right}.env-front{position:absolute;inset:42% 0 0;z-index:2;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
+@keyframes envelope-drift{0%{transform:translate(-50%,-50%) rotate(calc(var(--r) - .6deg)) scale(var(--s))}50%{transform:translate(calc(-50% + 3px),calc(-50% - 5px)) rotate(var(--r)) scale(var(--s))}100%{transform:translate(calc(-50% - 2px),calc(-50% + 3px)) rotate(calc(var(--r) + .5deg)) scale(var(--s))}}@keyframes sent{0%,100%{opacity:0}20%,72%{opacity:1}}
+@media(max-width:700px){.board-title{top:9%}.letter-sky{inset:18% 2% 48%}.floating-envelope{width:76px}.floating-envelope:nth-child(n+7){display:none}.composer{bottom:5%}.composer textarea{height:120px}.reading-close{top:13%;right:7%}.opened-envelope{top:42%;width:86vw}.letter-paper{min-height:210px;padding:26px 22px 20px}}
+@media(prefers-reduced-motion:reduce){.floating-envelope{animation:none}.sent-note{animation:none;opacity:1}.message-board *{scroll-behavior:auto!important}}
+
+/* 古画荔枝竖版信封 */
+.floating-envelope{width:clamp(58px,5.8vw,88px);aspect-ratio:941/1672;filter:drop-shadow(0 7px 7px rgba(70,54,37,.12))}
+.floating-envelope>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.floating-envelope>b,.outgoing-letter>b{position:absolute;z-index:4;top:7.5%;right:6%;max-width:74%;overflow:hidden;color:rgba(48,45,40,.78);font-family:"PING FANG GONG ZI TI","STKaiti","KaiTi",serif;font-size:clamp(.52rem,.68vw,.7rem);font-weight:400;letter-spacing:.08em;line-height:1.2;text-overflow:ellipsis;white-space:nowrap;writing-mode:vertical-rl;text-orientation:upright}
+.floating-envelope:hover,.floating-envelope:focus-visible{filter:drop-shadow(0 10px 9px rgba(70,54,37,.2)) saturate(1.06)}
+.composer-foot{gap:14px}.signature{display:flex!important;align-items:center;gap:9px;margin:0 auto 0 0!important;color:rgba(57,54,48,.52)!important;font-size:.7rem!important;letter-spacing:.14em!important}.signature span{white-space:nowrap}.signature input{width:clamp(112px,17vw,180px);padding:5px 3px 6px;border:0;border-bottom:1px solid rgba(74,62,48,.2);outline:0;background:transparent;color:rgba(57,54,48,.8);font:400 .78rem/1.4 var(--mb-display);letter-spacing:.08em}.signature input::placeholder{color:rgba(57,54,48,.28)}
+.outgoing-letter{width:126px;height:224px;border:0;background:transparent}.outgoing-letter>img{position:absolute;inset:0;z-index:2;display:block;width:100%;height:100%;object-fit:contain}.outgoing-letter>b{top:8%;right:7%;font-size:.7rem}.outgoing-letter .outgoing-sheet{left:15%;right:15%;bottom:17%;z-index:1;min-height:156px;padding:12px 9px;font-size:.6rem}.outgoing-letter .outgoing-flaps{z-index:3;opacity:0;background:rgba(238,220,190,.22);clip-path:polygon(8% 34%,50% 55%,92% 34%,92% 92%,8% 92%)}.outgoing-letter .outgoing-seal{z-index:5;top:54%}
+@media(max-width:700px){.floating-envelope{width:58px}.composer-foot{gap:8px}.signature{gap:5px}.signature input{width:100px}.outgoing-letter{width:104px;height:185px}}
+
+/* 背面信封的开合层：主体、封舌、下半封套分别使用同一古画素材 */
+.opened-envelope{top:48%;width:min(238px,43vw);aspect-ratio:905/1737;perspective:900px;filter:drop-shadow(0 13px 14px rgba(72,54,35,.14))}
+.envelope-back-art,.envelope-front-lower,.envelope-flap-art{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.envelope-back-art{z-index:0}.envelope-front-lower{z-index:3;clip-path:inset(43% 0 0 0)}
+.envelope-flap-art{z-index:4;clip-path:inset(0 0 55% 0);transform-origin:50% 25%;backface-visibility:visible;will-change:transform;filter:brightness(1.015)}
+.opened-envelope .letter-paper{left:50%;right:auto;bottom:39%;z-index:2;width:min(470px,84vw);min-height:230px;translate:-50% 0}
+.outgoing-letter>.envelope-back-art{z-index:1}.outgoing-letter>.envelope-flap-art{z-index:4}.outgoing-letter .outgoing-sheet{z-index:2}.outgoing-letter .outgoing-seal{z-index:5}
+@media(max-width:700px){.opened-envelope{top:51%;width:min(210px,54vw)}.opened-envelope .letter-paper{width:min(390px,88vw);min-height:205px}}
+
+/* 留言板整页使用古画信封背面；展开信纸完全抽出至信封上方 */
+.message-board{background-color:var(--mb-paper);background-image:linear-gradient(rgba(247,238,221,.64),rgba(235,216,188,.66)),url("../../../design-assets/page5/古画荔枝信封背面_透明背景.png");background-position:center;background-repeat:no-repeat;background-size:cover}
+.opened-envelope{top:56%}
+.opened-envelope .letter-paper{bottom:72%;min-height:245px;padding:32px clamp(25px,4vw,48px) 25px;border:1px solid rgba(117,87,51,.2);background-color:#ead5ad;background-image:radial-gradient(circle at 22% 18%,rgba(255,248,222,.58),transparent 34%),linear-gradient(90deg,rgba(195,148,85,.12),rgba(244,225,187,.92) 13%,rgba(239,216,173,.96) 82%,rgba(178,126,65,.14)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' seed='9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.09'/%3E%3C/svg%3E");box-shadow:inset 0 0 24px rgba(130,88,42,.11),0 12px 24px rgba(71,51,31,.12)}
+.opened-envelope .letter-paper::before{content:"";position:absolute;inset:7px;pointer-events:none;border:1px solid rgba(125,91,51,.08)}
+.opened-envelope .letter-paper p,.opened-envelope .letter-paper time{position:relative;z-index:1}
+.outgoing-letter .outgoing-sheet{background-color:#ead5ad;background-image:linear-gradient(90deg,rgba(185,132,69,.12),rgba(245,227,190,.94),rgba(182,128,64,.1));border:1px solid rgba(117,87,51,.16)}
+@media(max-width:700px){.opened-envelope{top:58%}.opened-envelope .letter-paper{bottom:70%;min-height:220px;padding:26px 22px 21px}}
+
+/* 最终素材帧：背景、打开信封与完全展开信纸 */
+.message-board{background-color:#efe1cc;background-image:linear-gradient(rgba(247,239,224,.18),rgba(236,219,194,.2)),url("../../../design-assets/page5/背景.png");background-position:center;background-repeat:no-repeat;background-size:cover}
+.opened-envelope{top:51%;width:min(250px,45vw);aspect-ratio:905/1737}
+.envelope-visual,.outgoing-envelope-visual,.outgoing-paper-visual{position:absolute;inset:0}
+.envelope-visual img,.outgoing-envelope-visual>img,.outgoing-paper-visual>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.envelope-closed-frame{z-index:1;opacity:1}.envelope-open-frame{z-index:2;opacity:0}
+.opened-envelope .letter-paper{left:50%;right:auto;bottom:1%;z-index:5;width:min(315px,72vw);min-height:0;aspect-ratio:978/1609;padding:0;border:0;background:transparent;box-shadow:none;translate:-50% 0;overflow:visible}
+.opened-envelope .letter-paper::before{display:none}.opened-envelope .letter-paper>img{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 17px rgba(70,49,28,.12))}
+.opened-envelope .letter-paper p{position:absolute;left:16%;right:16%;top:19%;z-index:2;max-height:54%;margin:0;overflow:auto;color:rgba(53,47,39,.84);font-size:clamp(.72rem,1vw,.9rem);line-height:1.9;scrollbar-width:thin;scrollbar-color:rgba(126,91,51,.25) transparent}
+.opened-envelope .letter-paper time{position:absolute;left:16%;right:16%;bottom:15%;z-index:2;margin:0;color:rgba(76,62,47,.42)}
+.outgoing-letter{width:150px;height:247px;border:0;background:transparent}.outgoing-paper-visual,.outgoing-envelope-visual{width:100%;height:100%}.outgoing-paper-visual{z-index:3}.outgoing-envelope-visual{z-index:2;opacity:0}
+.outgoing-letter .outgoing-sheet{position:absolute;left:calc(16% + 10px);right:calc(16% + 10px);top:19%;bottom:auto;z-index:4;min-height:0;max-height:54%;padding:0;overflow:hidden;border:0;background:transparent;color:rgba(53,47,39,.82);font-size:.58rem;line-height:1.75;transform:none}
+.outgoing-paper-visual em{position:absolute;right:16%;bottom:15%;z-index:4;color:rgba(62,52,42,.54);font-family:var(--mb-display);font-size:.58rem;font-style:normal;letter-spacing:.08em}
+.outgoing-envelope-visual>b{position:absolute;z-index:4;top:8%;right:7%;color:rgba(48,45,40,.76);font-family:var(--mb-display);font-size:.65rem;font-weight:400;writing-mode:vertical-rl}
+.outgoing-envelope-visual .outgoing-seal{z-index:5}
+@media(max-width:700px){.opened-envelope{top:53%;width:min(220px,56vw)}.opened-envelope .letter-paper{bottom:2%;width:min(290px,76vw)}.outgoing-letter{width:124px;height:204px}}
+
+/* 放大前景开信/寄信动画，背景漂浮信封缩至 4/5 并下移 */
+.letter-sky{transform:translateY(15px)}
+.floating-envelope{width:clamp(46.4px,4.64vw,70.4px)}
+.opened-envelope{width:min(300px,54vw)}
+.opened-envelope .letter-paper{width:min(378px,82vw)}
+.outgoing-letter{width:180px;height:296px}
+@media(max-width:700px){.floating-envelope{width:46.4px}.opened-envelope{width:min(260px,66vw)}.opened-envelope .letter-paper{width:min(340px,86vw)}.outgoing-letter{width:148px;height:244px}}
+
+/* 本轮比例：漂浮信封 ×2，中心素材动画 ×1.5 */
+.floating-envelope{width:clamp(92.8px,9.28vw,140.8px)}
+.opened-envelope{width:min(450px,72vw)}
+.opened-envelope .letter-paper{width:min(567px,92vw)}
+.outgoing-letter{width:270px;height:444px}
+@media(max-width:700px){.floating-envelope{width:92.8px}.opened-envelope{width:min(360px,88vw)}.opened-envelope .letter-paper{width:min(450px,94vw)}.outgoing-letter{width:222px;height:366px}}
+
+/* 本轮尺寸与 page2 副标题动效 */
+.letter-sky{transform:translateY(30px)}
+.floating-envelope{width:clamp(74.24px,7.424vw,112.64px);opacity:.9}
+.opened-envelope{width:min(360px,68vw)}
+.opened-envelope .letter-paper{width:min(453.6px,90vw)}
+.outgoing-letter{width:216px;height:355.2px}
+.board-title>.board-subtitle{display:flex;justify-content:center;margin-top:10px;color:rgba(48,45,40,.45);font-family:var(--mb-font);font-size:.74rem;letter-spacing:.1em}
+.board-subtitle i{display:inline-block;font-style:normal;opacity:0;animation:board-note-drop .68s calc(.72s + var(--i)*.085s) cubic-bezier(.2,.82,.3,1.18) forwards}
+@keyframes board-note-drop{0%{opacity:0;transform:translate3d(var(--drop-x),-38px,0) rotate(var(--drop-rotate))}72%{opacity:1;transform:translate3d(0,3px,0) rotate(0)}100%{opacity:1;transform:none}}
+@media(max-width:700px){.floating-envelope{width:74.24px}.opened-envelope{width:min(288px,82vw)}.opened-envelope .letter-paper{width:min(360px,92vw)}.outgoing-letter{width:177.6px;height:292.8px}}
+@media(prefers-reduced-motion:reduce){.board-subtitle i{opacity:1;animation:none}}
+
+/* 中心动画固定以视口中心为基准；收字跟随信纸右上角 */
+.opened-envelope{top:50%;left:50%}
+.opened-envelope .letter-paper{top:50%;bottom:auto;left:50%;translate:-50% -50%}
+.opened-envelope .letter-paper .reading-close{position:absolute;top:9%;right:9%;z-index:8;padding:4px;border-bottom:0;color:rgba(57,54,48,.54);font-size:.82rem}
+.outgoing-letter{top:50%;bottom:auto;translate:0 -50%}
+@media(max-width:700px){.opened-envelope{top:50%}.opened-envelope .letter-paper{top:50%;bottom:auto}.outgoing-letter{top:50%;bottom:auto}}
+
+/* 强制中心阅读舞台：不再让 GSAP transform 覆盖居中位移 */
+.reading-layer{display:grid;place-items:center}
+.reading-layer .opened-envelope{position:relative;left:auto;top:auto;width:min(360px,68vw);transform:none}
+.reading-layer .opened-envelope .letter-paper{top:50%;left:50%;bottom:auto;translate:none;transform:translate(-50%,-50%);width:min(453.6px,90vw)}
+@media(max-width:700px){.reading-layer .opened-envelope{left:auto;top:auto;width:min(288px,82vw)}.reading-layer .opened-envelope .letter-paper{top:50%;left:50%;width:min(360px,92vw);transform:translate(-50%,-50%)}}
+
+/* 背景信封安静漂浮；悬停暂停并上浮发出暖白微光 */
+.floating-envelope{transition:translate .42s cubic-bezier(.2,.78,.24,1),filter .4s ease,opacity .3s ease}
+.floating-envelope:hover,.floating-envelope:focus-visible{z-index:12;animation-play-state:paused;translate:0 -10px;opacity:1;filter:drop-shadow(0 10px 10px rgba(108,72,35,.2)) drop-shadow(0 0 13px rgba(255,243,201,.72)) saturate(1.1) brightness(1.06)}
+@keyframes envelope-drift{0%{transform:translate(-50%,-50%) rotate(calc(var(--r) - .8deg)) scale(var(--s))}50%{transform:translate(calc(-50% + 4px),calc(-50% - 8px)) rotate(var(--r)) scale(var(--s))}100%{transform:translate(calc(-50% - 3px),calc(-50% + 5px)) rotate(calc(var(--r) + .7deg)) scale(var(--s))}}
+
+/* 寄信舞台与阅读舞台同尺寸、同中心坐标 */
+.outgoing-letter{top:50%;left:50%;bottom:auto;width:min(360px,68vw);height:auto;aspect-ratio:905/1737;translate:0 -50%}
+.outgoing-envelope-visual{inset:0;width:100%;height:100%}
+.outgoing-paper-visual{inset:auto;left:50%;top:50%;width:min(453.6px,90vw);height:auto;aspect-ratio:978/1609;transform:translate(-50%,-50%)}
+.floating-envelope.is-user-message{animation:envelope-drift var(--d) ease-in-out infinite alternate,message-arrive 1.15s ease-out both}
+@keyframes message-arrive{0%{opacity:0;filter:blur(3px) brightness(1.12)}100%{opacity:.9;filter:none}}
+@media(max-width:700px){.outgoing-letter{width:min(288px,82vw)}.outgoing-paper-visual{width:min(360px,92vw)}}
+
+/* 六封信整体下移并横向收窄；信纸正文远离红线 */
+.letter-sky{left:calc(5% + 12.5px);right:calc(5% + 12.5px);transform:translateY(55px)}
+.opened-envelope .letter-paper p{left:calc(16% + 10px);right:calc(16% + 10px)}
+.opened-envelope .letter-paper time{left:calc(16% + 10px);right:calc(16% + 10px);font-family:var(--mb-font);font-size:clamp(.72rem,1vw,.9rem);line-height:1.9}
+@media(max-width:700px){.letter-sky{left:calc(2% + 12.5px);right:calc(2% + 12.5px);transform:translateY(55px)}.opened-envelope .letter-paper p,.opened-envelope .letter-paper time{left:calc(16% + 10px);right:calc(16% + 10px)}}
+
+/* 开信与寄信强制共用同一视口中心舞台和素材尺寸 */
+.shared-envelope-stage{position:fixed!important;top:50%!important;left:50%!important;bottom:auto!important;width:min(360px,68vw)!important;height:auto!important;aspect-ratio:905/1737!important;margin:0!important;transform-origin:50% 50%!important}
+.opened-envelope.shared-envelope-stage{translate:-50% -50%!important}
+.outgoing-letter.shared-envelope-stage{translate:0 -50%!important}
+.shared-paper-stage{position:absolute!important;top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;width:min(453.6px,90vw)!important;height:auto!important;aspect-ratio:978/1609!important;margin:0!important;translate:-50% -50%!important;transform-origin:50% 50%!important}
+.opened-envelope .shared-paper-stage{transform:none!important}
+.outgoing-letter .shared-paper-stage{transform:none!important}
+@media(max-width:700px){.shared-envelope-stage{width:min(288px,82vw)!important}.shared-paper-stage{width:min(360px,92vw)!important}}
+
+/* 取消双重百分比位移：四边归零配合 auto margin 做绝对视口居中 */
+.shared-envelope-stage{position:fixed!important;inset:0!important;top:0!important;right:0!important;bottom:0!important;left:0!important;margin:auto!important;translate:none!important}
+.opened-envelope.shared-envelope-stage,.outgoing-letter.shared-envelope-stage{translate:none!important}
+.shared-paper-stage{position:absolute!important;inset:0!important;top:0!important;right:0!important;bottom:0!important;left:0!important;margin:auto!important;translate:none!important;transform:none!important}
+.outgoing-letter .outgoing-sheet{font-family:var(--mb-font);font-size:clamp(.72rem,1vw,.9rem);line-height:1.9;letter-spacing:.08em}
+.outgoing-paper-visual em{font-family:var(--mb-font);font-size:clamp(.72rem,1vw,.9rem);line-height:1.9}
+
+/* 信纸高于信封容器，必须以自身中心做一次明确位移 */
+.shared-paper-stage{position:absolute!important;inset:auto!important;top:50%!important;right:auto!important;bottom:auto!important;left:50%!important;margin:0!important;translate:none!important;transform:translate(-50%,-50%)!important}
+
+/* 信纸是全屏网格的独立子项，不再相对信封计算位置 */
+.reading-layer{display:grid!important;place-items:center!important}
+.reading-layer .opened-envelope{grid-area:1/1;position:relative!important;inset:auto!important;margin:0!important;translate:none!important}
+.reading-paper{grid-area:1/1;position:relative!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;width:min(453.6px,90vw)!important;height:auto!important;aspect-ratio:978/1609!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;translate:none!important;transform:none!important;z-index:105;overflow:visible}
+.reading-paper>img{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 17px rgba(70,49,28,.12))}
+.reading-paper p{position:absolute;left:calc(16% + 10px);right:calc(16% + 10px);top:19%;z-index:2;max-height:54%;margin:0;overflow:auto;color:rgba(53,47,39,.84);font-family:var(--mb-font);font-size:clamp(.72rem,1vw,.9rem);line-height:1.9;letter-spacing:.08em;text-align:left}
+.reading-paper p span{display:inline-block;white-space:pre-wrap}.reading-paper time{position:absolute;left:calc(16% + 10px);right:calc(16% + 10px);bottom:15%;z-index:2;margin:0;color:rgba(76,62,47,.42);font-family:var(--mb-font);font-size:clamp(.72rem,1vw,.9rem);line-height:1.9;text-align:right}.reading-paper .reading-close{position:absolute;top:9%;right:9%;z-index:8;padding:4px;border:0;background:transparent;color:rgba(57,54,48,.54);font-family:var(--mb-font);font-size:.82rem;cursor:pointer}
+.outgoing-letter.shared-envelope-stage{display:none;place-items:center}.outgoing-letter.shared-envelope-stage[style*="display: block"]{display:grid!important}
+.outgoing-paper-visual,.outgoing-envelope-visual{grid-area:1/1;position:relative!important;inset:auto!important;margin:0!important;translate:none!important;transform:none!important}.outgoing-paper-visual{width:min(453.6px,90vw)!important;height:auto!important;aspect-ratio:978/1609}.outgoing-envelope-visual{width:100%;height:100%}
+@media(max-width:700px){.reading-paper,.outgoing-paper-visual{width:min(360px,92vw)!important}}
+
+/* 新寄信件入场不再占用 filter，所有信封均恢复悬停高光 */
+.floating-envelope:hover,.floating-envelope:focus-visible{filter:drop-shadow(0 10px 10px rgba(108,72,35,.2)) drop-shadow(0 0 13px rgba(255,243,201,.78)) saturate(1.1) brightness(1.07)!important}
+@keyframes message-arrive{0%{opacity:0}100%{opacity:.9}}
+
+/* 写信区左右各增加 10px，底部增加 8px 呼吸空间 */
+.composer textarea{padding:18px 30px 26px}
+
+/* Keep the final text line clear of the lower rule, even before scrolling starts. */
+.composer textarea{padding-bottom:34px}
+
+/* Narrow the six-letter composition by 40px and lower it by another 40px. */
+.letter-sky{left:calc(5% + 32.5px);right:calc(5% + 32.5px);transform:translateY(115px)}
+@media(max-width:700px){.letter-sky{left:calc(2% + 32.5px);right:calc(2% + 32.5px);transform:translateY(115px)}}
+
+.board-title .board-title-line{position:relative;display:inline-block;margin-top:0;color:var(--mb-ink);font-size:inherit;letter-spacing:normal}
+.board-title-line h1{position:relative;z-index:1;color:var(--mb-ink);opacity:1}
+.board-title-seal{position:absolute;top:-24px;left:-57px;width:clamp(46px,3.8vw,60px);height:auto;object-fit:contain;opacity:0;pointer-events:none;filter:saturate(1.08) contrast(1.04);transform:translate3d(-5px,5px,0) rotate(-5deg) scale(.88);animation:board-seal-arrive 1.15s .45s cubic-bezier(.2,.78,.25,1) forwards}
+@keyframes board-seal-arrive{to{opacity:.92;transform:translate3d(0,0,0) rotate(-4deg) scale(1)}}
+@media(max-width:700px){.board-title-seal{top:-19px;left:-43px;width:46px}}
+@media(prefers-reduced-motion:reduce){.board-title-seal{opacity:.92;transform:rotate(-4deg);animation:none}}
+
+/* 寄信与开信共用同一视口网格中心，动画位移从页面中心开始计算。 */
+.outgoing-layer{position:fixed;inset:0;z-index:30;display:grid;place-items:center;pointer-events:none}
+.outgoing-layer .outgoing-letter.shared-envelope-stage{position:relative!important;inset:auto!important;grid-area:1/1;width:auto!important;height:auto!important;aspect-ratio:auto!important;margin:0!important;translate:none!important}
+.outgoing-layer .outgoing-paper-visual,.outgoing-layer .outgoing-envelope-visual{grid-area:1/1;align-self:center;justify-self:center}
+.outgoing-layer .outgoing-envelope-visual{width:min(360px,68vw)!important;height:auto!important;aspect-ratio:905/1737}
+@media(max-width:700px){.outgoing-layer .outgoing-envelope-visual{width:min(288px,82vw)!important}}
+.composer{will-change:opacity}

@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f6f1e8;
+  --bg-elevated: rgba(255, 255, 255, 0.76);
+  --text: #191613;
+  --muted: #655c52;
+  --line: rgba(25, 22, 19, 0.12);
+  --accent: #8a4f2f;
+  --accent-soft: rgba(138, 79, 47, 0.12);
+  --shadow: 0 24px 60px rgba(33, 24, 16, 0.08);
+  --font-body: "STDongGuanTi Bld", "PING FANG GONG ZI TI", "Songti SC", serif;
+  --font-display: "PING FANG GONG ZI TI", "Kaiti SC", "Songti SC", serif;
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(255, 214, 176, 0.42), transparent 28%),
+    radial-gradient(circle at top right, rgba(171, 208, 255, 0.28), transparent 24%),
+    linear-gradient(180deg, #fffaf4 0%, var(--bg) 100%);
+  color: var(--text);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+.page-shell {
+  width: min(1120px, calc(100vw - 2rem));
+  margin: 0 auto;
+}
+
+.surface {
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}

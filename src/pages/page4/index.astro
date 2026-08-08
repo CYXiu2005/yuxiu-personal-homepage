@@ -1,0 +1,517 @@
+---
+import bg1 from '../../../design-assets/page4/page4-bg-01.jpg';
+import bg2 from '../../../design-assets/page4/page4-bg-02.jpg';
+import bg3 from '../../../design-assets/page4/page4-bg-03.jpg';
+import scrollImage from '../../../design-assets/page4/juanzhou.png';
+import SplashCursor from '../../components/react/SplashCursor.jsx';
+import MessageBoardLink from '../../components/MessageBoardLink.astro';
+
+const frames = [bg1, bg2, bg3];
+const petals = Array.from({ length: 28 }, (_, i) => ({
+  style: [
+    `--x:${(i * 37 + 9) % 101}vw`,
+    `--size:${7 + (i * 7 % 9)}px`,
+    `--duration:${12 + (i * 5 % 11)}s`,
+    `--delay:${-(i * 7 % 19)}s`,
+    `--drift:${-90 + (i * 43 % 181)}px`,
+    `--sway:${-38 + (i * 29 % 77)}px`,
+    `--turn:${210 + (i * 53 % 310)}deg`,
+    `--alpha:${(0.6 + (i % 5) * 0.0625).toFixed(2)}`,
+  ].join(';'),
+}));
+const writings = {
+  poetry: [
+    { title: '象牙塔', meta: '诗 · 其一', excerpt: '', body: '绯色可入画，\n雨骤无人察，\n在这避世的象牙塔，\n你做我的撇捺。\n\n—云岫。—' },
+    { title: '入秋', meta: '诗 · 其二', excerpt: '', body: '你要写秋，就不能只写秋。\n你要写芭蕉雨打摇，写孤影独望，\n写故人别去断柔肠，\n无人羡鸳鸯。\n你要写落拓书生驿道旁，\n看月明孤鹜也回乡。\n要写寒蝉声声切，暮霭沉沉凉。\n惊入夜，转清商。\n再要写十年生死两茫茫，\n惹不归客登临对酒殇。\n\n“陡转入秋，梦魂无据，独把对汝情思酿”\n\n—云岫。—' },
+    { title: '木吉他', meta: '诗 · 其三', excerpt: '', body: '潦草吭哧的木吉他，\n背着我的生计和结痂的魂，\n塞街填巷，\n听我声嘶力竭，\n吼这费力生活三十年，\n灌进三瓶啤酒一首歌。\n\n—云岫。—' },
+    { title: '无相', meta: '诗 · 其四', excerpt: '', body: '你要知佛本无相\n怎会风情万种，钗环玲琅\n堕入这三千红尘软帐\n\n不过遇尔情长\n\n—云岫。—' },
+  ],
+  prose: [
+    { title: 'May 雨季不再来', meta: '文 · 其一', excerpt: '', body: `一、引
+
+那天凌晨，站在银灰云港，望来占用我约20分钟来品鉴她的处女作。我记得很多厉害的细节，比如一个从根顶高耸大地的、我们学校有两个人，关于她模糊的脸的青春。我读到她的文章，句子平不板，内容不无聊，如果从你长辈的冷峻里真正走来的特殊厚重一点，它就会像春天一样鲜活，慵懒的情绪里有分之五十。
+
+二、野生动物园
+
+让我来讲讲留下的百分之五十。
+
+就好像不太喜欢高中时期的自己，连带着那一段记忆都想选择遗忘。像看见墙缝的水蒸气，蒸干了八面，晃荡成水；这段开篇新的铺陈，很多事情是模糊的，比如对“意”的渴望、对逃的思索、对远方的期待、对现在的意义。
+
+并不意味着故事的真正篇章要我们拥有一半的自由。我是野生动物园里唯一的斑羚，心跳追起来，每天都是有很多困惑：笼兽的家在一座三分地上给人观瞻，是人给它的圈套还是归宿。有未来往往因为人从家园搬迁过，欣赏程度评判；但这都无所谓，明朝在新的事情和人类不一样。其它早有动物养员和饮食起居。
+
+不足的是它没有同伴。
+
+像井上挂着那样独立的影，忘不掉却渴望到所有的期待。当夜化开，手里阳光明明照未来诗的地方只受绿植抽丝。日子不算太重，我只是和其他动物一起听雨走化的歌，做一样的表演。其实也没有人真正愿意被定义为什么，海豹和树懒的规定表演都是在燃烧一本枯燥的经书。
+
+所以它当然不会多高兴，也不会多焦虑未来，不记得很多事情。知道很多书里的故事和人类的叙事。
+
+有一个故事我看了很多遍。叫《东山一把青》。白先勇老师写的。讲一个年轻漂亮的女学生和飞行员教官之间的故事。故事是朱青的故事，那是我最爱看的有情节且足够他乡间意味的一段。可是我每一次看都会替她伤心。多少年可以女性她的丈夫变成了迁至台北的军区里最年轻受欢迎的教女，不再会流泪。可我每看一遍就会莫名其妙地替女孩子流泪。其实在我眼里更喜欢看反叛后的故事。哪怕富强小哥也该等着天涯散文。然而日复一日地往生望只是需要看花，做做故事里的女学生也有不选择事的终点，醒醒想想她见的是幸福。
+
+三、雨季不再来
+
+如果人都会下雨，那第一个雨季也许是他们的16岁。
+
+也许就是因为对世界的了解还太少，通过放学楼梯里一样的黑，看见的不服从一种模糊的天。
+
+如上所有我没什么大的抱怨，不至于过高地夸大她。那时候我的不喜和不愿是一个模式，而剩下一样的百分之五十来自于这篇文学里那种充满雨后远方的清澈。
+
+在高考的前一个月，我在每天睡眠都很薄学校图书馆三楼，坐在西侧沙发上，看见五楼角落里一幅的巨大玻璃折射出远处绿色高墙。大厅里的三角钢琴从不弹奏，五楼通常有一群在红色楼梯上团舞，偶尔的律动和愿望证明它是生命物体的真正活着。我莫名的不愿离开那个瞬间，不想去拥有人普通的轻松的将来，即使那三年我算不上多幸福。
+
+现在我在川流绵延长江边两年中学校停歇5:30的光芒重叠的角度，偶尔希望自己依然住在那条街道城市。曾经有一次恋文学们，隔里是“Key word your friends use to describe you”，大家说我的keyword是浪漫的。当时我一度以为我担任的是仍然模糊的妄想。也许是一种平衡失衡下的感觉。其实现在我知道浪漫还是一个喜欢人间漂泊的人——这是最确定的内核。如果那种做法永久地记住它，现在我要知道浪漫是生性的灵魂更看时间。必须有时间天地也找找那些现实里有重量、拥有精神的生活。
+
+重新为文学具有诗意令我的可能性的，获得多彩的时间。
+
+有一个远去的好朋友，情谊交集了我的少女时限，我们已经很久没有任何联系，很多事情已经远去了。然而我的眼中一直从未清晰，所有歌的桥段都停留在收藏夹。那天翻了好久她的主页清单。她去年在下雪发到了短暂的歌《雨季不再来》，心里的忧伤慢慢的。我好像看到多眼观望这首歌发行的当年，想起本地最无趣的曲子。一切远历历在目。我清楚明白现在的日子或许更好，可是以前的他物和故事现在不再来了。如果文学能像重逢一样制造她对方和重逢的雨季，又该可爱。
+
+四、倒带
+
+离开动物园后的树懒播放了，DDL一个连着一个。夜晚我们渐渐变了一个月后又去放大最好比赛，灰里C又点了一首很多歌。她的声音很轻，逐渐是那种同我们结束旅程。那首歌叫《倒带》。我第一次听。熟悉的风格让我看了眼作词——竟然是周杰伦。
+
+想起我的16岁和整整2010年东北的时候满含着刚保持出现的10秒，给我一首歌的时间，不愿去人前。曾经的不舍在安好的现在仍然值得倒带。
+
+光年的时候关了在心里，就像好像从来没开过门。
+
+“过去甜蜜在倒带，只是感觉已经不在……”
+
+现在留在故事里的《倒带》什么时机会变成下一个雨季。` },
+    { title: '无题', meta: '文 · 其二', excerpt: '', body: `人前向来缄默，把你姓名咽下三寸舌尖，
+摘落深情眉眼。
+只是我啊，露重着薄衫，更深灌冰酒，萧瑟的能与秋风比肩，醉倒了便以为留住了曾热烈过的季节。
+末了还说一句，先生很抱歉，让你平白在我的生命里度日如年。
+
+—云岫。—` },
+  ],
+};
+
+writings.prose[0].body = `一、引
+
+那天凌晨X给我发消息，要求占用我的20分钟来品鉴她的处女作。我记得很多厉害的细节，比如——“从楼顶亲吻大地的，我们学校有两个人”，关于旋转缠绕的她的青春。我说好棒的文章，句子不冗长，内容不无聊，如果从你完美的冷幽默到正式感的转换再丝滑一点，它就会像德芙一样美味。但我的共情是百分之五十。
+
+二、野生动物园
+
+让我来讲讲剩下的百分之五十。
+
+我好像不太喜欢高中时期的自己，连带着那一段记忆都很浅很淡——像高中选修的水彩画，画歪了几笔，就蘸饱水，涂抹开重彩的错误。很多事情是模糊的，比如对“赢”的渴望，对谁的爱慕，对远方的期待，对现在的意义。
+
+并不算衡水模式的浙江重高里我们拥有一半的自由。我是野生动物园里唯一的树懒，6点被迫起床，每天总是有很多困意；能做的是在一亩三分地上给人做固定门类的答题表演，有来来往往的游人从我面前经过，欣赏抑或评判；但这都无所谓，树懒在意的事情和人类不一样，且它毕竟有饲养员照料饮食起居。
+
+不足的是它没有同伴。
+
+除开b站里旅游博主的vlog，也不知道南美洲的热带雨林到底长什么样，于是阳光明媚雨水丰沛的地方只变成精神故里。日子不算太糟，我只是和其他动物一起听周杰伦的歌，做一样的表演，其实也没有人类在意或能改变为什么海豹和树懒的规定表演都是做圆锥曲线和画晶体结构。
+
+所以它当然不会多高兴，也不会多焦虑未来，不记得很多事情，知道很多书里的故事和人类的叙事。
+
+有一个故事我看了很多遍，叫《东山一把青》。白先勇老师写的。讲一个瘦弱青涩的女学生和意气风发的民国小飞行员的爱情故事。结局是未度蜜月的飞行员见到他新婚妻子的最后一面是一纸牺牲电报——多年前以头抢地的女孩变成了迁到台北的军区里最摇曳生姿的歌女，不再会流泪。可我每看一遍就会莫名其妙地替女孩流一次眼泪。其实我想我更喜欢离经叛道的故事，哪怕痛彻心扉地流落成天涯歌女。然而日复一日地往外望只是雾里看花，就像故事里的女学生也看不透故事的终点，朦朦胧胧想见的总是幸福。
+
+三、雨季不再来
+
+如果人都会下雨，那第一个雨季也许是他们的16岁。
+
+也许就是因为对世界的了解还太少，透过教学楼蜂巢一样的窗，看见的不是同一片模糊的天。
+
+如上所诉我没什么大的愤怒，不至于过高地亲吻大地。那时候我的不解和X不是一个款式，而剩下一样的百分之五十来自于台湾文学里那种充满雨后泥泞的青涩。
+
+在高考的前一个月，我在每天晚餐后绕道学校图书馆三楼，坐在西侧沙发上，看从五楼垂坠到一楼的巨大玻璃折射出整轮橙黄色落日。大厅里的三角钢琴从不停歇，五线谱海浪一样在红色壁砖上回响，偶尔的停顿和重复证明它是生气勃勃的真正演奏。我莫名的不想离开那个瞬间，不想去所人言道的轻松的将来，即便那三年我算不上多幸福。
+
+现在我在川渝依然会记起两年前学校傍晚5:30的光芒重复的角度，偶尔希望自己依然住在那座海边城市。曾经有一次英文习作，题目是“Key word your friends use to describe you”，大家说我的keyword是淡然，当时我一度以为我往后的性情都是如此，也许是一种采菊东篱下的赞美。其实现在我知道我还是一个喜欢人声鼎沸的人——这里是崎岖的内陆。如果我相信达尔文进化论，现在是我演进成陆生生物的奥德赛时期。必须说明今天的我比曾经更快乐更有重量，拥有期待的生活。
+
+是因为文学具有巧言令色的可能性吗，我怀念那段时间。
+
+有一个远去的好朋友S，情谊贯穿了我的少女时期。我们已经很久没有任何联系，很多事情已经淡忘了。然而我的歌单一直从未清理，所有歌按时间顺序沉寂在收藏夹。那天戴了好久耳机没摘下，歌单终于往下播放到了黎瑞恩的《雨季不再来》。它的忧伤慢慢的。我好像听到S跟我说这首老歌极好听的语气，想起来他喜欢温柔的曲子，一切还历历在目。我清楚明白现在的日子或许更好，可是以前的怅惘和故事究竟不再来了。如果文字能像蜜蜡一样剔透地封存那场潮湿的雨季，又岂可贵。
+
+四、倒带
+
+离开动物园后的树懒睡醒了，DDL一个连着一个。夜晚我们刚结束了一个熬了无数大夜的比赛，ktv里C又点了一首蔡依林。她的声线很甜美，唱早期的蔡依林刚刚好。那首歌叫《倒带》，我第一次听。熟悉的风格让我看了眼作词——竟然是周杰伦。
+
+想起我的16岁就像2010年杰伦的时代演唱会里蔡依林出现的10秒。给我一首歌的时间，不回去从前，曾经的不舍在安好的现在仍然值得倒带。
+
+出来的时候天又在小雨，成都好像从未离开过下雨。
+
+“过去甜蜜在倒带，只是感觉已不在……”
+
+现在留在歌单里的《倒带》什么时候会变成下一个雨季。`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Yuxiu 的诗与文" />
+  <link rel="stylesheet" href="/fonts/pingfang-gongzi/result.css" />
+  <link rel="stylesheet" href="/fonts/shangtudongguan-bold/result.css" />
+  <title>我的文字 · My Writings</title>
+</head>
+<body>
+    <MessageBoardLink />
+  <main class="page">
+    <div class="background" aria-hidden="true">
+      {frames.map((src, i) => <img class:list={['background-frame', { active: i === 0 }]} src={src.src} alt="" />)}
+      <div class="background-wash"></div>
+    </div>
+    <div class="ink-mist-field" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="falling-petals" aria-hidden="true">{petals.map((petal, i) => <i class={`petal petal--${i % 3}`} style={petal.style}></i>)}</div>
+    <SplashCursor client:load RAINBOW_MODE={false} COLOR="#f7ecd9" SECONDARY_COLOR="#ffffff" COLOR_INTENSITY={0.16} SPLAT_RADIUS={0.26} DENSITY_DISSIPATION={1.7} VELOCITY_DISSIPATION={1.15} />
+
+    <header class="nav-wrap">
+      <nav aria-label="主要导航"><ul>
+        <li><a href="/">首页</a></li><li><a href="/page1/">个人介绍</a></li>
+        <li><a href="/experience/">工作经历</a></li><li><a href="/projects/">项目经历</a></li>
+        <li><a href="/page4/" aria-current="page">我的文字</a></li><li><a href="/daily/">日常小品</a></li>
+      </ul></nav>
+    </header>
+
+    <section class="writing-shell" aria-label="我的文字">
+      <div class="reading-layout">
+        <aside class="verse-heading" aria-label="云岫诗句">
+          {[
+            '最深程度的伤春悲秋是一种克己的英雄主义——云岫。',
+            '九月的天很高远，缱绻的路也远，像这个季节里的思念向来磅礴流连——云岫。',
+            '觑着月亮对坐相论，山海相隔不过眼底乾坤——云岫。',
+            '其间枯荣有数，得失难量，也好在这里演一场老式的游园惊梦——云岫。',
+          ].map((verse, line) => (
+            <p class={`verse-line verse-line--${line + 1}`} aria-label={verse} style={`--line:${line}`}>
+              {[...verse].map((char, i) => <span aria-hidden="true" style={`--i:${i};--drop-x:${(i % 3 - 1) * 7}px;--drop-rotate:${i % 2 === 0 ? -7 : 7}deg`}>{char}</span>)}
+              {line === 0 && <img class="verse-signature" src="/images/home/home-bg-yin.png" alt="云岫落款" />}
+            </p>
+          ))}
+        </aside>
+
+        <section class="paper-board" aria-live="polite">
+          <div class="board-top"><span class="category"><b id="category-cn">诗</b><em id="category-en">POETRY</em></span><span id="counter">01 / 04</span></div>
+          <article class="writing-card" id="writing-card">
+            <div class="article-copy">
+              <p class="meta" id="meta"></p><h2 id="article-title"></h2>
+              <p class="excerpt" id="excerpt"></p><p class="body-copy" id="body-copy"></p>
+            </div>
+          </article>
+          <footer class="board-controls">
+            <div class="dots" id="dots"></div>
+            <a class="more-xhs more-poetry" href="https://xhslink.cn/m/5QBJRvnwJB3" target="_blank" rel="noopener noreferrer" aria-label="在小红书查看更多">
+              <span>更多见</span><b aria-hidden="true">+</b>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="1.5" width="21" height="21" rx="5.4"></rect><text x="12" y="14.4" font-family="Arial Black, PingFang SC, sans-serif" font-size="6.2" font-weight="900" text-anchor="middle" letter-spacing="-.35">小红书</text></svg>
+            </a>
+            <button class="more-xhs more-wechat" id="wechat-dialog-open" type="button" aria-label="查看更多微信公众号文章" hidden>
+              <span>更多见</span><b aria-hidden="true">+</b>
+              <svg class="wechat-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.25 4.25c-4 0-7.25 2.65-7.25 5.92 0 1.88 1.1 3.54 2.8 4.63l-.7 2.13 2.5-1.25c.84.27 1.73.41 2.65.41 4 0 7.25-2.65 7.25-5.92s-3.25-5.92-7.25-5.92Zm-2.52 4.1a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm5.04 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" />
+                <path opacity=".78" d="M22 14.2c0-2.55-2.45-4.62-5.48-4.62-.1 0-.2 0-.3.01.05.3.08.6.08.91 0 3.68-3.57 6.67-7.98 6.67-.24 0-.47-.01-.7-.03 1.02 1.02 2.58 1.68 4.34 1.68.72 0 1.41-.11 2.06-.32l1.93.97-.54-1.66C19.27 17.4 22 15.99 22 14.2Z" />
+              </svg>
+            </button>
+            <div><button id="previous" type="button" aria-label="上一篇">←</button><button id="next" type="button" aria-label="下一篇">→</button></div>
+          </footer>
+        </section>
+
+        <aside class="scroll-tabs" aria-label="文字分类">
+          <button class="scroll-tab active" type="button" data-type="poetry" aria-pressed="true">
+            <span class="scroll-picture"><img src={scrollImage.src} alt="" /></span>
+            <span class="scroll-copy"><strong>诗</strong><small>POETRY</small></span>
+          </button>
+          <button class="scroll-tab" type="button" data-type="prose" aria-pressed="false">
+            <span class="scroll-picture"><img src={scrollImage.src} alt="" /></span>
+            <span class="scroll-copy"><strong>文</strong><small>PROSE</small></span>
+          </button>
+        </aside>
+      </div>
+
+      <a class="story-next" href="/daily/"><span>继续阅读我的故事</span><span class="story-next__arrow" aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <dialog class="wechat-dialog" id="wechat-dialog" aria-labelledby="wechat-dialog-title">
+    <button class="wechat-dialog__close" id="wechat-dialog-close" type="button" aria-label="关闭">×</button>
+    <img class="wechat-dialog__qr" src="/images/page1/page1-ma.jpg" alt="云岫 clouds seeping 公众号二维码" />
+    <p class="wechat-dialog__name" id="wechat-dialog-title">公众号：云岫 clouds seeping</p>
+    <p class="wechat-dialog__copy-row">
+      <button class="wechat-dialog__copy" id="wechat-link-copy" type="button" data-copy="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=MzYzOTAwNzI1Mg==#wechat_redirect">复制链接</button>
+      <span>（需要在微信中打开）</span>
+    </p>
+  </dialog>
+
+  <script define:vars={{ writings }}>
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const frames = [...document.querySelectorAll('.background-frame')];
+    let frameIndex = 0;
+    if (!reduceMotion.matches && frames.length > 1) setInterval(() => {
+      frames[frameIndex].classList.remove('active'); frameIndex = (frameIndex + 1) % frames.length; frames[frameIndex].classList.add('active');
+    }, 750);
+
+    let type = 'poetry'; let index = 0;
+    const q = (selector) => document.querySelector(selector);
+    function render(animate = true) {
+      const item = writings[type][index];
+      q('.paper-board').classList.toggle('poetry-mode', type === 'poetry');
+      q('#category-cn').textContent = type === 'poetry' ? '诗' : '文';
+      q('#category-en').textContent = type === 'poetry' ? 'POETRY' : 'PROSE';
+      q('#counter').textContent = `${String(index + 1).padStart(2, '0')} / ${String(writings[type].length).padStart(2, '0')}`;
+      q('#meta').textContent = item.meta; q('#article-title').textContent = item.title; q('#excerpt').textContent = item.excerpt;
+      q('#body-copy').textContent = item.body;
+      q('.article-copy').scrollTop = 0;
+      q('.more-poetry').hidden = type !== 'poetry';
+      q('.more-wechat').hidden = type !== 'prose';
+      const dots = q('#dots'); dots.innerHTML = writings[type].map((_, i) => `<button class="dot ${i === index ? 'active' : ''}" data-index="${i}" aria-label="第 ${i + 1} 篇"></button>`).join('');
+      dots.querySelectorAll('.dot').forEach((dot) => dot.addEventListener('click', () => { index = Number(dot.dataset.index); render(); }));
+      if (animate && !reduceMotion.matches) { const card = q('#writing-card'); card.classList.remove('turning'); void card.offsetWidth; card.classList.add('turning'); }
+    }
+    document.querySelectorAll('.scroll-tab').forEach((button) => button.addEventListener('click', () => {
+      type = button.dataset.type; index = 0;
+      document.querySelectorAll('.scroll-tab').forEach((tab) => { const active = tab === button; tab.classList.toggle('active', active); tab.setAttribute('aria-pressed', String(active)); }); render();
+    }));
+    q('#previous').addEventListener('click', () => { index = (index - 1 + writings[type].length) % writings[type].length; render(); });
+    q('#next').addEventListener('click', () => { index = (index + 1) % writings[type].length; render(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') q('#previous').click(); if (event.key === 'ArrowRight') q('#next').click(); });
+    document.querySelectorAll('.verse-line span').forEach((char) => char.addEventListener('pointerenter', () => {
+      if (reduceMotion.matches) return;
+      char.classList.remove('char-ripple'); void char.offsetWidth; char.classList.add('char-ripple');
+    }));
+    const board = q('.paper-board');
+    if (board && !reduceMotion.matches) {
+      board.addEventListener('pointermove', (event) => {
+        const rect = board.getBoundingClientRect();
+        const rotateY = ((event.clientX - rect.left) / rect.width - .5) * 2.4;
+        const rotateX = (.5 - (event.clientY - rect.top) / rect.height) * 1.7;
+        board.style.setProperty('--tilt-x', `${rotateX}deg`);
+        board.style.setProperty('--tilt-y', `${rotateY}deg`);
+      });
+      board.addEventListener('pointerleave', () => {
+        board.style.setProperty('--tilt-x', '0deg');
+        board.style.setProperty('--tilt-y', '0deg');
+      });
+    }
+    const wechatDialog = q('#wechat-dialog');
+    const wechatDialogOpen = q('#wechat-dialog-open');
+    const wechatDialogClose = q('#wechat-dialog-close');
+    const wechatLinkCopy = q('#wechat-link-copy');
+    wechatDialogOpen?.addEventListener('click', () => wechatDialog?.showModal());
+    wechatDialogClose?.addEventListener('click', () => wechatDialog?.close());
+    wechatDialog?.addEventListener('click', (event) => { if (event.target === wechatDialog) wechatDialog.close(); });
+    wechatLinkCopy?.addEventListener('click', async () => {
+      const link = wechatLinkCopy.dataset.copy;
+      if (!link) return;
+      try {
+        await navigator.clipboard.writeText(link);
+        wechatLinkCopy.textContent = '已复制';
+        setTimeout(() => { wechatLinkCopy.textContent = '复制链接'; }, 1600);
+      } catch { window.prompt('请复制公众号链接', link); }
+    });
+    render(false);
+  </script>
+</body>
+</html>
+
+<style>
+  :root{--ink:#332e28;--soft:rgba(51,46,40,.58);--green:#718474;--red:#a65347;--paper:#f2e7d4;--ease:cubic-bezier(.33,1,.68,1);--cn:"PING FANG GONG ZI TI","Songti SC",serif;--body:"STDongGuanTi Bld","PING FANG GONG ZI TI","Songti SC",serif;--en:"Iowan Old Style",Georgia,serif}
+  *{box-sizing:border-box}html,body{margin:0;min-width:320px;min-height:100%;background:var(--paper);color:var(--ink)}body{font-family:var(--body);overflow-x:hidden}.page{position:relative;min-height:100svh;isolation:isolate;overflow:hidden}.background{position:fixed;inset:0;z-index:-2;background:var(--paper)}.background-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;visibility:hidden;transition:none}.background-frame.active{opacity:1;visibility:visible}.background-wash{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(255,253,247,.12),transparent 52%),linear-gradient(90deg,rgba(255,253,247,.08),transparent 65%)}
+  .nav-wrap{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:center;padding:22px 24px 8px;pointer-events:none}.nav-wrap nav{pointer-events:auto;animation:nav-float 6.8s ease-in-out infinite}.nav-wrap ul{display:flex;gap:clamp(22px,3.1vw,50px);margin:0;padding:0;list-style:none}.nav-wrap a{position:relative;display:block;padding:8px 1px 10px;color:rgba(51,46,40,.61);font-family:var(--cn);font-size:clamp(.78rem,1vw,.94rem);letter-spacing:.12em;text-decoration:none}.nav-wrap a::after{content:"";position:absolute;left:50%;bottom:1px;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:0;transform:translate(-50%,5px);transition:.24s}.nav-wrap a:hover,.nav-wrap a[aria-current="page"]{color:var(--ink);transform:translateY(-2px)}.nav-wrap a:hover::after,.nav-wrap a[aria-current="page"]::after{opacity:.75;transform:translate(-50%,0)}
+  .writing-shell{position:relative;width:min(1180px,calc(100% - 50px));margin:0 auto;padding:clamp(92px,10vh,112px) 0 64px}.page-heading{text-align:center;margin:0 auto clamp(23px,3vh,34px);animation:heading-arrive 1s .08s var(--ease) both}.eyebrow{margin:0 0 6px;color:var(--green);font-family:var(--en);font-size:.76rem;font-style:italic;letter-spacing:.2em}.page-heading h1{margin:0;font-family:var(--cn);font-size:clamp(2rem,3.2vw,3.15rem);font-weight:500;letter-spacing:.16em}.heading-note{position:relative;width:fit-content;margin:11px auto 0;padding:0 7px 8px;overflow:hidden;color:rgba(51,46,40,.43);font-size:.72rem;letter-spacing:.1em}.heading-note span{display:block;opacity:0;filter:blur(5px);animation:note-arrive 1.25s .68s var(--ease) forwards}.heading-note::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(113,132,116,.42),rgba(166,83,71,.3),transparent);transform:scaleX(0);animation:ink-line 1.15s 1.05s var(--ease) forwards}
+  .reading-layout{display:grid;grid-template-columns:145px minmax(0,900px);align-items:center;justify-content:center;gap:clamp(28px,4vw,58px)}.scroll-tabs{display:flex;flex-direction:column;gap:22px}.scroll-tab{position:relative;display:flex;align-items:center;width:145px;height:132px;padding:0;border:0;background:transparent;color:inherit;cursor:pointer;transition:transform .32s var(--ease),filter .32s}.scroll-tab:hover{transform:translate(4px,-3px)}.scroll-tab.active{transform:translateX(8px);filter:saturate(1.08) brightness(1.02)}.scroll-picture{display:block;width:84px;height:127px;overflow:hidden;filter:drop-shadow(0 7px 8px rgba(73,53,34,.14))}.scroll-picture img{width:174px;height:128px;max-width:none;object-fit:cover;object-position:left center;transform:rotate(90deg) scale(1.2)}.scroll-tab:nth-child(2) .scroll-picture img{object-position:right center;transform:rotate(90deg) scale(1.2) translateY(-6px)}.scroll-copy{display:flex;flex-direction:column;align-items:flex-start;margin-left:-7px}.scroll-copy strong{font-family:var(--cn);font-size:1.28rem;font-weight:500;letter-spacing:.16em}.scroll-copy small{margin-top:7px;color:var(--green);font-family:var(--en);font-size:.52rem;font-style:italic;letter-spacing:.12em}.scroll-tab::after{content:"";position:absolute;right:8px;bottom:25px;width:10px;height:10px;background:var(--red);opacity:0;transform:scale(.4) rotate(-8deg);transition:.3s}.scroll-tab.active::after{opacity:.72;transform:scale(1) rotate(-3deg)}
+  .paper-board{position:relative;height:clamp(485px,61vh,590px);padding:22px 30px 25px;overflow:hidden;clip-path:polygon(.7% 1%,15% .3%,31% .8%,49% .2%,68% .9%,84% .3%,99.3% 1%,100% 98.8%,83% 99.4%,65% 98.9%,47% 99.7%,27% 99.2%,8% 99.7%,0 98.6%);background:radial-gradient(ellipse at 50% 43%,rgba(255,255,252,.98) 0%,rgba(255,253,247,.96) 53%,rgba(238,219,181,.9) 83%,rgba(181,137,83,.45) 100%),linear-gradient(145deg,#fffdf5,#d9b77d);box-shadow:0 24px 52px rgba(78,57,34,.18),inset 0 0 44px rgba(139,94,41,.14);animation:board-arrive 1.05s .2s var(--ease) both}.paper-board::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background:linear-gradient(90deg,rgba(139,91,39,.3),transparent 7%,transparent 93%,rgba(139,91,39,.28)),linear-gradient(rgba(180,136,78,.2),transparent 8%,transparent 92%,rgba(155,103,47,.22));mix-blend-mode:multiply}.board-top,.board-controls,.writing-card{position:relative;z-index:1}.board-top{display:flex;align-items:baseline;justify-content:space-between;padding:2px 6px 14px;border-bottom:1px solid rgba(91,69,45,.12);color:rgba(51,46,40,.36);font-family:var(--en);font-size:.67rem;letter-spacing:.16em}.category{display:flex;align-items:baseline;gap:12px}.category b{color:var(--ink);font-family:var(--cn);font-size:1.08rem;font-weight:500}.category em{color:var(--green);font-size:.65rem}.writing-card{display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:44px;height:calc(100% - 91px);align-items:center;padding:22px 35px 17px}.writing-card.turning{animation:page-turn .55s var(--ease)}.article-copy{min-width:0}.meta{margin:0 0 10px;color:rgba(166,83,71,.67);font-family:var(--en);font-size:.66rem;letter-spacing:.18em}.article-copy h2{margin:0;font-family:var(--cn);font-size:clamp(1.5rem,2.15vw,2.18rem);font-weight:500;letter-spacing:.13em}.excerpt{margin:16px 0 0;color:var(--soft);font-size:clamp(.8rem,.95vw,.93rem);line-height:1.9;letter-spacing:.05em}.body-copy{margin:19px 0 0;white-space:pre-line;color:rgba(51,46,40,.75);font-size:clamp(.84rem,1vw,.96rem);line-height:2.05;letter-spacing:.05em}.date{margin:16px 0 0;color:rgba(51,46,40,.34);font-family:var(--en);font-size:.64rem;letter-spacing:.16em}.margin-mark{height:78%;display:flex;align-items:center;justify-content:center;border-left:1px solid rgba(91,69,45,.11);color:rgba(113,132,116,.31);font-family:var(--cn);font-size:.82rem;line-height:1.8;letter-spacing:.2em}.margin-mark i{position:absolute;right:23px;bottom:23%;width:21px;height:21px;background:rgba(166,83,71,.55);transform:rotate(-4deg)}.board-controls{display:flex;align-items:center;justify-content:space-between;padding:13px 5px 0;border-top:1px solid rgba(91,69,45,.12)}.dots{display:flex;gap:8px}.dot{width:6px;height:6px;padding:0;border:0;border-radius:20px;background:rgba(51,46,40,.18);cursor:pointer;transition:.25s}.dot.active{width:20px;background:rgba(166,83,71,.6)}.board-controls>div:last-child{display:flex;gap:7px}.board-controls button:not(.dot){width:34px;height:28px;padding:0;border:0;background:transparent;color:rgba(51,46,40,.48);font-family:var(--en);font-size:1.1rem;cursor:pointer}.board-controls button:hover{color:var(--red);transform:translateY(-2px)}
+  .continue-link{display:flex;align-items:center;justify-content:center;gap:14px;width:max-content;margin:clamp(36px,5vh,52px) auto 0;padding:8px 4px 10px;color:rgba(51,46,40,.66);font-family:var(--cn);font-size:.86rem;letter-spacing:.12em;text-decoration:none}.continue-link span{position:relative}.continue-link span::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:linear-gradient(90deg,transparent,rgba(166,83,71,.55),transparent);transform:scaleX(.35);transition:.35s}.continue-link i{font-family:var(--en);font-size:1.1rem;font-style:normal;transition:.3s}.continue-link:hover{color:var(--ink)}.continue-link:hover span::after{transform:scaleX(1)}.continue-link:hover i{transform:translateX(5px)}
+  @keyframes nav-float{50%{transform:translateY(-3px)}}@keyframes heading-arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes note-arrive{to{opacity:1;filter:none}}@keyframes ink-line{to{transform:scaleX(1)}}@keyframes board-arrive{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}@keyframes page-turn{0%{opacity:.25;transform:translateX(17px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+  @media(max-width:900px){.writing-shell{width:min(760px,calc(100% - 28px));padding-top:94px}.reading-layout{grid-template-columns:1fr;gap:12px}.scroll-tabs{flex-direction:row;justify-content:center}.scroll-tab{width:125px;height:70px}.scroll-picture{width:70px;height:70px}.scroll-picture img{width:110px;height:75px}.paper-board{height:560px}.writing-card{grid-template-columns:1fr;padding-inline:25px}.margin-mark{display:none}.nav-wrap{justify-content:flex-start;overflow-x:auto}.nav-wrap ul{min-width:max-content}}
+  @media(max-width:560px){.writing-shell{width:calc(100% - 18px);padding-bottom:38px}.page-heading{margin-bottom:16px}.page-heading h1{font-size:1.9rem}.paper-board{height:585px;padding:18px 15px 21px}.writing-card{height:calc(100% - 86px);padding:18px 12px 14px}.article-copy h2{font-size:1.43rem}.body-copy{font-size:.81rem;line-height:1.92}.excerpt{font-size:.77rem}.continue-link{margin-top:30px}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0ms!important}.background-frame{opacity:0!important;visibility:hidden!important}.background-frame:first-child{opacity:1!important;visibility:visible!important}.heading-note span{opacity:1!important;filter:none!important}}
+
+  /* V2: 完整卷轴、单栏文本与半透明气泡阅读框 */
+  .heading-note{display:flex;justify-content:center;gap:0;overflow:visible;padding-bottom:0}
+  .heading-note::after{display:none}
+  .heading-note span{display:inline-block;opacity:0;filter:none;animation:note-drop .68s calc(.72s + var(--i) * .085s) cubic-bezier(.2,.82,.3,1.18) forwards}
+  @keyframes note-drop{0%{opacity:0;transform:translate3d(var(--drop-x),-38px,0) rotate(var(--drop-rotate))}72%{opacity:1;transform:translate3d(0,3px,0) rotate(0)}100%{opacity:1;transform:none}}
+
+  .scroll-tab{width:160px;height:116px}
+  .scroll-picture{flex:0 0 108px;width:108px;height:96px;overflow:visible;filter:drop-shadow(0 7px 8px rgba(73,53,34,.15))}
+  .scroll-picture img,.scroll-tab:nth-child(2) .scroll-picture img{display:block;width:108px;height:96px;max-width:100%;object-fit:contain;object-position:center;transform:none}
+  .scroll-copy{margin-left:-2px}
+
+  .paper-board{clip-path:none;border:1px solid rgba(255,255,255,.55);border-radius:clamp(24px,2.5vw,36px);background:linear-gradient(135deg,rgba(255,255,255,.58),rgba(255,250,239,.38));box-shadow:0 22px 50px rgba(78,57,34,.12),inset 0 1px 0 rgba(255,255,255,.8),inset 0 0 32px rgba(255,255,255,.16);backdrop-filter:blur(14px) saturate(1.08);-webkit-backdrop-filter:blur(14px) saturate(1.08)}
+  .paper-board::before{opacity:.28;border-radius:inherit;background:radial-gradient(circle at 18% 10%,rgba(255,255,255,.72),transparent 34%),radial-gradient(circle at 88% 86%,rgba(213,177,116,.2),transparent 38%);mix-blend-mode:normal}
+  .writing-card{display:block;height:calc(100% - 91px);padding:clamp(26px,3.2vh,38px) clamp(32px,4vw,58px) 20px}
+  .article-copy{width:min(760px,100%)}
+
+  .continue-link{position:relative;display:inline-flex;align-items:center;gap:.72em;width:auto;margin:clamp(36px,5vh,52px) auto 0;padding:5px 2px;color:rgba(84,65,55,.72);font-size:clamp(.72rem,.86vw,.84rem);letter-spacing:.13em;text-decoration:none;transform:none;transition:color .24s var(--ease),transform .28s var(--ease)}
+  .continue-link::after{content:"";position:absolute;right:0;bottom:-5px;left:0;height:1px;background:rgba(166,78,66,.48);transform:scaleX(.72);transform-origin:center;transition:background .24s,transform .28s var(--ease)}
+  .continue-link span:first-child::after{display:none}
+  .continue-link:hover,.continue-link:focus-visible{color:#8f493f;outline:none;transform:translateY(-3px)}
+  .continue-link:hover::after,.continue-link:focus-visible::after{background:#a64e42;transform:scaleX(1)}
+  .continue-link__arrow{font-family:var(--en);font-size:1.05em;transition:transform .28s var(--ease)}
+  .continue-link:hover .continue-link__arrow,.continue-link:focus-visible .continue-link__arrow{transform:translateX(4px)}
+
+  @media(max-width:900px){.scroll-tab{width:145px;height:78px}.scroll-picture{flex-basis:82px;width:82px;height:72px}.scroll-picture img,.scroll-tab:nth-child(2) .scroll-picture img{width:82px;height:72px}.writing-card{padding-inline:25px}}
+  @media(max-width:560px){.scroll-tab{width:132px}.paper-board{border-radius:22px}.writing-card{padding-inline:18px}}
+
+  /* V3: 与第 2 页统一标题、导航与章节入口，纵向阅读框避让右下景物 */
+  :root{--cn:"STDongGuanTi Bld","STKaiti","KaiTi","Songti SC",serif;--body:"STDongGuanTi Bld","STKaiti","KaiTi","Songti SC",serif;--display:"STKaiti","KaiTi","Songti SC",serif}
+
+  .nav-wrap{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:center;padding:clamp(21px,3vh,34px) 24px 8px;pointer-events:none}
+  .nav-wrap nav{pointer-events:auto;animation:nav-float 6.8s ease-in-out infinite}
+  .nav-wrap ul{display:flex;gap:clamp(20px,3vw,48px);margin:0;padding:0;list-style:none}
+  .nav-wrap a{position:relative;display:block;padding:8px 1px 10px;color:rgba(48,45,40,.64);font-size:clamp(.75rem,1vw,.94rem);letter-spacing:.13em;text-decoration:none;transition:color .22s,transform .22s}
+  .nav-wrap a::after{content:"";position:absolute;left:50%;bottom:0;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:0;transform:translate(-50%,5px) scale(.3);transition:.22s}
+  .nav-wrap a:hover,.nav-wrap a:focus-visible,.nav-wrap a[aria-current="page"]{color:var(--ink);outline:none;transform:translateY(-2px)}
+  .nav-wrap a:hover::after,.nav-wrap a:focus-visible::after,.nav-wrap a[aria-current="page"]::after{opacity:.76;transform:translate(-50%,0) scale(1)}
+
+  .writing-shell{position:relative;display:flex;flex-direction:column;width:100%;min-height:100svh;margin:0;padding:clamp(92px,11vh,120px) 24px clamp(74px,8vh,90px)}
+  .page-heading{position:relative;top:-28px;flex:0 0 auto;margin:0 0 clamp(18px,2.8vh,30px);text-align:center;animation:heading-arrive 1.05s .12s var(--ease) both}
+  .eyebrow{margin:0 0 8px;color:var(--green);font-family:var(--en);font-size:.8rem;font-style:italic;letter-spacing:.17em}
+  .page-heading h1{margin:0;font-family:var(--display);font-size:clamp(1.6rem,2.35vw,2.45rem);font-weight:400;letter-spacing:.13em}
+  .heading-note{margin:10px auto 0;color:rgba(48,45,40,.45);font-size:.74rem;letter-spacing:.1em}
+
+  .reading-layout{display:grid;grid-template-columns:150px minmax(0,520px);align-items:center;justify-content:start;gap:clamp(22px,2.5vw,38px);width:min(730px,calc(100vw - 48px));margin:-26px 0 0 clamp(42px,13vw,245px)}
+  .scroll-tabs{gap:18px}
+  .paper-board{width:100%;height:clamp(570px,68vh,660px);border:1px solid rgba(255,255,255,.42);border-radius:30px;background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,250,239,.18));box-shadow:0 18px 42px rgba(78,57,34,.075),inset 0 1px 0 rgba(255,255,255,.58),inset 0 0 28px rgba(255,255,255,.09);backdrop-filter:blur(11px) saturate(1.04);-webkit-backdrop-filter:blur(11px) saturate(1.04)}
+  .paper-board::before{opacity:.18;background:radial-gradient(circle at 18% 10%,rgba(255,255,255,.58),transparent 34%),radial-gradient(circle at 88% 86%,rgba(213,177,116,.12),transparent 38%)}
+  .writing-card{height:calc(100% - 91px);padding:clamp(27px,3.4vh,40px) clamp(30px,3vw,44px) 20px}
+  .article-copy{width:100%}
+  .body-copy{line-height:2.12}
+
+  .story-next{position:absolute;left:50%;bottom:calc(clamp(16px,2.4vh,28px) + 4px);z-index:20;display:inline-flex;align-items:center;gap:.72em;color:rgba(84,65,55,.72);font-size:clamp(.72rem,.86vw,.84rem);letter-spacing:.13em;text-decoration:none;transform:translateX(-50%);transition:color .24s var(--ease),transform .28s var(--ease)}
+  .story-next::after{content:"";position:absolute;right:0;bottom:-5px;left:0;height:1px;background:rgba(166,78,66,.48);transform:scaleX(.72);transform-origin:center;transition:background .24s,transform .28s var(--ease)}
+  .story-next:hover,.story-next:focus-visible{color:#8f493f;outline:none;transform:translate(-50%,-3px)}
+  .story-next:hover::after,.story-next:focus-visible::after{background:#a64e42;transform:scaleX(1)}
+  .story-next__arrow{font-family:var(--en);font-size:1.05em;transition:transform .28s var(--ease)}
+  .story-next:hover .story-next__arrow,.story-next:focus-visible .story-next__arrow{transform:translateX(4px)}
+
+  @keyframes nav-float{50%{transform:translateY(-3px)}}
+  @media(max-width:900px){.nav-wrap ul{gap:17px}.nav-wrap li:nth-last-child(-n+2){display:none}.writing-shell{padding-inline:18px}.reading-layout{grid-template-columns:1fr;width:min(540px,100%);margin:-20px auto 0}.scroll-tabs{flex-direction:row}.paper-board{height:590px}.page-heading{width:100%}}
+  @media(max-width:520px){.writing-shell{padding-inline:14px}.page-heading{width:100%}.paper-board{height:min(540px,calc(100svh - 190px));border-radius:22px}.writing-card{height:calc(100% - 78px);padding:16px 10px 12px}.article-copy h2{font-size:1.3rem;line-height:1.42}.body-copy{font-size:.82rem;line-height:1.88}.continue-link{margin-top:24px}.story-next{bottom:16px}}
+
+  /* V4: 左题、中框、右卷轴 */
+  .writing-shell{justify-content:center;padding-top:clamp(86px,9vh,106px);padding-bottom:clamp(74px,8vh,90px)}
+  .reading-layout{display:grid;grid-template-columns:160px minmax(0,820px) 160px;align-items:center;justify-content:center;gap:clamp(18px,2vw,34px);width:min(1208px,calc(100vw - 48px));margin:0 auto}
+  .page-heading{position:relative;top:auto;display:flex;align-items:center;justify-content:center;width:160px;margin:0;text-align:center;animation:heading-arrive 1.05s .12s var(--ease) both}
+  .page-heading .eyebrow,.page-heading .heading-note{display:none}
+  .page-heading h1{display:flex;flex-direction:column;gap:.32em;margin:0;font-family:"PING FANG GONG ZI TI","STKaiti","KaiTi",serif;font-size:clamp(1.6rem,2.35vw,2.45rem);font-weight:400;line-height:1;letter-spacing:0}
+  .page-heading h1 span{display:block;transition:transform .32s var(--ease),color .28s}
+  .page-heading h1:hover span{color:#3b3731;transform:translateY(calc(-3px - var(--i,0) * .12px))}
+  .paper-board{width:100%;height:clamp(500px,59vh,570px)}
+  .writing-card{padding:clamp(25px,3vh,36px) clamp(40px,4vw,60px) 18px}
+  .scroll-tabs{justify-self:start;width:160px;gap:20px}
+  .scroll-tab{width:160px;height:116px}
+
+  @media(max-width:1050px){.reading-layout{grid-template-columns:105px minmax(0,680px) 125px;gap:14px}.page-heading{width:105px}.scroll-tabs,.scroll-tab{width:125px}.scroll-picture{flex-basis:78px;width:78px}.scroll-picture img,.scroll-tab:nth-child(2) .scroll-picture img{width:78px}.paper-board{height:550px}}
+  @media(max-width:760px){.writing-shell{justify-content:flex-start}.reading-layout{grid-template-columns:70px minmax(0,1fr);grid-template-areas:"title tabs" "board board";width:100%;margin:0 auto}.page-heading{grid-area:title;width:70px}.page-heading h1{flex-direction:row;gap:.12em;font-size:1.55rem}.scroll-tabs{grid-area:tabs;flex-direction:row;justify-self:end;width:auto}.paper-board{grid-area:board;height:590px}.scroll-tab{width:126px;height:76px}.scroll-picture{flex-basis:78px;width:78px;height:70px}.scroll-picture img,.scroll-tab:nth-child(2) .scroll-picture img{width:78px;height:70px}}
+
+  /* V5: 完整纵排主副标题 + 纵向阅读框 */
+  .reading-layout{grid-template-columns:190px minmax(0,510px) 190px;gap:24px;width:min(938px,calc(100vw - 48px))}
+  .page-heading{display:grid;grid-template-columns:24px 64px 48px;grid-template-rows:1fr;justify-content:end;align-items:center;column-gap:3px;width:190px;height:clamp(650px,calc(68vh + 60px),720px);translate:-18px 0}
+  .page-heading .eyebrow{display:block;grid-column:1;writing-mode:vertical-rl;margin:0;color:var(--green);font-family:var(--en);font-size:.72rem;font-style:italic;letter-spacing:.17em}
+  .page-heading h1{position:relative;left:-15px;display:block;grid-column:2;writing-mode:vertical-rl;text-orientation:upright;margin:0;font-family:"PING FANG GONG ZI TI","STKaiti","KaiTi",serif;font-size:clamp(1.6rem,2.35vw,2.45rem);font-weight:400;line-height:1.28;letter-spacing:.13em}
+  .page-heading h1 span{display:inline-block}
+  .page-heading .heading-note{position:relative;left:45px;top:10px;display:block;grid-column:3;writing-mode:vertical-rl;text-orientation:upright;margin:0;color:rgba(48,45,40,.45);font-size:.74rem;line-height:1.4;letter-spacing:.1em}
+  .page-heading .heading-seal{position:absolute;top:11%;left:34px;z-index:2;display:grid;place-items:center;width:42px;height:42px;border:2px solid rgba(166,78,66,.72);color:rgba(166,78,66,.82);background:rgba(255,248,236,.12);opacity:.9;pointer-events:none;transform:rotate(-4deg)}
+  .page-heading .heading-seal::before{content:"";position:absolute;inset:3px;border:1px solid rgba(166,78,66,.42)}
+  .page-heading .heading-seal>span{position:relative;z-index:1;width:2em;font-family:"STKaiti","KaiTi","Songti SC",serif;font-size:.82rem;font-weight:600;line-height:1.05;letter-spacing:0;text-align:center}
+  .page-heading .heading-note span{display:inline-block;opacity:0;animation:note-drop .68s calc(.72s + var(--i) * .085s) cubic-bezier(.2,.82,.3,1.18) forwards}
+  .paper-board{width:510px;height:clamp(650px,calc(68vh + 60px),720px)}
+  .scroll-tabs{align-self:center;justify-self:start;width:160px}
+
+  @media(max-width:980px){.reading-layout{grid-template-columns:155px minmax(0,470px) 145px;gap:14px;width:min(798px,calc(100vw - 28px))}.page-heading{grid-template-columns:20px 40px 54px;width:155px}.paper-board{width:100%}.scroll-tabs{width:145px}}
+  @media(max-width:760px){.reading-layout{grid-template-columns:1fr;grid-template-areas:"title" "tabs" "board";width:min(520px,100%)}.page-heading{grid-area:title;display:flex;flex-direction:column;width:100%;height:auto;translate:0}.page-heading .eyebrow{display:block;writing-mode:horizontal-tb;margin:0 0 7px}.page-heading h1{left:0;writing-mode:horizontal-tb;text-orientation:mixed;font-size:clamp(1.5rem,6vw,2rem);letter-spacing:.13em}.page-heading .heading-note{left:0;top:0;display:flex;writing-mode:horizontal-tb;text-orientation:mixed;margin:9px auto 0}.page-heading .heading-seal{top:23px;left:calc(50% - 185px);width:38px;height:38px}.scroll-tabs{grid-area:tabs;justify-self:center}.paper-board{grid-area:board;width:100%;height:620px}}
+
+  /* V6: 左侧纵向诗句 */
+  .verse-heading{display:flex;align-items:flex-start;justify-content:flex-end;gap:clamp(45px,calc(1.4vw + 30px),56px);width:190px;height:clamp(650px,calc(68vh + 60px),720px);padding:18px 1px 12px 0;overflow:visible;translate:-70px 10px}
+  .verse-line{width:1.45em;margin:0;color:rgba(48,45,40,.66);font-size:clamp(.77rem,.84vw,.86rem);line-height:1.4;letter-spacing:.1em;writing-mode:vertical-rl;text-orientation:upright}
+  .verse-line span{display:inline-block;opacity:0;animation:note-drop .68s calc(.5s + var(--line) * .16s + var(--i) * .055s) cubic-bezier(.2,.82,.3,1.18) forwards}
+  .verse-line--1{margin-top:20px}.verse-line--2{margin-top:128px}.verse-line--3{margin-top:4px}.verse-line--4{margin-top:48px}
+
+  @media(max-width:980px){.verse-heading{width:155px;gap:45px;translate:-70px 10px}.verse-line{font-size:.74rem}}
+  @media(max-width:760px){.verse-heading{grid-area:title;display:grid;grid-template-columns:1fr 1fr;width:100%;height:auto;padding:0;gap:8px 16px;translate:0}.verse-line{width:auto;margin:0!important;font-size:.68rem;line-height:1.7;letter-spacing:.08em;writing-mode:horizontal-tb;text-orientation:mixed}.verse-line span{display:inline-block}.scroll-tabs{grid-area:tabs}.paper-board{grid-area:board}}
+
+  /* 游移雾气与等幅阻尼单字 */
+  .ink-mist-field{position:fixed;inset:0;z-index:2;overflow:hidden;pointer-events:none;opacity:.72}
+  .ink-mist-field i{position:absolute;display:block;border-radius:50%;background:radial-gradient(ellipse,rgba(255,250,239,.28),rgba(184,163,132,.09) 42%,transparent 72%);filter:blur(22px);will-change:transform,opacity;animation:mist-drift 10s ease-in-out infinite alternate}
+  .ink-mist-field i:nth-child(1){left:17%;top:24%;width:250px;height:160px}
+  .ink-mist-field i:nth-child(2){right:18%;top:42%;width:310px;height:190px;animation-duration:13s;animation-delay:-4s}
+  .ink-mist-field i:nth-child(3){left:36%;bottom:7%;width:360px;height:180px;animation-duration:15s;animation-delay:-8s}
+  .writing-shell{z-index:10}
+  .verse-line span{cursor:default;will-change:transform;transform-origin:center}
+  .verse-line span.char-ripple{opacity:1!important;animation:char-damped-float .82s cubic-bezier(.2,.78,.24,1) both}
+  @keyframes mist-drift{0%{opacity:.36;transform:translate3d(-12px,8px,0) scale(.96)}50%{opacity:.66}100%{opacity:.4;transform:translate3d(18px,-12px,0) scale(1.06)}}
+  @keyframes char-damped-float{0%{opacity:1;transform:translate3d(0,0,0) rotate(0)}25%{opacity:1;transform:translate3d(0,-6px,0) rotate(-2.1deg)}45%{opacity:1;transform:translate3d(0,3px,0) rotate(1.1deg)}62%{opacity:1;transform:translate3d(0,-1.7px,0) rotate(-.58deg)}78%{opacity:1;transform:translate3d(0,.8px,0) rotate(.26deg)}90%{opacity:1;transform:translate3d(0,-.3px,0) rotate(-.1deg)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0)}}
+  @media(prefers-reduced-motion:reduce){.ink-mist-field{display:none}.verse-line span.char-ripple{animation:none!important}}
+
+  /* 落英：半透明写意桃花瓣 */
+  .falling-petals{position:fixed;inset:0;z-index:3;overflow:hidden;pointer-events:none}
+  .petal{position:absolute;top:-7vh;left:var(--x);display:block;width:var(--size);height:calc(var(--size) * .72);border-radius:72% 28% 68% 32% / 75% 35% 65% 25%;opacity:0;background:linear-gradient(135deg,rgba(224,151,162,.96),rgba(183,91,108,.84));box-shadow:0 1px 3px rgba(131,71,81,.16),inset 1px 1px 1px rgba(255,235,232,.42);transform-origin:42% 58%;will-change:transform,opacity;animation:petal-fall var(--duration) linear var(--delay) infinite}
+  .petal::after{content:"";position:absolute;left:39%;top:-18%;width:68%;height:78%;border-radius:35% 70% 28% 72%;background:linear-gradient(145deg,rgba(235,169,178,.82),rgba(190,95,112,.68));transform:rotate(23deg);transform-origin:left bottom}
+  .petal--1{filter:saturate(.82) brightness(1.08)}
+  .petal--2{filter:saturate(.7) brightness(1.14);scale:.78}
+  @keyframes petal-fall{0%{opacity:0;transform:translate3d(0,-8vh,0) rotate(0deg) rotateX(0deg)}8%{opacity:var(--alpha)}32%{transform:translate3d(var(--sway),31vh,0) rotate(calc(var(--turn) * .36)) rotateX(115deg)}64%{opacity:var(--alpha);transform:translate3d(calc(var(--drift) * .62),67vh,0) rotate(calc(var(--turn) * .7)) rotateX(225deg)}100%{opacity:0;transform:translate3d(var(--drift),110vh,0) rotate(var(--turn)) rotateX(360deg)}}
+  @media(prefers-reduced-motion:reduce){.falling-petals{display:none}}
+
+  /* 透明窗右下的小红书延伸入口 */
+  .excerpt:empty{display:none}
+  .more-xhs{display:inline-flex;align-items:center;gap:5px;margin-left:auto;margin-right:13px;padding:3px 1px;color:rgba(48,45,40,.56);font-size:.68rem;letter-spacing:.1em;text-decoration:none;transition:color .24s var(--ease),transform .28s var(--ease)}
+  .more-xhs b{color:rgba(166,78,66,.72);font-family:var(--en);font-size:.9rem;font-weight:400}
+  .more-xhs svg{width:22px;height:22px;overflow:visible;filter:drop-shadow(0 2px 3px rgba(91,52,48,.09));transition:transform .28s var(--ease)}
+  .more-xhs svg rect{fill:#a64e42}
+  .more-xhs svg text{fill:#fff}
+  .more-xhs:hover,.more-xhs:focus-visible{color:#8f493f;outline:none;transform:translateY(-2px)}
+  .more-xhs:hover svg,.more-xhs:focus-visible svg{transform:rotate(-5deg) scale(1.06)}
+  @media(max-width:520px){.more-xhs{margin-right:5px;font-size:.62rem}.more-xhs svg{width:20px;height:20px}}
+
+  /* 长诗紧凑排版，保证正文不越过底部控制栏 */
+  .paper-board.poetry-mode .article-copy h2{font-size:clamp(1.3rem,1.88vw,1.86rem)}
+  .paper-board.poetry-mode .body-copy{margin-top:14px;font-size:0.9rem;line-height:1.8}
+  .paper-board.poetry-mode .writing-card{padding-top:clamp(23px,2.7vh,32px)}
+
+  /* 文模式：正文限制在上下横线之间，并在右侧独立滚动 */
+  .paper-board:not(.poetry-mode) .writing-card{overflow:hidden}
+  .paper-board:not(.poetry-mode) .article-copy{height:100%;padding-right:13px;overflow-x:hidden;overflow-y:auto;scrollbar-gutter:stable;overscroll-behavior:contain}
+  .paper-board:not(.poetry-mode) .body-copy{margin-top:15px;font-size:.9rem;line-height:1.9}
+  .paper-board:not(.poetry-mode) .article-copy::-webkit-scrollbar{width:5px}
+  .paper-board:not(.poetry-mode) .article-copy::-webkit-scrollbar-track{border-radius:9px;background:rgba(113,92,66,.07)}
+  .paper-board:not(.poetry-mode) .article-copy::-webkit-scrollbar-thumb{border-radius:9px;background:linear-gradient(180deg,rgba(166,83,71,.42),rgba(113,132,116,.34))}
+  .paper-board:not(.poetry-mode) .article-copy{scrollbar-width:thin;scrollbar-color:rgba(166,83,71,.42) rgba(113,92,66,.07)}
+
+  /* 复用 page1 名片的轻微立体倾斜，四角以柔光强调层次 */
+  .paper-board{--tilt-x:0deg;--tilt-y:0deg;transform-style:preserve-3d;transform-origin:center;transition:box-shadow 420ms ease;will-change:transform;animation:board-corner-float 7.2s ease-in-out infinite!important}
+  .paper-board:hover{box-shadow:0 25px 56px rgba(78,57,34,.12),-7px -6px 22px rgba(255,255,255,.18),7px 7px 24px rgba(133,94,54,.08),inset 0 1px 0 rgba(255,255,255,.66),inset 0 0 28px rgba(255,255,255,.09)}
+  .paper-board::after{content:"";position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 0 0,rgba(255,255,255,.43),transparent 12%),radial-gradient(circle at 100% 0,rgba(255,255,255,.3),transparent 12%),radial-gradient(circle at 0 100%,rgba(171,128,77,.1),transparent 13%),radial-gradient(circle at 100% 100%,rgba(171,128,77,.12),transparent 13%);animation:corner-breathe 5.8s ease-in-out infinite}
+  @keyframes board-corner-float{
+    0%,100%{transform:perspective(1100px) translate3d(-1px,1px,0) rotateX(calc(var(--tilt-x) + .12deg)) rotateY(calc(var(--tilt-y) - .18deg))}
+    25%{transform:perspective(1100px) translate3d(1px,-2px,0) rotateX(calc(var(--tilt-x) - .16deg)) rotateY(calc(var(--tilt-y) - .08deg))}
+    50%{transform:perspective(1100px) translate3d(2px,-1px,0) rotateX(calc(var(--tilt-x) - .08deg)) rotateY(calc(var(--tilt-y) + .2deg))}
+    75%{transform:perspective(1100px) translate3d(-1px,1px,0) rotateX(calc(var(--tilt-x) + .17deg)) rotateY(calc(var(--tilt-y) + .07deg))}
+  }
+  @keyframes corner-breathe{0%,100%{opacity:.62}50%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){.paper-board{transform:none!important;animation:none!important}.paper-board::after{animation:none}}
+
+  /* 阅读区加宽、朱砂篇目圆点与左侧落款 */
+  .writing-card{padding-right:max(20px,calc(clamp(40px,4vw,60px) - 10px));padding-left:max(20px,calc(clamp(40px,4vw,60px) - 10px))}
+  .board-controls .dots :global(button.dot){appearance:none!important;-webkit-appearance:none!important;display:block!important;flex:0 0 8px!important;width:8px!important;min-width:0!important;height:8px!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:#a65347!important;box-shadow:none!important;opacity:.42;transform:translateY(0)!important;transition:opacity .24s ease,transform .28s var(--ease),box-shadow .24s ease!important}
+  .board-controls .dots :global(button.dot.active){opacity:1;box-shadow:0 0 0 3px rgba(166,83,71,.12)!important;transform:translateY(-4px)!important}
+  .verse-heading{position:relative}
+  .verse-line--1{position:relative}
+  .verse-signature{position:absolute;top:calc(100% + 12px);left:-38px;width:50px;height:50px;max-width:none;object-fit:contain;opacity:1;filter:none;transform:rotate(-4deg);pointer-events:none}
+
+  /* “文”模式复用 page1 微信公众号弹窗 */
+  .more-xhs[hidden]{display:none}
+  .more-xhs,.more-wechat{flex:0 0 auto;white-space:nowrap;font-family:var(--body);font-size:.68rem;font-weight:400;line-height:normal;letter-spacing:.1em}
+  .more-xhs span{white-space:nowrap}
+  button.more-xhs{min-width:max-content;border:0;background:transparent;font:400 .68rem/normal var(--body)!important;letter-spacing:.1em!important;cursor:pointer}
+  button.more-wechat span{font:inherit;letter-spacing:inherit}
+  .more-wechat .wechat-icon{padding:0;fill:currentColor;color:#a65347;background:none;border-radius:0}
+  .wechat-dialog{width:min(390px,calc(100vw - 36px));padding:30px 30px 26px;border:1px solid rgba(113,95,72,.22);border-radius:8px;color:var(--ink);background:rgba(249,244,233,.97);box-shadow:0 24px 70px rgba(48,42,34,.24);text-align:center}
+  .wechat-dialog::backdrop{background:rgba(43,39,34,.28);backdrop-filter:blur(4px)}
+  .wechat-dialog__close{position:absolute;top:10px;right:12px;width:30px;height:30px;padding:0;border:0;color:rgba(48,45,40,.54);background:transparent;font-size:1.35rem;line-height:1;cursor:pointer}
+  .wechat-dialog__qr{display:block;width:min(230px,72vw);aspect-ratio:1;margin:0 auto 18px;object-fit:cover;border-radius:3px;transition:transform 360ms var(--ease),filter 280ms ease}
+  .wechat-dialog__qr:hover{filter:drop-shadow(0 9px 13px rgba(65,54,43,.14));transform:translateY(-2px)}
+  .wechat-dialog__name{margin:0;font-size:.92rem;letter-spacing:.08em}
+  .wechat-dialog__copy-row{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:7px;margin:13px 0 0;color:rgba(48,45,40,.5);font-size:.72rem;letter-spacing:.05em}
+  .wechat-dialog__copy{padding:0;border:0;color:rgba(48,45,40,.72);background:transparent;font:inherit;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+  .wechat-dialog__copy:hover{color:#a65347}
+  @media(max-width:520px){button.more-wechat{font-size:.62rem!important}}
+  @media(max-width:760px){.verse-signature{display:none}.writing-card{padding-right:18px;padding-left:18px}}
+
+  /* 与前几页统一背景帧频；透明窗标题统一使用平方公子体 */
+  .paper-board .category b,
+  .paper-board .article-copy h2{font-family:"PING FANG GONG ZI TI","STKaiti","KaiTi","Songti SC",serif}
+
+  /* 透明阅读窗先柔和进入，再衔接原有四角浮动。 */
+  .paper-board{animation:page4-window-arrive 1.05s .16s cubic-bezier(.2,.76,.25,1) both,board-corner-float 7.2s 1.21s ease-in-out infinite!important}
+  .verse-signature{opacity:0;animation:page4-seal-arrive 1.15s 1.02s cubic-bezier(.2,.78,.25,1) forwards}
+  @keyframes page4-window-arrive{from{opacity:0;transform:perspective(1100px) translate3d(0,27px,0) scale(.975);filter:blur(4px)}to{opacity:1;transform:perspective(1100px) translate3d(0,0,0) scale(1);filter:blur(0)}}
+  @keyframes page4-seal-arrive{from{opacity:0;transform:translate3d(-7px,7px,0) rotate(-8deg) scale(.86)}to{opacity:1;transform:translate3d(0,0,0) rotate(-4deg) scale(1)}}
+  @media(prefers-reduced-motion:reduce){.verse-signature{opacity:1;transform:rotate(-4deg);animation:none!important}}
+</style>

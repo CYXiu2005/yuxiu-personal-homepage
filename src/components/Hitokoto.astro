@@ -1,0 +1,148 @@
+---
+const fallbackText = '行到水穷处，坐看云起时。';
+const fallbackSource = '王维 · 《终南别业》';
+---
+
+<div class="hitokoto" id="hitokoto" aria-live="polite">
+  <div class="hitokoto__line">
+    <span class="hitokoto__text" id="hitokoto-text">{fallbackText}</span>
+    <span class="hitokoto__source" id="hitokoto-source">—— {fallbackSource}</span>
+  </div>
+  <a
+    class="hitokoto__link"
+    id="hitokoto-link"
+    href="https://hitokoto.cn/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    （转自一言）
+  </a>
+</div>
+
+<script>
+  interface HitokotoResponse {
+    hitokoto?: string;
+    from?: string;
+    from_who?: string | null;
+    uuid?: string;
+  }
+
+  const API_URL = 'https://v1.hitokoto.cn/?c=d&c=i&c=k&encode=json&max_length=28';
+
+  const textElement = document.querySelector<HTMLElement>('#hitokoto-text');
+  const sourceElement = document.querySelector<HTMLElement>('#hitokoto-source');
+  const linkElement = document.querySelector<HTMLAnchorElement>('#hitokoto-link');
+
+  function renderHitokoto(data: HitokotoResponse): void {
+    if (!textElement || !sourceElement || !linkElement) return;
+
+    const sentence = data.hitokoto?.trim();
+    if (!sentence) return;
+
+    textElement.textContent = sentence;
+
+    const author = data.from_who?.trim();
+    const source = data.from?.trim();
+    const attribution = [author, source].filter(Boolean).join(' · ');
+
+    sourceElement.textContent = attribution ? `—— ${attribution}` : '—— 一言';
+    linkElement.href = data.uuid
+      ? `https://hitokoto.cn/?uuid=${encodeURIComponent(data.uuid)}`
+      : 'https://hitokoto.cn/';
+  }
+
+  async function loadHitokoto(): Promise<void> {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 5000);
+
+    try {
+      const response = await fetch(API_URL, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        signal: controller.signal,
+      });
+
+      if (!response.ok) throw new Error(`Hitokoto request failed: ${response.status}`);
+      renderHitokoto((await response.json()) as HitokotoResponse);
+    } catch (error) {
+      console.warn('Unable to load hitokoto:', error);
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+  }
+
+  void loadHitokoto();
+</script>
+
+<style>
+  .hitokoto {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(24px, 4vh, 44px);
+    z-index: 20;
+    width: min(720px, calc(100% - 48px));
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .hitokoto__line {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: .55em;
+    max-width: 100%;
+    color: rgba(51, 47, 41, .68);
+    white-space: nowrap;
+    pointer-events: auto;
+    translate: 0 0;
+    transition: translate 220ms var(--ease-soft);
+  }
+
+  .hitokoto__link {
+    display: block;
+    width: fit-content;
+    margin: 6px auto 0;
+    color: rgba(51, 47, 41, .4);
+    font-family: "STDongGuanTi Bld", "PING FANG GONG ZI TI", "Songti SC", serif;
+    font-size: clamp(.62rem, .72vw, .7rem);
+    font-weight: 400;
+    letter-spacing: .08em;
+    text-decoration: none;
+    pointer-events: auto;
+    transition: color 240ms ease, opacity 240ms ease;
+  }
+
+  .hitokoto__text {
+    font-family: "STDongGuanTi Bld", "PING FANG GONG ZI TI", "Songti SC", serif;
+    font-size: clamp(.8rem, 1.05vw, .98rem);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: .12em;
+  }
+
+  .hitokoto__line:hover { translate: 0 -2px; }
+
+  .hitokoto__source {
+    color: rgba(51, 47, 41, .43);
+    font-family: "STDongGuanTi Bld", "PING FANG GONG ZI TI", "Songti SC", serif;
+    font-size: clamp(.66rem, .8vw, .76rem);
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: .08em;
+  }
+
+  .hitokoto__link:hover { color: var(--cinnabar, #9f4035); }
+  .hitokoto__link:focus-visible { outline: 1px solid rgba(163, 75, 63, .55); outline-offset: 7px; border-radius: 2px; }
+
+  @media (max-width: 640px) {
+    .hitokoto { bottom: 20px; width: calc(100% - 36px); }
+    .hitokoto__text { font-size: .76rem; letter-spacing: .08em; }
+    .hitokoto__source { font-size: .64rem; }
+    .hitokoto__link { margin-top: 5px; font-size: .6rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hitokoto__line { transition: none; }
+  }
+</style>

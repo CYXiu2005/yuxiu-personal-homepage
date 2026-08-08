@@ -1,0 +1,156 @@
+---
+import '../styles/home.css';
+import SplashCursor from '../components/react/SplashCursor.jsx';
+import StarBorder from '../components/react/StarBorder.jsx';
+import Hitokoto from '../components/Hitokoto.astro';
+import MessageBoardLink from '../components/MessageBoardLink.astro';
+
+const frames = [
+  '/images/home/home-bg-frame-01.webp',
+  '/images/home/home-bg-frame-02.webp',
+  '/images/home/home-bg-frame-03.webp',
+];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="宋代文人生活小品风格个人网站首页" />
+    <link
+      rel="stylesheet"
+      href="/fonts/pingfang-gongzi/result.css"
+    />
+    <link rel="stylesheet" href="/fonts/shangtudongguan-bold/result.css" />
+    <title>Welcome to My Place</title>
+  </head>
+  <body>
+    <MessageBoardLink />
+    <main class="homepage">
+      <div class="background-animation" aria-hidden="true">
+        {frames.map((src, index) => (
+          <img
+            class:list={['background-frame', { 'is-active': index === 0 }]}
+            src={src}
+            alt=""
+            width="1672"
+            height="941"
+            loading="eager"
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+          />
+        ))}
+        <div class="paper-tone"></div>
+      </div>
+
+      <SplashCursor
+        client:load
+        RAINBOW_MODE={false}
+        COLOR="#fff8df"
+        SECONDARY_COLOR="#ffffff"
+        COLOR_INTENSITY={0.24}
+        SPLAT_RADIUS={0.32}
+        DENSITY_DISSIPATION={1.8}
+        VELOCITY_DISSIPATION={1.2}
+      />
+
+      <section class="hero" aria-labelledby="welcome-title">
+        <div class="hero-copy">
+          <div class="welcome-mark" aria-hidden="true">
+            <img src="/images/home/home-bg-yin.png" alt="" width="1024" height="1024" />
+          </div>
+          <h1 class="welcome" id="welcome-title">
+            <span class="welcome-en">Welcome to My Place</span>
+            <span class="welcome-cn">欢迎来到Yuxiu的空间</span>
+          </h1>
+          <div class="ink-line" aria-hidden="true"></div>
+          <div class="hero-actions">
+            <StarBorder
+              as="a"
+              href="/page1/"
+              color="#ffffff"
+              goldColor="#fff8df"
+              speed="6s"
+              thickness={4}
+            >
+              Enter · 入卷
+            </StarBorder>
+            <address class="home-contact" aria-label="联系我">
+              <span class="contact-row"><i aria-hidden="true"></i><span class="contact-icon" aria-hidden="true">☎️</span><span><button class="copy-contact" type="button" data-copy="15356056720">15356056720</button></span></span>
+              <span class="contact-row contact-row--main"><i>contact</i><span class="contact-icon" aria-hidden="true">✉️</span><span><button class="copy-contact" type="button" data-copy="15356056720@163.com">15356056720@163.com</button></span></span>
+              <span class="contact-row"><i aria-hidden="true"></i><span class="contact-icon" aria-hidden="true">✉️</span><span><button class="copy-contact" type="button" data-copy="cyxiu1222@gmail.com">cyxiu1222@gmail.com</button></span></span>
+              <span class="copy-feedback" role="status" aria-live="polite"></span>
+            </address>
+          </div>
+        </div>
+      </section>
+
+      <Hitokoto />
+
+    </main>
+
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const frames = Array.from(document.querySelectorAll<HTMLImageElement>('.background-frame'));
+      let activeFrameIndex = 0;
+      let frameTimer: number | undefined;
+
+      const showFrame = (index: number) => {
+        frames.forEach((frame, frameIndex) => frame.classList.toggle('is-active', frameIndex === index));
+      };
+
+      const startStopMotion = () => {
+        if (frameTimer || reduceMotion.matches || frames.length < 2) return;
+        frameTimer = window.setInterval(() => {
+          activeFrameIndex = (activeFrameIndex + 1) % frames.length;
+          showFrame(activeFrameIndex);
+        }, 750);
+      };
+
+      const stopStopMotion = () => {
+        if (!frameTimer) return;
+        window.clearInterval(frameTimer);
+        frameTimer = undefined;
+      };
+
+      startStopMotion();
+      void Promise.all(frames.map((frame) => frame.decode().catch(() => undefined)));
+      document.addEventListener('visibilitychange', () => document.hidden ? stopStopMotion() : startStopMotion());
+      reduceMotion.addEventListener?.('change', (event) => {
+        if (event.matches) {
+          stopStopMotion();
+          activeFrameIndex = 0;
+          showFrame(0);
+        } else startStopMotion();
+      });
+
+      const copyFeedback = document.querySelector<HTMLElement>('.copy-feedback');
+      let copyFeedbackTimer: number | undefined;
+      const copyText = async (text: string) => {
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const input = document.createElement('textarea');
+          input.value = text;
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          input.remove();
+        }
+        if (!copyFeedback) return;
+        window.clearTimeout(copyFeedbackTimer);
+        copyFeedback.textContent = '复制成功';
+        copyFeedback.classList.remove('is-visible');
+        void copyFeedback.offsetWidth;
+        copyFeedback.classList.add('is-visible');
+        copyFeedbackTimer = window.setTimeout(() => copyFeedback.classList.remove('is-visible'), 1800);
+      };
+      document.querySelectorAll<HTMLButtonElement>('.copy-contact').forEach((button) => {
+        button.addEventListener('click', () => void copyText(button.dataset.copy || ''));
+      });
+
+    </script>
+  </body>
+</html>
