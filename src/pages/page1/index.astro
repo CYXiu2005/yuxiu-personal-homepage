@@ -1,7 +1,8 @@
 ---
 import SplashCursor from '../../components/react/SplashCursor.jsx';
-import lianCurtain from '../../../design-assets/page1/lian.png';
+import lianCurtain from '../../../design-assets/page1/lian.webp';
 import MessageBoardLink from '../../components/MessageBoardLink.astro';
+import SiteNavigation from '../../components/SiteNavigation.astro';
 ---
 
 <!doctype html>
@@ -135,112 +136,6 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
           rgba(255,255,255,.025),
           rgba(133,107,80,.025)
         );
-    }
-
-    .bamboo-blind {
-      --blind-mirror: 1;
-      position: absolute;
-      top: -96px;
-      z-index: 8;
-      width: clamp(125px, calc(14vw - 30px), 185px);
-      height: clamp(620px, 82vh, 900px);
-      pointer-events: none;
-      user-select: none;
-      transform-origin: 50% 2%;
-      animation: blind-breeze 7.2s ease-in-out infinite alternate;
-      will-change: transform;
-    }
-
-    .bamboo-blind--first {
-      --blind-mirror: -1;
-      left: clamp(-17px, calc(1.8vw - 25px), 3px);
-      width: calc(clamp(125px, calc(14vw - 30px), 185px) + 15px);
-      height: calc(clamp(620px, 82vh, 900px) + 0px);
-      animation-duration: 7.2s;
-    }
-
-    .bamboo-blind--second {
-      left: clamp(83px, calc(17vw - 72px), 188px);
-      height: calc(clamp(620px, 82vh, 900px) - 145px);
-      animation-duration: 8.8s;
-      animation-delay: -3.1s;
-    }
-
-    .bamboo-blind--second .bamboo-blind__ribbon--left {
-      animation-duration: 4.3s;
-      animation-delay: -1.35s;
-    }
-
-    .bamboo-blind--second .bamboo-blind__ribbon--right {
-      animation-duration: 4.7s;
-      animation-delay: -2.2s;
-    }
-
-    .bamboo-blind__layer {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      filter:
-        sepia(.16)
-        saturate(.88)
-        contrast(1.08)
-        brightness(.94);
-    }
-
-    .bamboo-blind__upper {
-      opacity: .66;
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 57%,
-        0 59%
-      );
-    }
-
-    .bamboo-blind__roll {
-      opacity: .78;
-      clip-path: polygon(
-        0 59%,
-        100% 57%,
-        100% 67%,
-        0 69%
-      );
-    }
-
-    .bamboo-blind__ribbon {
-      position: absolute;
-      opacity: .68;
-      object-fit: fill;
-      transform-origin: 50% 0;
-      filter:
-        sepia(.16)
-        saturate(.88)
-        contrast(1.08)
-        brightness(.94);
-      will-change: transform;
-    }
-
-    .bamboo-blind__ribbon--left {
-      top: 68.2%;
-      left: 10%;
-      width: 14.62%;
-      height: 27.53%;
-      animation: ribbon-breeze-left 3.6s ease-in-out infinite alternate;
-    }
-
-    .bamboo-blind__ribbon--right {
-      top: 67.2%;
-      left: 74.23%;
-      width: 13.46%;
-      height: 26.35%;
-      animation: ribbon-breeze-right 4s -.8s ease-in-out infinite alternate;
-    }
-
-    /* 原竹帘结构与动画参数完整保留，仅由新帘暂时覆盖。 */
-    .bamboo-blind--temporarily-covered {
-      opacity: 0 !important;
     }
 
     .gauze-curtain {
@@ -676,7 +571,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
       height: 58px;
       z-index: 1;
       opacity: .9;
-      background: url("/images/home/home-bg-yin.png") center / contain no-repeat;
+      background: url("/images/home/home-bg-yin.webp") center / contain no-repeat;
       transform: rotate(-4deg);
     }
 
@@ -1122,42 +1017,6 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
       }
     }
 
-    @keyframes blind-breeze {
-      0% {
-        transform: scaleX(var(--blind-mirror)) rotate(-1.45deg) skewX(-.36deg) translate3d(0, 0, 0);
-      }
-      48% {
-        transform: scaleX(var(--blind-mirror)) rotate(1.8deg) skewX(.49deg) translate3d(3px, 1px, 0);
-      }
-      100% {
-        transform: scaleX(var(--blind-mirror)) rotate(-.72deg) skewX(-.21deg) translate3d(-1px, 2px, 0);
-      }
-    }
-
-    @keyframes ribbon-breeze-left {
-      0% {
-        transform: rotate(-4deg) skewX(-.9deg);
-      }
-      52% {
-        transform: rotate(5.8deg) skewX(1.25deg);
-      }
-      100% {
-        transform: rotate(-1.9deg) skewX(-.47deg);
-      }
-    }
-
-    @keyframes ribbon-breeze-right {
-      0% {
-        transform: rotate(4.4deg) skewX(.85deg);
-      }
-      48% {
-        transform: rotate(-5.3deg) skewX(-1.14deg);
-      }
-      100% {
-        transform: rotate(1.7deg) skewX(.36deg);
-      }
-    }
-
     @keyframes gauze-breeze-first {
       0% {
         transform: rotate(-1.44deg) skewX(-.3deg) translate3d(0, 0, 0);
@@ -1265,7 +1124,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
 
       .profile-hero {
         align-items: start;
-        padding-top: 112px;
+        padding-top: calc(var(--site-mobile-nav-height) + 20px);
       }
 
       .postcard-float {
@@ -1311,7 +1170,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
 
       .profile-hero {
         padding:
-          96px
+          calc(var(--site-mobile-nav-height) + 14px)
           14px
           38px;
       }
@@ -1326,24 +1185,6 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
 
       .profile-stack {
         transform: translateY(10px);
-      }
-
-      .bamboo-blind {
-        top: -72px;
-        width: 90px;
-        height: 590px;
-        opacity: .48;
-      }
-
-      .bamboo-blind--first {
-        left: -47px;
-        width: 105px;
-        height: 590px;
-      }
-
-      .bamboo-blind--second {
-        left: 27px;
-        height: 445px;
       }
 
       .social-cups {
@@ -1416,38 +1257,25 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
 
 <body>
   <MessageBoardLink />
+  <SiteNavigation current="profile" />
   <main class="profile-page" id="home">
     <div class="background-animation" aria-hidden="true">
       <img
         class="background-frame is-active"
-        src="/images/page1/page1-bg-01.png"
+        src="/images/page1/page1-bg-01.webp"
         alt=""
       />
       <img
         class="background-frame"
-        src="/images/page1/page2-bg-02.png"
+        src="/images/page1/page2-bg-02.webp"
         alt=""
       />
       <img
         class="background-frame"
-        src="/images/page1/page3-bg-03.png"
+        src="/images/page1/page3-bg-03.webp"
         alt=""
       />
       <div class="background-wash"></div>
-    </div>
-
-    <div class="bamboo-blind bamboo-blind--first bamboo-blind--temporarily-covered" aria-hidden="true">
-      <img class="bamboo-blind__layer bamboo-blind__upper" src="/images/page1/page1-bg-lian.png" alt="" />
-      <img class="bamboo-blind__layer bamboo-blind__roll" src="/images/page1/page1-bg-lian.png" alt="" />
-      <img class="bamboo-blind__ribbon bamboo-blind__ribbon--left" src="/images/page1/page1-bg-lian-ribbon-left-v3.png" alt="" />
-      <img class="bamboo-blind__ribbon bamboo-blind__ribbon--right" src="/images/page1/page1-bg-lian-ribbon-right-v2.png" alt="" />
-    </div>
-
-    <div class="bamboo-blind bamboo-blind--second bamboo-blind--temporarily-covered" aria-hidden="true">
-      <img class="bamboo-blind__layer bamboo-blind__upper" src="/images/page1/page1-bg-lian.png" alt="" />
-      <img class="bamboo-blind__layer bamboo-blind__roll" src="/images/page1/page1-bg-lian.png" alt="" />
-      <img class="bamboo-blind__ribbon bamboo-blind__ribbon--left" src="/images/page1/page1-bg-lian-ribbon-left-v3.png" alt="" />
-      <img class="bamboo-blind__ribbon bamboo-blind__ribbon--right" src="/images/page1/page1-bg-lian-ribbon-right-v2.png" alt="" />
     </div>
 
     <div class="gauze-curtain gauze-curtain--first" aria-hidden="true">
@@ -1480,22 +1308,6 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
       VELOCITY_DISSIPATION={1.2}
     />
 
-    <!--
-      Codex 接入真实项目时，将 href 改成项目实际路由。
-    -->
-    <header class="site-header">
-      <nav class="site-nav" aria-label="主要导航">
-        <ul>
-          <li><a href="/">首页</a></li>
-          <li><a href="/page1/" aria-current="page">个人介绍</a></li>
-          <li><a href="/experience/">工作经历</a></li>
-          <li><a href="/projects/">项目经历</a></li>
-          <li><a href="/writings/">我的文字</a></li>
-          <li><a href="/daily/">日常小品</a></li>
-        </ul>
-      </nav>
-    </header>
-
     <section class="profile-hero" aria-labelledby="profile-title">
       <div class="profile-stack">
         <div class="postcard-float">
@@ -1503,7 +1315,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
           <figure class="photo-panel">
             <img
               class="profile-photo"
-              src="/images/page1/photo.jpg"
+              src="/images/page1/photo.webp"
               alt="Yuxiu Chen 个人照片"
             />
             <figcaption class="photo-caption">
@@ -1552,7 +1364,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
             <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.88c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.82a9.5 9.5 0 0 1 2.5.34c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
             </svg>
-            <img src="/images/page1/page1-bei.png" alt="" />
+            <img src="/images/page1/page1-bei.webp" alt="" />
           </a>
           <a class="social-cup" href="https://xhslink.cn/m/5QBJRvnwJB3" target="_blank" rel="noopener noreferrer" aria-label="小红书">
             <svg class="social-icon social-icon--xhs" viewBox="0 0 24 24" aria-hidden="true">
@@ -1568,7 +1380,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
                 letter-spacing="-.35"
               >小红书</text>
             </svg>
-            <img src="/images/page1/page1-bei.png" alt="" />
+            <img src="/images/page1/page1-bei.webp" alt="" />
           </a>
           <button
             class="social-cup"
@@ -1580,7 +1392,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
               <path fill="currentColor" d="M9.25 4.25c-4 0-7.25 2.65-7.25 5.92 0 1.88 1.1 3.54 2.8 4.63l-.7 2.13 2.5-1.25c.84.27 1.73.41 2.65.41 4 0 7.25-2.65 7.25-5.92s-3.25-5.92-7.25-5.92Zm-2.52 4.1a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm5.04 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" />
               <path fill="currentColor" opacity=".78" d="M22 14.2c0-2.55-2.45-4.62-5.48-4.62-.1 0-.2 0-.3.01.05.3.08.6.08.91 0 3.68-3.57 6.67-7.98 6.67-.24 0-.47-.01-.7-.03 1.02 1.02 2.58 1.68 4.34 1.68.72 0 1.41-.11 2.06-.32l1.93.97-.54-1.66C19.27 17.4 22 15.99 22 14.2Z" />
             </svg>
-            <img src="/images/page1/page1-bei.png" alt="" />
+            <img src="/images/page1/page1-bei.webp" alt="" />
           </button>
         </nav>
       </div>
@@ -1588,7 +1400,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
 
     <dialog class="wechat-dialog" id="wechat-dialog" aria-labelledby="wechat-dialog-title">
       <button class="wechat-dialog__close" id="wechat-dialog-close" type="button" aria-label="关闭">×</button>
-      <img class="wechat-dialog__qr" src="/images/page1/page1-ma.jpg" alt="云岫 clouds seeping 公众号二维码" />
+      <img class="wechat-dialog__qr" src="/images/page1/page1-ma.webp" alt="云岫 clouds seeping 公众号二维码" />
       <p class="wechat-dialog__name" id="wechat-dialog-title">公众号：云岫 clouds seeping</p>
       <p class="wechat-dialog__copy-row">
         <button

@@ -1,8 +1,8 @@
 ---
-import restingReader from '../../design-assets/page5/人物侧卧读书_透明背景.png';
-import awakeReader from '../../design-assets/page5/人物坐起读书_透明背景.png';
+import restingReader from '../../design-assets/page5/人物侧卧读书_透明背景.webp';
+import awakeReader from '../../design-assets/page5/人物坐起读书_透明背景.webp';
 ---
-<a class="message-board-link" href="/messages/" aria-label="进入留言板">
+<a class="message-board-link" href="/messages/" aria-label="进入留言板" data-message-bubble>
   <span>留言板</span>
   <span class="reader" aria-hidden="true">
     <img class="reader-rest" src={restingReader.src} alt="" />
@@ -16,10 +16,145 @@ import awakeReader from '../../design-assets/page5/人物坐起读书_透明背�
   .message-board-link span:first-child::after{content:"";position:absolute;left:0;right:.14em;bottom:-5px;height:1px;background:linear-gradient(90deg,transparent,rgba(166,78,66,.62),transparent);transform:scaleX(.2);transition:transform .32s ease}
   .message-board-link:hover span:first-child::after,.message-board-link:focus-visible span:first-child::after{transform:scaleX(1)}
   .reader{position:relative;display:block;width:108px;height:32px;margin-left:-5px}
-  .reader img{position:absolute;left:50%;top:8px;display:block;width:116px;height:96px;object-fit:contain;transform:translate(-50%,-50%);transition:opacity .32s ease,transform .45s cubic-bezier(.2,.75,.25,1)}
+  .reader img{position:absolute;left:50%;top:8px;display:block;width:116px;height:96px;object-fit:contain;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .32s ease,transform .45s cubic-bezier(.2,.75,.25,1)}
   .reader-awake{opacity:0}
   .message-board-link:hover .reader-rest,.message-board-link:focus-visible .reader-rest{opacity:0;transform:translate(-50%,-45%) scale(.96)}
   .message-board-link:hover .reader-awake,.message-board-link:focus-visible .reader-awake{opacity:1;transform:translate(-50%,-54%) scale(1.04)}
-  @media(max-width:760px){.message-board-link{top:auto;right:5px;bottom:10px;height:58px;padding:18px 8px 3px 12px;background:rgba(246,237,220,.7);border-radius:999px;backdrop-filter:blur(5px);font-size:clamp(.75rem,1vw,.94rem)}.reader{width:72px;height:32px;margin-left:-5px}.reader img{top:0;width:78px;height:64px}}
+  @media(max-width:820px){
+    .message-board-link{top:auto;right:max(8px,env(safe-area-inset-right,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));display:grid;width:68px;height:68px;padding:0;place-items:center;overflow:hidden;border:1px solid rgba(117,87,51,.2);border-radius:50%;color:rgba(48,45,40,.72);background:radial-gradient(circle at 33% 24%,rgba(255,255,251,.88),rgba(241,226,201,.82));box-shadow:0 10px 26px rgba(66,49,33,.16),inset 0 1px 0 rgba(255,255,255,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:.62rem;letter-spacing:.08em;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;will-change:left,top,transform}
+    .message-board-link:hover,.message-board-link:focus-visible{transform:none}
+    .message-board-link.is-dragging{cursor:grabbing;box-shadow:0 15px 32px rgba(66,49,33,.22),inset 0 1px 0 rgba(255,255,255,.78);transform:scale(1.045)}
+    .message-board-link.is-snapping{transition:left .34s cubic-bezier(.2,.8,.25,1),top .2s ease,box-shadow .25s ease}
+    .message-board-link>span:first-child{position:absolute;right:0;bottom:5px;left:0;z-index:3;text-align:center;text-shadow:0 1px 4px rgba(255,252,244,.95)}
+    .message-board-link>span:first-child::after{display:none}
+    .reader{width:60px;height:52px;margin:0 0 10px}
+    .reader img{top:50%;width:70px;height:58px;transform:translate(-50%,-50%)}
+    .message-board-link:hover .reader-rest,.message-board-link:focus-visible .reader-rest{transform:translate(-50%,-47%) scale(.96)}
+    .message-board-link:hover .reader-awake,.message-board-link:focus-visible .reader-awake{transform:translate(-50%,-53%) scale(1.03)}
+  }
   @media(prefers-reduced-motion:reduce){.message-board-link,.reader img{transition:none}}
 </style>
+
+<script>
+  const bubble = document.querySelector<HTMLAnchorElement>('[data-message-bubble]');
+  const mobileBubble = window.matchMedia('(max-width: 820px)');
+  const storageKey = 'yunxiu-message-bubble-position-v1';
+
+  if (bubble) {
+    let dragging = false;
+    let moved = false;
+    let suppressClick = false;
+    let startX = 0;
+    let startY = 0;
+    let originLeft = 0;
+    let originTop = 0;
+
+    const viewportHeight = () => window.visualViewport?.height ?? window.innerHeight;
+    const bounds = () => {
+      const rect = bubble.getBoundingClientRect();
+      const navHeight = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--site-mobile-nav-height')) || 92;
+      return {
+        width: rect.width,
+        height: rect.height,
+        minLeft: 8,
+        maxLeft: Math.max(8, window.innerWidth - rect.width - 8),
+        minTop: navHeight + 8,
+        maxTop: Math.max(navHeight + 8, viewportHeight() - rect.height - 8),
+      };
+    };
+    const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+    const setPosition = (left: number, top: number) => {
+      const limit = bounds();
+      bubble.style.right = 'auto';
+      bubble.style.bottom = 'auto';
+      bubble.style.left = `${clamp(left, limit.minLeft, limit.maxLeft)}px`;
+      bubble.style.top = `${clamp(top, limit.minTop, limit.maxTop)}px`;
+    };
+    const savePosition = () => {
+      const rect = bubble.getBoundingClientRect();
+      const limit = bounds();
+      const usableHeight = Math.max(1, limit.maxTop - limit.minTop);
+      const side = rect.left + rect.width / 2 < window.innerWidth / 2 ? 'left' : 'right';
+      const y = clamp((rect.top - limit.minTop) / usableHeight, 0, 1);
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({ side, y }));
+      } catch {
+        // Dragging still works when browser storage is unavailable.
+      }
+    };
+    const snapToSide = () => {
+      const rect = bubble.getBoundingClientRect();
+      const limit = bounds();
+      const left = rect.left + rect.width / 2 < window.innerWidth / 2 ? limit.minLeft : limit.maxLeft;
+      bubble.classList.add('is-snapping');
+      setPosition(left, rect.top);
+      window.setTimeout(() => bubble.classList.remove('is-snapping'), 380);
+      savePosition();
+    };
+    const restorePosition = () => {
+      if (!mobileBubble.matches) {
+        bubble.removeAttribute('style');
+        bubble.classList.remove('is-dragging', 'is-snapping');
+        return;
+      }
+      window.requestAnimationFrame(() => {
+        const limit = bounds();
+        let side: 'left' | 'right' = 'right';
+        let y = .82;
+        try {
+          const stored = JSON.parse(localStorage.getItem(storageKey) || '{}');
+          if (stored.side === 'left' || stored.side === 'right') side = stored.side;
+          if (Number.isFinite(stored.y)) y = clamp(stored.y, 0, 1);
+        } catch {
+          // Keep the calm lower-right default when stored data is unavailable.
+        }
+        setPosition(side === 'left' ? limit.minLeft : limit.maxLeft, limit.minTop + (limit.maxTop - limit.minTop) * y);
+      });
+    };
+    const finishDrag = (event: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      bubble.classList.remove('is-dragging');
+      if (bubble.hasPointerCapture(event.pointerId)) bubble.releasePointerCapture(event.pointerId);
+      if (moved) {
+        suppressClick = true;
+        snapToSide();
+        window.setTimeout(() => { suppressClick = false; }, 400);
+      }
+    };
+
+    bubble.addEventListener('pointerdown', (event) => {
+      if (!mobileBubble.matches || !event.isPrimary || event.button !== 0) return;
+      const rect = bubble.getBoundingClientRect();
+      dragging = true;
+      moved = false;
+      startX = event.clientX;
+      startY = event.clientY;
+      originLeft = rect.left;
+      originTop = rect.top;
+      bubble.classList.remove('is-snapping');
+      bubble.setPointerCapture(event.pointerId);
+    });
+    bubble.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      const deltaX = event.clientX - startX;
+      const deltaY = event.clientY - startY;
+      if (!moved && Math.hypot(deltaX, deltaY) < 5) return;
+      moved = true;
+      bubble.classList.add('is-dragging');
+      event.preventDefault();
+      setPosition(originLeft + deltaX, originTop + deltaY);
+    });
+    bubble.addEventListener('pointerup', finishDrag);
+    bubble.addEventListener('pointercancel', finishDrag);
+    bubble.addEventListener('click', (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick = false;
+    });
+    mobileBubble.addEventListener?.('change', restorePosition);
+    window.addEventListener('resize', restorePosition, { passive: true });
+    restorePosition();
+  }
+</script>

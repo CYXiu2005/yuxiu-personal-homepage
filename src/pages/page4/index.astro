@@ -1,10 +1,11 @@
 ---
-import bg1 from '../../../design-assets/page4/page4-bg-01.jpg';
-import bg2 from '../../../design-assets/page4/page4-bg-02.jpg';
-import bg3 from '../../../design-assets/page4/page4-bg-03.jpg';
-import scrollImage from '../../../design-assets/page4/juanzhou.png';
+import bg1 from '../../../design-assets/page4/page4-bg-01.webp';
+import bg2 from '../../../design-assets/page4/page4-bg-02.webp';
+import bg3 from '../../../design-assets/page4/page4-bg-03.webp';
+import scrollImage from '../../../design-assets/page4/juanzhou.webp';
 import SplashCursor from '../../components/react/SplashCursor.jsx';
 import MessageBoardLink from '../../components/MessageBoardLink.astro';
+import SiteNavigation from '../../components/SiteNavigation.astro';
 
 const frames = [bg1, bg2, bg3];
 const petals = Array.from({ length: 28 }, (_, i) => ({
@@ -144,6 +145,7 @@ writings.prose[0].body = `一、引
 </head>
 <body>
     <MessageBoardLink />
+  <SiteNavigation current="writings" />
   <main class="page">
     <div class="background" aria-hidden="true">
       {frames.map((src, i) => <img class:list={['background-frame', { active: i === 0 }]} src={src.src} alt="" />)}
@@ -152,14 +154,6 @@ writings.prose[0].body = `一、引
     <div class="ink-mist-field" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="falling-petals" aria-hidden="true">{petals.map((petal, i) => <i class={`petal petal--${i % 3}`} style={petal.style}></i>)}</div>
     <SplashCursor client:load RAINBOW_MODE={false} COLOR="#f7ecd9" SECONDARY_COLOR="#ffffff" COLOR_INTENSITY={0.16} SPLAT_RADIUS={0.26} DENSITY_DISSIPATION={1.7} VELOCITY_DISSIPATION={1.15} />
-
-    <header class="nav-wrap">
-      <nav aria-label="主要导航"><ul>
-        <li><a href="/">首页</a></li><li><a href="/page1/">个人介绍</a></li>
-        <li><a href="/experience/">工作经历</a></li><li><a href="/projects/">项目经历</a></li>
-        <li><a href="/page4/" aria-current="page">我的文字</a></li><li><a href="/daily/">日常小品</a></li>
-      </ul></nav>
-    </header>
 
     <section class="writing-shell" aria-label="我的文字">
       <div class="reading-layout">
@@ -172,7 +166,7 @@ writings.prose[0].body = `一、引
           ].map((verse, line) => (
             <p class={`verse-line verse-line--${line + 1}`} aria-label={verse} style={`--line:${line}`}>
               {[...verse].map((char, i) => <span aria-hidden="true" style={`--i:${i};--drop-x:${(i % 3 - 1) * 7}px;--drop-rotate:${i % 2 === 0 ? -7 : 7}deg`}>{char}</span>)}
-              {line === 0 && <img class="verse-signature" src="/images/home/home-bg-yin.png" alt="云岫落款" />}
+              {line === 0 && <img class="verse-signature" src="/images/home/home-bg-yin.webp" alt="云岫落款" />}
             </p>
           ))}
         </aside>
@@ -220,7 +214,7 @@ writings.prose[0].body = `一、引
 
   <dialog class="wechat-dialog" id="wechat-dialog" aria-labelledby="wechat-dialog-title">
     <button class="wechat-dialog__close" id="wechat-dialog-close" type="button" aria-label="关闭">×</button>
-    <img class="wechat-dialog__qr" src="/images/page1/page1-ma.jpg" alt="云岫 clouds seeping 公众号二维码" />
+    <img class="wechat-dialog__qr" src="/images/page1/page1-ma.webp" alt="云岫 clouds seeping 公众号二维码" />
     <p class="wechat-dialog__name" id="wechat-dialog-title">公众号：云岫 clouds seeping</p>
     <p class="wechat-dialog__copy-row">
       <button class="wechat-dialog__copy" id="wechat-link-copy" type="button" data-copy="https://mp.weixin.qq.com/mp/profile_ext?action=home&amp;__biz=MzYzOTAwNzI1Mg==#wechat_redirect">复制链接</button>
@@ -513,5 +507,30 @@ writings.prose[0].body = `一、引
   .verse-signature{opacity:0;animation:page4-seal-arrive 1.15s 1.02s cubic-bezier(.2,.78,.25,1) forwards}
   @keyframes page4-window-arrive{from{opacity:0;transform:perspective(1100px) translate3d(0,27px,0) scale(.975);filter:blur(4px)}to{opacity:1;transform:perspective(1100px) translate3d(0,0,0) scale(1);filter:blur(0)}}
   @keyframes page4-seal-arrive{from{opacity:0;transform:translate3d(-7px,7px,0) rotate(-8deg) scale(.86)}to{opacity:1;transform:translate3d(0,0,0) rotate(-4deg) scale(1)}}
+  @media(max-width:820px){
+    .page{overflow:visible}
+    .writing-shell{justify-content:flex-start;min-height:auto;padding:calc(var(--site-mobile-nav-height) + 16px) 12px 50px}
+    .reading-layout{grid-template-columns:1fr;grid-template-areas:"title" "tabs" "board";gap:13px;width:min(600px,100%);margin:0 auto}
+    .verse-heading{grid-area:title;display:grid;grid-template-columns:1fr 1fr;width:100%;height:auto;padding:0;gap:8px 15px;translate:0}
+    .verse-line{width:auto;margin:0!important;font-size:clamp(.65rem,2.8vw,.74rem);line-height:1.72;letter-spacing:.06em;writing-mode:horizontal-tb;text-orientation:mixed;overflow-wrap:anywhere}
+    .verse-line span{display:inline-block}
+    .verse-signature{display:none}
+    .scroll-tabs{grid-area:tabs;flex-direction:row;justify-self:center;align-self:auto;width:auto;max-width:100%;gap:8px}
+    .scroll-tab{width:min(132px,40vw);height:76px}
+    .scroll-picture{flex-basis:72px;width:72px;height:68px}
+    .scroll-picture img,.scroll-tab:nth-child(2) .scroll-picture img{width:72px;height:68px}
+    .paper-board{grid-area:board;width:100%;height:620px;max-height:none}
+    .writing-card{padding-right:18px;padding-left:18px}
+    .story-next{position:relative;left:auto;bottom:auto;align-self:center;width:max-content;max-width:100%;margin:28px auto 0;transform:none;text-align:center;white-space:normal}
+    .story-next:hover,.story-next:focus-visible{transform:translateY(-3px)}
+  }
+  @media(max-width:520px){
+    .writing-shell{padding-inline:9px}
+    .verse-heading{grid-template-columns:1fr;gap:6px}
+    .paper-board{height:min(590px,calc(100svh - 126px));min-height:500px;border-radius:20px}
+    .writing-card{height:calc(100% - 82px);padding:16px 13px 12px}
+    .board-controls{gap:5px;padding-inline:0}
+    .more-xhs{margin-right:0}
+  }
   @media(prefers-reduced-motion:reduce){.verse-signature{opacity:1;transform:rotate(-4deg);animation:none!important}}
 </style>

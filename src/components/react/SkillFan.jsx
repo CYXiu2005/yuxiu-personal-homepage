@@ -66,6 +66,7 @@ export default function SkillFan({ items = DEFAULT_SKILLS }) {
   const dragMovedRef = useRef(false);
   const [selected, setSelected] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const isCompactLayout = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches;
 
   const render = useCallback(() => {
     currentRef.current += (targetRef.current - currentRef.current) * 0.14;
@@ -100,6 +101,7 @@ export default function SkillFan({ items = DEFAULT_SKILLS }) {
     if (!root) return undefined;
     let wheelTimer;
     const wheel = (event) => {
+      if (isCompactLayout()) return;
       event.preventDefault();
       moveTo(targetRef.current + Math.sign(event.deltaY) * 0.72);
       clearTimeout(wheelTimer);
@@ -114,6 +116,7 @@ export default function SkillFan({ items = DEFAULT_SKILLS }) {
   }, [moveTo]);
 
   const pointerDown = (event) => {
+    if (isCompactLayout()) return;
     dragRef.current = { y: event.clientY, start: targetRef.current, id: event.pointerId };
     dragMovedRef.current = false;
     setDragging(true);

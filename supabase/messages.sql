@@ -10,8 +10,22 @@ create table if not exists public.messages (
   status text not null default 'pending' check (status in ('pending','approved','rejected'))
 );
 alter table public.messages enable row level security;
-create policy "public reads approved messages" on public.messages for select using (status='approved');
-create policy "public submits pending messages" on public.messages for insert with check (status='pending');
+
+grant usage on schema public to anon;
+grant select, insert on public.messages to anon;
+
+drop policy if exists "public reads approved messages" on public.messages;
+drop policy if exists "public submits pending messages" on public.messages;
+
+create policy "public reads approved messages" on public.messages
+  for select
+  to anon
+  using (status='approved');
+
+create policy "public submits pending messages" on public.messages
+  for insert
+  to anon
+  with check (status='pending');
 create index if not exists messages_status_created_at_idx on public.messages(status,created_at desc);
 
 -- 首次执行时清理历史数据，只保留最新 100 条。

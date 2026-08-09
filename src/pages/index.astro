@@ -4,6 +4,7 @@ import SplashCursor from '../components/react/SplashCursor.jsx';
 import StarBorder from '../components/react/StarBorder.jsx';
 import Hitokoto from '../components/Hitokoto.astro';
 import MessageBoardLink from '../components/MessageBoardLink.astro';
+import SiteNavigation from '../components/SiteNavigation.astro';
 
 const frames = [
   '/images/home/home-bg-frame-01.webp',
@@ -27,6 +28,7 @@ const frames = [
   </head>
   <body>
     <MessageBoardLink />
+    <SiteNavigation current="home" mobileOnly />
     <main class="homepage">
       <div class="background-animation" aria-hidden="true">
         {frames.map((src, index) => (
@@ -57,7 +59,7 @@ const frames = [
       <section class="hero" aria-labelledby="welcome-title">
         <div class="hero-copy">
           <div class="welcome-mark" aria-hidden="true">
-            <img src="/images/home/home-bg-yin.png" alt="" width="1024" height="1024" />
+            <img src="/images/home/home-bg-yin.webp" alt="" width="1024" height="1024" />
           </div>
           <h1 class="welcome" id="welcome-title">
             <span class="welcome-en">Welcome to My Place</span>

@@ -1,0 +1,180 @@
+---
+interface Props {
+  current?: 'home' | 'profile' | 'experience' | 'projects' | 'writings' | 'daily';
+  mobileOnly?: boolean;
+}
+
+const { current, mobileOnly = false } = Astro.props as Props;
+const items = [
+  { key: 'home', label: '首页', href: '/' },
+  { key: 'profile', label: '个人介绍', href: '/page1/' },
+  { key: 'experience', label: '工作经历', href: '/experience/' },
+  { key: 'projects', label: '项目经历', href: '/projects/' },
+  { key: 'writings', label: '我的文字', href: '/page4/' },
+  { key: 'daily', label: '日常小品', href: '/daily/' },
+] as const;
+---
+
+<header class:list={['site-navigation', { 'site-navigation--mobile-only': mobileOnly }]}>
+  <nav aria-label="主要导航">
+    <ul>
+      {items.map((item) => (
+        <li>
+          <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  :global(:root) {
+    --site-mobile-nav-height: 0px;
+  }
+
+  .site-navigation {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 12000;
+    display: flex;
+    justify-content: center;
+    padding: clamp(21px, 3vh, 34px) 24px 8px;
+    pointer-events: none;
+  }
+
+  .site-navigation--mobile-only {
+    display: none;
+  }
+
+  nav {
+    pointer-events: auto;
+    animation: shared-nav-float 6.8s ease-in-out infinite;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 3vw, 48px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    min-width: 0;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: 8px 1px 10px;
+    color: rgba(48, 45, 40, .64);
+    font-family: "STDongGuanTi Bld", "PING FANG GONG ZI TI", "Songti SC", serif;
+    font-size: clamp(.78rem, 1vw, .96rem);
+    line-height: 1;
+    letter-spacing: .13em;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+    transition: color .22s ease, transform .22s cubic-bezier(.33, 1, .68, 1);
+  }
+
+  a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--red, var(--cinnabar, #a64e42));
+    opacity: 0;
+    transform: translate(-50%, 5px) scale(.3);
+    transition: opacity .22s ease, transform .22s cubic-bezier(.33, 1, .68, 1);
+  }
+
+  a:hover,
+  a:focus-visible,
+  a[aria-current="page"] {
+    color: var(--ink, #302d28);
+    outline: none;
+    transform: translateY(-2px);
+  }
+
+  a:hover::after,
+  a:focus-visible::after,
+  a[aria-current="page"]::after {
+    opacity: .76;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  @keyframes shared-nav-float {
+    50% { transform: translateY(-3px); }
+  }
+
+  @media (max-width: 820px) {
+    :global(:root) {
+      --site-mobile-nav-height: calc(92px + env(safe-area-inset-top, 0px));
+    }
+
+    .site-navigation,
+    .site-navigation--mobile-only {
+      display: flex;
+      min-height: var(--site-mobile-nav-height);
+      padding:
+        max(8px, env(safe-area-inset-top, 0px))
+        max(8px, env(safe-area-inset-right, 0px))
+        8px
+        max(8px, env(safe-area-inset-left, 0px));
+      background:
+        linear-gradient(180deg, rgba(247, 239, 224, .94), rgba(244, 234, 216, .84));
+      border-bottom: 1px solid rgba(91, 69, 45, .1);
+      box-shadow: 0 8px 24px rgba(64, 49, 34, .07);
+      backdrop-filter: blur(13px) saturate(1.08);
+      -webkit-backdrop-filter: blur(13px) saturate(1.08);
+    }
+
+    nav {
+      width: min(520px, 100%);
+      animation: none;
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 3px 5px;
+      width: 100%;
+    }
+
+    a {
+      display: grid;
+      min-height: 35px;
+      place-items: center;
+      padding: 7px 4px 8px;
+      border-radius: 9px;
+      font-size: clamp(.7rem, 3.35vw, .8rem);
+      line-height: 1.25;
+      letter-spacing: .08em;
+      text-align: center;
+      text-shadow: none;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    a[aria-current="page"] {
+      background: rgba(255, 252, 245, .55);
+    }
+
+    a::after {
+      bottom: 3px;
+      width: 3px;
+      height: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    nav { animation: none; }
+  }
+</style>

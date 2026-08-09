@@ -23,7 +23,7 @@
 @media(max-width:700px){.opened-envelope{top:51%;width:min(210px,54vw)}.opened-envelope .letter-paper{width:min(390px,88vw);min-height:205px}}
 
 /* 留言板整页使用古画信封背面；展开信纸完全抽出至信封上方 */
-.message-board{background-color:var(--mb-paper);background-image:linear-gradient(rgba(247,238,221,.64),rgba(235,216,188,.66)),url("../../../design-assets/page5/古画荔枝信封背面_透明背景.png");background-position:center;background-repeat:no-repeat;background-size:cover}
+.message-board{background-color:var(--mb-paper);background-image:linear-gradient(rgba(247,238,221,.64),rgba(235,216,188,.66)),url("../../../design-assets/page5/古画荔枝信封背面_透明背景.webp");background-position:center;background-repeat:no-repeat;background-size:cover}
 .opened-envelope{top:56%}
 .opened-envelope .letter-paper{bottom:72%;min-height:245px;padding:32px clamp(25px,4vw,48px) 25px;border:1px solid rgba(117,87,51,.2);background-color:#ead5ad;background-image:radial-gradient(circle at 22% 18%,rgba(255,248,222,.58),transparent 34%),linear-gradient(90deg,rgba(195,148,85,.12),rgba(244,225,187,.92) 13%,rgba(239,216,173,.96) 82%,rgba(178,126,65,.14)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' seed='9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.09'/%3E%3C/svg%3E");box-shadow:inset 0 0 24px rgba(130,88,42,.11),0 12px 24px rgba(71,51,31,.12)}
 .opened-envelope .letter-paper::before{content:"";position:absolute;inset:7px;pointer-events:none;border:1px solid rgba(125,91,51,.08)}
@@ -32,7 +32,7 @@
 @media(max-width:700px){.opened-envelope{top:58%}.opened-envelope .letter-paper{bottom:70%;min-height:220px;padding:26px 22px 21px}}
 
 /* 最终素材帧：背景、打开信封与完全展开信纸 */
-.message-board{background-color:#efe1cc;background-image:linear-gradient(rgba(247,239,224,.18),rgba(236,219,194,.2)),url("../../../design-assets/page5/背景.png");background-position:center;background-repeat:no-repeat;background-size:cover}
+.message-board{background-color:#efe1cc;background-image:linear-gradient(rgba(247,239,224,.18),rgba(236,219,194,.2)),url("../../../design-assets/page5/背景.webp");background-position:center;background-repeat:no-repeat;background-size:cover}
 .opened-envelope{top:51%;width:min(250px,45vw);aspect-ratio:905/1737}
 .envelope-visual,.outgoing-envelope-visual,.outgoing-paper-visual{position:absolute;inset:0}
 .envelope-visual img,.outgoing-envelope-visual>img,.outgoing-paper-visual>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
@@ -165,3 +165,45 @@
 .outgoing-layer .outgoing-envelope-visual{width:min(360px,68vw)!important;height:auto!important;aspect-ratio:905/1737}
 @media(max-width:700px){.outgoing-layer .outgoing-envelope-visual{width:min(288px,82vw)!important}}
 .composer{will-change:opacity}
+
+/* Mobile board: preserve every letter and keep the two-row site navigation clear. */
+@media(max-width:820px){
+  .message-board{min-height:100svh;overflow:hidden}
+  .board-title{top:calc(var(--site-mobile-nav-height,92px) + 8px);width:calc(100% - 28px)}
+  .board-title p{margin-bottom:2px;font-size:.59rem}
+  .board-title h1{font-size:clamp(1.42rem,7vw,1.75rem);line-height:1.2}
+  .board-title>.board-subtitle{margin-top:6px;font-size:.65rem;line-height:1.4;white-space:normal}
+  .board-title-seal{top:-15px;left:-37px;width:40px}
+  .letter-sky{top:calc(var(--site-mobile-nav-height,92px) + 82px);right:13px;bottom:190px;left:13px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:6px 8px;transform:none}
+  .floating-envelope{position:relative;left:auto;top:auto;align-self:center;justify-self:center;width:clamp(52px,17vw,66px);transform:rotate(var(--r)) scale(calc(var(--s) * .9));animation-name:envelope-drift-mobile}
+  .floating-envelope:hover,.floating-envelope:focus-visible{translate:0 -4px}
+  .composer{bottom:max(10px,env(safe-area-inset-bottom,0px));width:calc(100% - 24px)}
+  .composer label{margin-bottom:5px;font-size:.7rem}
+  .composer textarea{height:92px;padding:12px 14px 22px;font-size:.82rem;line-height:1.75}
+  .composer>div{gap:6px;padding-top:6px}
+  .composer-foot{flex-wrap:wrap}
+  .signature{gap:4px!important}
+  .signature input{width:min(100px,29vw);padding-top:3px;font-size:.72rem}
+  .composer small{margin-left:auto}
+  .composer button{min-width:36px}
+  .reading-layer{z-index:11000!important;padding:var(--site-mobile-nav-height,92px) 8px 8px}
+  .reading-paper,.outgoing-paper-visual{width:min(360px,92vw,calc((100svh - var(--site-mobile-nav-height,92px) - 24px) * .608))!important}
+  .reading-paper p{left:calc(16% + 7px);right:calc(16% + 7px);font-size:.72rem;line-height:1.82}
+  .reading-paper time{left:calc(16% + 7px);right:calc(16% + 7px);font-size:.68rem;line-height:1.6}
+  .outgoing-layer{z-index:11000;padding-top:var(--site-mobile-nav-height,92px);box-sizing:border-box}
+  .outgoing-layer .outgoing-envelope-visual{width:min(288px,78vw,calc((100svh - var(--site-mobile-nav-height,92px) - 24px) * .521))!important}
+  .outgoing-paper-visual em,.outgoing-letter .outgoing-sheet{font-size:.7rem}
+}
+@media(max-width:380px), (max-height:620px){
+  .board-title{top:calc(var(--site-mobile-nav-height,92px) + 4px)}
+  .board-title p{display:none}
+  .board-title>.board-subtitle{margin-top:3px}
+  .letter-sky{top:calc(var(--site-mobile-nav-height,92px) + 58px);bottom:170px;gap:2px 6px}
+  .floating-envelope{width:50px}
+  .composer textarea{height:78px;padding-block:9px 18px}
+}
+@keyframes envelope-drift-mobile{
+  0%{transform:translate3d(-2px,2px,0) rotate(calc(var(--r) - .8deg)) scale(calc(var(--s) * .88))}
+  50%{transform:translate3d(3px,-5px,0) rotate(var(--r)) scale(calc(var(--s) * .92))}
+  100%{transform:translate3d(-2px,3px,0) rotate(calc(var(--r) + .7deg)) scale(calc(var(--s) * .9))}
+}
