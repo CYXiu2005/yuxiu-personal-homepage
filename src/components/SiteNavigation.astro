@@ -1,6 +1,6 @@
 ---
 interface Props {
-  current?: 'home' | 'profile' | 'experience' | 'projects' | 'writings' | 'daily';
+  current?: 'home' | 'profile' | 'experience' | 'projects' | 'competition' | 'writings' | 'daily';
   mobileOnly?: boolean;
 }
 
@@ -10,6 +10,7 @@ const items = [
   { key: 'profile', label: '个人介绍', href: '/page1/' },
   { key: 'experience', label: '工作经历', href: '/experience/' },
   { key: 'projects', label: '项目经历', href: '/projects/' },
+  { key: 'competition', label: '比赛经历', href: '/competitions/', mobileOnly: true },
   { key: 'writings', label: '我的文字', href: '/page4/' },
   { key: 'daily', label: '日常小品', href: '/daily/' },
 ] as const;
@@ -19,7 +20,7 @@ const items = [
   <nav aria-label="主要导航">
     <ul>
       {items.map((item) => (
-        <li>
+        <li class:list={{ 'mobile-nav-item': 'mobileOnly' in item && item.mobileOnly }}>
           <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>
             {item.label}
           </a>
@@ -65,6 +66,10 @@ const items = [
 
   li {
     min-width: 0;
+  }
+
+  .mobile-nav-item {
+    display: none;
   }
 
   a {
@@ -116,18 +121,22 @@ const items = [
 
   @media (max-width: 820px) {
     :global(:root) {
-      --site-mobile-nav-height: calc(92px + env(safe-area-inset-top, 0px));
+      --site-mobile-nav-height: calc(54px + env(safe-area-inset-top, 0px));
     }
 
     .site-navigation,
     .site-navigation--mobile-only {
+      position: sticky;
+      inset: auto;
+      top: 0;
       display: flex;
+      width: 100%;
       min-height: var(--site-mobile-nav-height);
       padding:
-        max(8px, env(safe-area-inset-top, 0px))
-        max(8px, env(safe-area-inset-right, 0px))
-        8px
-        max(8px, env(safe-area-inset-left, 0px));
+        max(2px, env(safe-area-inset-top, 0px))
+        max(4px, env(safe-area-inset-right, 0px))
+        2px
+        max(4px, env(safe-area-inset-left, 0px));
       background:
         linear-gradient(180deg, rgba(247, 239, 224, .94), rgba(244, 234, 216, .84));
       border-bottom: 1px solid rgba(91, 69, 45, .1);
@@ -143,20 +152,25 @@ const items = [
 
     ul {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 3px 5px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 1px 2px;
       width: 100%;
+    }
+
+    .mobile-nav-item {
+      display: block;
     }
 
     a {
       display: grid;
-      min-height: 35px;
+      min-height: 23px;
       place-items: center;
-      padding: 7px 4px 8px;
-      border-radius: 9px;
-      font-size: clamp(.7rem, 3.35vw, .8rem);
-      line-height: 1.25;
-      letter-spacing: .08em;
+      padding: 2px 2px 3px;
+      border-radius: 6px;
+      font-size: clamp(.58rem, 2.65vw, .69rem);
+      line-height: 1.08;
+      letter-spacing: .035em;
       text-align: center;
       text-shadow: none;
       white-space: normal;
@@ -168,7 +182,7 @@ const items = [
     }
 
     a::after {
-      bottom: 3px;
+      bottom: 0;
       width: 3px;
       height: 3px;
     }

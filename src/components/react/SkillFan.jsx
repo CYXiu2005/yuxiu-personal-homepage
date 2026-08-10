@@ -35,12 +35,32 @@ const SKILL_ICONS = {
   Figma: siFigma,
 };
 
-const getSkillPosition = (index, length, current = 0) => {
-  const radius = 355;
-  const angleStep = 9.3 * Math.PI / 180;
+const getSkillPosition = (index, length, current = 0, compact = false) => {
   let distance = index - current;
   distance = ((distance % length) + length) % length;
   if (distance > length / 2) distance -= length;
+
+  if (compact) {
+    const radius = 285;
+    const centeredDistance = distance - .5;
+    const angle = centeredDistance * .24;
+    const x = radius * Math.sin(angle);
+    const y = radius * Math.cos(angle);
+    const strength = Math.max(.5, 1 - Math.abs(centeredDistance) * .13);
+    const visible = distance >= -2.25 && distance <= 3.25;
+
+    return {
+      transform: `translate(-50%, -50%) translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) rotate(${(-angle * 11).toFixed(2)}deg)`,
+      opacity: visible ? strength : 0,
+      filter: 'none',
+      zIndex: Math.max(1, 100 - Math.round(Math.abs(distance) * 10)),
+      pointerEvents: visible ? 'auto' : 'none',
+      '--skill-active': Math.max(0, 1 - Math.abs(distance)),
+    };
+  }
+
+  const radius = 355;
+  const angleStep = 9.3 * Math.PI / 180;
   const angle = Math.max(-1.16, Math.min(1.16, distance * angleStep));
   const x = -radius * (1 - Math.cos(angle));
   const y = radius * Math.sin(angle);
@@ -74,7 +94,7 @@ export default function SkillFan({ items = DEFAULT_SKILLS }) {
 
     itemRefs.current.forEach((element, index) => {
       if (!element) return;
-      const style = getSkillPosition(index, items.length, currentRef.current);
+      const style = getSkillPosition(index, items.length, currentRef.current, isCompactLayout());
       element.style.transform = style.transform;
       element.style.opacity = String(style.opacity);
       element.style.filter = style.filter;
@@ -108,8 +128,11 @@ export default function SkillFan({ items = DEFAULT_SKILLS }) {
       wheelTimer = window.setTimeout(() => moveTo(Math.round(targetRef.current)), 120);
     };
     root.addEventListener('wheel', wheel, { passive: false });
+    const refreshLayout = () => moveTo(targetRef.current);
+    window.addEventListener('resize', refreshLayout, { passive: true });
     return () => {
       root.removeEventListener('wheel', wheel);
+      window.removeEventListener('resize', refreshLayout);
       clearTimeout(wheelTimer);
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
     };

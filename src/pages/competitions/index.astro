@@ -1,0 +1,149 @@
+---
+import type { ImageMetadata } from 'astro';
+import bgImage from '../../../design-assets/page3/page3-bg-01.webp';
+import MessageBoardLink from '../../components/MessageBoardLink.astro';
+import SiteNavigation from '../../components/SiteNavigation.astro';
+
+const awardAssetModules = import.meta.glob(
+  '../../../design-assets/ award/*.webp',
+  { eager: true, import: 'default' }
+) as Record<string, ImageMetadata>;
+
+const awardImages = Object.entries(awardAssetModules).map(([path, image]) => ({
+  src: image.src,
+  width: image.width,
+  height: image.height,
+  alt: decodeURIComponent(path.split('/').pop()?.replace(/\.[^.]+$/, '') || '云岫奖状'),
+  landscape: image.width >= image.height,
+})).sort((a, b) => Number(b.landscape) - Number(a.landscape));
+
+const awards = [
+  '全国大学生数学建模省二等奖（队长）',
+  '中国大学生计算机设计大赛省一等奖',
+  '全国大学生统计建模大赛四川省三等奖',
+  'MathorCup数学应用挑战赛赛区三等奖',
+  '四川省大学生数据科学与统计建模竞赛三等奖',
+  '四川省大学生茶学技能大赛茶文化与产品宣推三等奖',
+  '“三下乡”社会实践校级一等奖',
+  '大学生创新创业省级立项（两项）',
+  '全国大学生电子商务“创新、创意及创业”挑战赛省一等奖',
+  '光华创新创业大赛金奖（两项）',
+  '项目入选启点青年创客计划',
+  '温江区青年创新创业大赛优秀奖',
+];
+
+---
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="陈昱秀的比赛与获奖经历" />
+  <title>比赛经历 · Competition Notes</title>
+  <link rel="stylesheet" href="/fonts/pingfang-gongzi/result.css" />
+  <link rel="stylesheet" href="/fonts/shangtudongguan-bold/result.css" />
+  <style>
+    :root{--paper:#f5ead8;--ink:#302d28;--green:#74897c;--red:#a65346;--cn:"STDongGuanTi Bld","PING FANG GONG ZI TI","Songti SC",serif;--display:"PING FANG GONG ZI TI","Songti SC",serif;--en:"Iowan Old Style","Palatino Linotype",Georgia,serif;--ease:cubic-bezier(.33,1,.68,1)}
+    *{box-sizing:border-box}html,body{min-width:320px;min-height:100%;margin:0;background:var(--paper);color:var(--ink);font-family:var(--cn)}body{overflow-x:hidden}button{color:inherit;font:inherit}
+    .page{position:relative;min-height:100svh;isolation:isolate}
+    .competition-shell{position:relative;width:min(470px,100%);min-height:calc(100svh - var(--site-mobile-nav-height));margin:0 auto;padding:14px 12px 42px;overflow:hidden;isolation:isolate}
+    .background{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:68% center;filter:brightness(1.04) saturate(.72)}
+    .background--mist{display:none}
+    .competition-shell::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(255,252,244,.5);pointer-events:none}
+    .heading{position:relative;z-index:2;text-align:center}.heading .en{margin:0 0 6px;color:var(--green);font-family:var(--en);font-size:.7rem;font-style:italic;letter-spacing:.18em}.heading-title{position:relative;display:inline-block}.heading h1{margin:0;font-family:var(--display);font-size:clamp(1.6rem,7vw,2rem);font-weight:400;letter-spacing:.14em}.heading-seal{display:none;position:absolute;top:-18px;left:-46px;width:42px;height:auto;object-fit:contain;filter:saturate(1.08) contrast(1.04);transform:rotate(-4deg)}.heading .note{margin:8px 0 0;color:rgba(48,45,40,.45);font-size:.7rem;letter-spacing:.1em}.heading .note span{display:inline-block}
+    .award-tree{position:relative;z-index:1;width:100%;height:720px;margin:5px auto 0;overflow:hidden;border-radius:28px;background:radial-gradient(circle at 50% 48%,rgba(255,253,247,.19),transparent 68%)}.award-tree::after{content:"";position:absolute;right:8%;bottom:18px;left:8%;height:1px;background:linear-gradient(90deg,transparent,rgba(113,133,120,.3),transparent)}.award-tree canvas{position:relative;z-index:1;display:block;width:100%;height:100%;touch-action:pan-y}
+    .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+    .award-gallery-link{position:relative;display:block;width:max-content;max-width:calc(100% - 42px);margin:-3px auto 0;padding:7px 3px 11px;border:0;background:transparent;color:rgba(74,72,68,.72);font-size:.75rem;line-height:1.7;letter-spacing:.1em;text-align:center;cursor:pointer}.award-gallery-link::after{content:"";position:absolute;right:4px;bottom:3px;left:4px;height:1px;background:linear-gradient(90deg,transparent,rgba(166,78,66,.56),transparent);transform:scaleX(.7);transition:transform .28s var(--ease)}.award-gallery-link:hover::after,.award-gallery-link:focus-visible::after{transform:scaleX(1)}
+    .competition-story{position:relative;display:none;width:max-content;max-width:calc(100% - 32px);margin:26px auto 4px;align-items:center;gap:.72em;color:rgba(84,65,55,.72);font-size:.75rem;letter-spacing:.13em;text-align:center;text-decoration:none}.competition-story::after{content:"";position:absolute;right:0;bottom:-5px;left:0;height:1px;background:rgba(166,78,66,.48);transform:scaleX(.72);transform-origin:center}.competition-story__arrow{font-family:var(--en);font-size:1.05em}
+    .award-dialog{width:calc(100vw - 14px);height:calc(100svh - 14px);max-width:none;max-height:none;padding:0;border:0;overflow:hidden;background:transparent;color:var(--ink)}.award-dialog::backdrop{background:rgba(18,17,21,.72);backdrop-filter:blur(8px)}.award-dialog__paper{position:relative;width:100%;height:100%}.award-dialog__close{position:absolute;top:10px;right:10px;z-index:5000;width:40px;height:40px;padding:0;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(20,20,22,.5);color:#fff;font-family:var(--en);font-size:1.5rem;cursor:pointer}
+    .depth-carousel{position:relative;width:100%;height:100%;perspective:1200px;touch-action:pan-y;outline:none;user-select:none}.depth-carousel__stage{position:absolute;inset:0;transform-style:preserve-3d}.depth-carousel__card{position:absolute;top:48%;left:50%;display:grid;place-items:center;width:min(78vw,660px);height:auto;aspect-ratio:var(--award-ratio);max-width:78vw;max-height:72svh;margin:0;overflow:hidden;border-radius:12px;transform:translate(-50%,-50%);transform-origin:center;transition:transform .58s var(--ease),opacity .42s,filter .42s;will-change:transform,opacity,filter}.depth-carousel__card[data-landscape="false"]{width:min(58vw,390px);max-width:58vw}.depth-carousel__img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit;pointer-events:none}.depth-carousel__arrow{position:absolute;top:50%;z-index:3000;display:grid;width:40px;height:40px;padding:0;place-items:center;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(18,20,26,.56);color:#fff;font-family:var(--en);font-size:1.4rem;cursor:pointer;transform:translateY(-50%)}.depth-carousel__arrow--prev{left:7px}.depth-carousel__arrow--next{right:7px}.award-counter{position:absolute;bottom:48px;left:50%;z-index:3000;padding:5px 10px;border-radius:999px;background:rgba(14,16,22,.45);color:rgba(255,255,255,.84);font-family:var(--en);font-size:.7rem;letter-spacing:.12em;transform:translateX(-50%)}.depth-carousel__dots{position:absolute;bottom:13px;left:50%;z-index:3000;display:flex;max-width:calc(100% - 36px);gap:7px;padding:7px 10px;overflow-x:auto;border-radius:999px;background:rgba(14,16,22,.4);transform:translateX(-50%);scrollbar-width:none}.depth-carousel__dot{flex:0 0 auto;width:6px;height:6px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.34);cursor:pointer;transition:width .25s,background .25s}.depth-carousel__dot.is-active{width:18px;background:#fff}
+    @media(min-width:821px){.competition-shell{min-height:100svh;padding-top:105px}.heading h1{font-size:2rem}.award-tree{height:720px}}
+    @keyframes note-drop{0%{opacity:0;transform:translate3d(var(--drop-x),-38px,0) rotate(var(--drop-rotate))}72%{opacity:1;transform:translate3d(0,3px,0) rotate(0)}100%{opacity:1;transform:none}}
+    @media(max-width:820px){.competition-shell{padding-bottom:max(28px,env(safe-area-inset-bottom,0px))}.background--mist{display:none}.background--scene{inset:auto -364px -22px auto;width:auto;height:108%;max-width:none;object-fit:contain;object-position:center;filter:none}.competition-shell::before,.award-tree{background:transparent}.heading .note span{opacity:0;animation:note-drop .68s calc(.72s + var(--i)*.085s) cubic-bezier(.2,.82,.3,1.18) forwards}.heading-seal{top:-9px;left:-58px;display:block}.award-tree{margin-top:-6px}.award-gallery-link{position:absolute;right:110px;bottom:270px;z-index:3;margin:0}.competition-story{z-index:100;display:inline-flex;left:50%;margin-bottom:0;padding:8px 10px;pointer-events:auto;touch-action:manipulation;transform:translateX(-50%);isolation:isolate}.competition-story::before{content:"";position:absolute;inset:-8px -12px}}
+    @media(max-width:360px){.competition-shell{padding-inline:7px}.award-tree{height:650px}.heading h1{font-size:1.5rem}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.heading .note span{opacity:1!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <MessageBoardLink />
+  <SiteNavigation current="competition" />
+  <main class="page">
+    <section class="competition-shell">
+      <img class="background background--mist" src={bgImage.src} alt="" aria-hidden="true" />
+      <img class="background background--scene" src={bgImage.src} alt="" aria-hidden="true" />
+      <header class="heading">
+        <p class="en">Competition &amp; Awards</p>
+        <span class="heading-title"><h1>折桂记</h1><img class="heading-seal" src="/images/home/home-bg-yin.webp" alt="云岫印" /></span>
+        <p class="note" aria-label="枝上有字，记一路试炼与回响">{[...'枝上有字，记一路试炼与回响'].map((char, i) => <span aria-hidden="true" style={`--i:${i};--drop-x:${(i % 3 - 1) * 7}px;--drop-rotate:${i % 2 === 0 ? -7 : 7}deg`}>{char}</span>)}</p>
+      </header>
+      <div class="award-tree" aria-hidden="true"><canvas id="competition-willow"></canvas></div>
+      <ul class="sr-only" aria-label="比赛与获奖经历">{awards.map((award) => <li>{award}</li>)}</ul>
+      <button class="award-gallery-link" id="competition-award-open" type="button">可以偷偷给你看云岫的奖状 o</button>
+      <a class="competition-story" href="/page4/" data-mobile-story-next><span>继续阅读我的故事</span><span class="competition-story__arrow" aria-hidden="true">→</span></a>
+    </section>
+    <dialog class="award-dialog" id="competition-award-dialog" aria-label="云岫的奖状">
+      <div class="award-dialog__paper">
+        <button class="award-dialog__close" id="competition-award-close" type="button" aria-label="关闭">×</button>
+        <div class="depth-carousel" id="competition-award-carousel" role="region" aria-roledescription="carousel" aria-label="云岫的奖状" tabindex="0">
+          <div class="depth-carousel__stage">
+            {awardImages.map((image, i) => <figure class="depth-carousel__card" style={`--award-ratio:${image.width}/${image.height}`} data-competition-award={i} data-landscape={String(image.landscape)} aria-label={`${i + 1} / ${awardImages.length}`}><img class="depth-carousel__img" src={image.src} width={image.width} height={image.height} alt={image.alt} draggable="false" /></figure>)}
+          </div>
+          <button class="depth-carousel__arrow depth-carousel__arrow--prev" type="button" aria-label="上一张">‹</button>
+          <button class="depth-carousel__arrow depth-carousel__arrow--next" type="button" aria-label="下一张">›</button>
+          <div class="award-counter" aria-live="polite">1 / {awardImages.length}</div>
+          <div class="depth-carousel__dots" role="tablist" aria-label="选择奖状">{awardImages.map((_, i) => <button class={`depth-carousel__dot${i === 0 ? ' is-active' : ''}`} data-competition-dot={i} type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-label={`第 ${i + 1} 张`}></button>)}</div>
+        </div>
+      </div>
+    </dialog>
+  </main>
+  <script define:vars={{ awards }}>
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileCompetition = matchMedia('(max-width: 820px)');
+    const canvas = document.querySelector('#competition-willow');
+    const context = canvas?.getContext('2d');
+    let branches = []; let width = 0; let height = 0; let dpr = 1;
+    const pointer = { x:0, y:0, active:false, lastX:0, dx:0 };
+    const createTree = () => {
+      if (!canvas || !context) return;
+      const rect = canvas.getBoundingClientRect(); if (!rect.width || !rect.height) return;
+      width = rect.width; height = rect.height; dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); context.setTransform(dpr,0,0,dpr,0,0);
+      const sy = height / 740;
+      branches = awards.map((award, i) => {
+        const startRows = [112,176,78,154,96,202,126,168,70,190,106,148];
+        const chars = [...award];
+        const columnX = 24 + (width - 48) * ((i + .5) / 12);
+        const baseY = (startRows[i] + (mobileCompetition.matches ? -22 : 0)) * sy;
+        const direction = i < awards.length / 2 ? -1 : 1;
+        const bend = mobileCompetition.matches ? (8.5 + i % 3 * 2.2) : (3 + i % 3 * 1.6);
+        const curledTail = i % 3 === 1;
+        const spacing = Math.min(13.8 * sy, (height - baseY - 24) / Math.max(chars.length - 1, 1));
+        const nodes = chars.map((char, j) => { const progress=Math.min(j/6,1);const eased=1-(1-progress)**2;const tailStart=Math.max(chars.length-5,7);const tailProgress=curledTail&&j>=tailStart?(j-tailStart)/Math.max(chars.length-1-tailStart,1):0;const tailEase=tailProgress*tailProgress*(3-2*tailProgress);const x=columnX+direction*bend*eased+direction*5.5*tailEase;const y=baseY+j*spacing-3.5*tailEase;return{char,originalX:x,originalY:y,x,y,vx:0,vy:0,glow:0}; });
+        return { nodes, phase:i*.73, frequency:.00042+(i%3)*.000045, opacity:.72+(i%3)*.07, sway:0, swayVelocity:0 };
+      });
+    };
+    const updatePointer = (clientX, clientY) => { if(!canvas)return;const rect=canvas.getBoundingClientRect();const x=clientX-rect.left;const y=clientY-rect.top;const inside=x>=0&&x<=rect.width&&y>=0&&y<=rect.height;pointer.dx=pointer.active?x-pointer.lastX:0;pointer.lastX=x;pointer.x=x;pointer.y=y;pointer.active=inside; };
+    window.addEventListener('pointermove',(event)=>updatePointer(event.clientX,event.clientY),{passive:true});
+    window.addEventListener('pointerdown',(event)=>updatePointer(event.clientX,event.clientY),{passive:true});
+    window.addEventListener('resize',createTree,{passive:true});
+    const renderTree = (time) => {
+      if(!context||!canvas)return requestAnimationFrame(renderTree);context.clearRect(0,0,width,height);context.textAlign='center';context.textBaseline='middle';context.font=`600 ${mobileCompetition.matches ? 10.4 : 11.5}px "STDongGuanTi Bld", "Songti SC", serif`;
+      branches.forEach((branch)=>{const nodes=branch.nodes;let push=0;let weight=0;if(pointer.active)nodes.forEach((node)=>{const dx=node.x-pointer.x;const dy=node.y-pointer.y;const dist=Math.hypot(dx,dy)||.001;if(dist<90){const edge=1-dist/90;push+=dx/dist*edge*edge;weight+=edge*edge}});if(weight>0)branch.swayVelocity+=push*.045+pointer.dx*Math.min(weight,2)*.006;branch.swayVelocity+=-branch.sway*.03;branch.swayVelocity*=reduced.matches ? .9 : .925;branch.sway+=branch.swayVelocity;branch.sway=Math.max(-7,Math.min(7,branch.sway));
+        nodes.forEach((node,j)=>{const p=j/Math.max(nodes.length-1,1);const idle=Math.sin(time*branch.frequency+branch.phase)*(.12+Math.pow(p,1.42)*2.2);const targetX=node.originalX+idle+branch.sway*Math.pow(p,1.65);const targetY=node.originalY+Math.abs(branch.sway)*.025*p;node.vx=(node.vx+(targetX-node.x)*.045)*.88;node.vy=(node.vy+(targetY-node.y)*.045)*.88;node.x+=node.vx;node.y+=node.vy;if(pointer.active){const dist=Math.hypot(node.x-pointer.x,node.y-pointer.y);node.glow=dist<90?Math.max(node.glow,1-dist/90):node.glow*.9}else node.glow*=.9});
+        if(nodes.length){context.beginPath();context.moveTo(nodes[0].x-10,nodes[0].y-7);nodes.forEach((node,j)=>{if(j===0)context.quadraticCurveTo(node.x-4,node.y-4,node.x,node.y);else{const prev=nodes[j-1];context.quadraticCurveTo(prev.x,prev.y,(prev.x+node.x)/2,(prev.y+node.y)/2)}});context.strokeStyle=`rgba(49,94,73,${branch.opacity*.35})`;context.lineWidth=.8;context.stroke()}nodes.forEach((node)=>{context.fillStyle=`rgba(${49+node.glow*22},${94+node.glow*35},${73+node.glow*18},${Math.min(1,branch.opacity+node.glow*.2)})`;context.fillText(node.char,node.x,node.y)});
+      });requestAnimationFrame(renderTree);
+    };
+    document.fonts?.ready.then(createTree);createTree();requestAnimationFrame(renderTree);
+
+    const dialog=document.querySelector('#competition-award-dialog');const openButton=document.querySelector('#competition-award-open');const closeButton=document.querySelector('#competition-award-close');const carousel=document.querySelector('#competition-award-carousel');const cards=[...document.querySelectorAll('[data-competition-award]')];const dots=[...document.querySelectorAll('[data-competition-dot]')];const counter=document.querySelector('.award-counter');let focus=0;let drag=null;
+    const normalize=(value)=>(value%cards.length+cards.length)%cards.length;
+    const layout=()=>{cards.forEach((card,i)=>{const raw=(i-focus+cards.length)%cards.length;const distance=raw>cards.length/2?raw-cards.length:raw;const shown=Math.abs(distance)<=2;card.style.transform=`translate(-50%,-50%) translateX(${distance*34}px) translateZ(${-Math.abs(distance)*150}px) rotateY(${distance*9}deg) scale(${1-Math.abs(distance)*.07})`;card.style.opacity=shown?String(Math.max(.18,1-Math.abs(distance)*.34)):'0';card.style.filter=`brightness(${Math.max(.52,1-Math.abs(distance)*.2)}) blur(${Math.abs(distance)*.7}px)`;card.style.zIndex=String(2000-Math.abs(distance)*30);card.style.pointerEvents=distance===0?'auto':'none';card.setAttribute('aria-hidden',distance===0?'false':'true')});dots.forEach((dot,i)=>{const active=i===focus;dot.classList.toggle('is-active',active);dot.setAttribute('aria-selected',String(active))});if(counter)counter.textContent=`${focus+1} / ${cards.length}`};
+    const setFocus=(value)=>{focus=normalize(value);layout()};
+    openButton?.addEventListener('click',()=>{dialog?.showModal();document.body.style.overflow='hidden';setFocus(0);carousel?.focus()});closeButton?.addEventListener('click',()=>dialog?.close());dialog?.addEventListener('click',(event)=>{if(event.target===dialog)dialog.close()});dialog?.addEventListener('close',()=>{document.body.style.overflow='';openButton?.focus()});
+    carousel?.querySelector('.depth-carousel__arrow--prev')?.addEventListener('click',()=>setFocus(focus-1));carousel?.querySelector('.depth-carousel__arrow--next')?.addEventListener('click',()=>setFocus(focus+1));dots.forEach((dot)=>dot.addEventListener('click',()=>setFocus(Number(dot.dataset.competitionDot))));carousel?.addEventListener('keydown',(event)=>{if(event.key==='ArrowLeft'){event.preventDefault();setFocus(focus-1)}else if(event.key==='ArrowRight'){event.preventDefault();setFocus(focus+1)}else if(event.key==='Escape')dialog?.close()});carousel?.addEventListener('pointerdown',(event)=>{drag={x:event.clientX,id:event.pointerId}});carousel?.addEventListener('pointerup',(event)=>{if(!drag)return;const delta=event.clientX-drag.x;if(Math.abs(delta)>28)setFocus(focus+(delta<0?1:-1));drag=null});carousel?.addEventListener('pointercancel',()=>{drag=null});layout();
+    const mobileStoryLink=document.querySelector('[data-mobile-story-next]');
+    mobileStoryLink?.addEventListener('click',(event)=>{if(!matchMedia('(max-width: 820px)').matches)return;event.preventDefault();const href=mobileStoryLink.getAttribute('href');if(href)window.location.assign(href)});
+  </script>
+</body>
+</html>

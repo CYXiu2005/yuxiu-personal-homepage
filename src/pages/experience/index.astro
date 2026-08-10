@@ -2,6 +2,7 @@
 import SplashCursor from '../../components/react/SplashCursor.jsx';
 import Ribbons from '../../components/react/Ribbons.jsx';
 import SkillFan from '../../components/react/SkillFan.jsx';
+import detailPaper from '../../../design-assets/page2/page2-tan.webp';
 import MessageBoardLink from '../../components/MessageBoardLink.astro';
 import SiteNavigation from '../../components/SiteNavigation.astro';
 
@@ -154,6 +155,8 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
     dialog { width:min(890px,calc(100vw - 32px)); max-height:calc(100svh - 38px); padding:0; border:0; overflow:visible; color:var(--ink); background:transparent; }
     dialog::backdrop { background:rgba(53,45,36,.34); backdrop-filter:blur(7px); }
     .paper { position:relative; aspect-ratio:3 / 2; max-height:calc(100svh - 38px); overflow:auto; padding:clamp(38px,5vw,70px) clamp(33px,6vw,82px) clamp(45px,5vw,68px); border-radius:0; background-color:transparent; background-image:url('/images/page2/page2-tan-landscape.webp'); background-size:125% auto; background-position:center; background-repeat:no-repeat; box-shadow:0 34px 74px rgba(52,42,31,.18); animation:unfold .84s var(--ease) both; transform-origin:center center; backface-visibility:hidden; will-change:transform,opacity; }
+    .paper-bg { display:none; position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; pointer-events:none; }
+    .paper-content { position:relative; z-index:1; }
     .close { position:absolute; top:18px; right:20px; z-index:5; width:36px; height:36px; border:0; border-radius:50%; background:transparent; color:rgba(48,45,40,.48); font-family:var(--en); font-size:1.45rem; cursor:pointer; transition:color .2s,transform .2s; }
     .close:hover { color:var(--red); transform:rotate(7deg); }
     .d-idx { margin:0 0 15px; color:rgba(166,78,66,.66); font-family:var(--en); font-size:.75rem; letter-spacing:.18em; }
@@ -177,8 +180,8 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
       .page{overflow:visible}
       .background{position:fixed}
       .leaves{position:fixed}
-      .hero{align-items:stretch;justify-content:flex-start;min-height:auto;padding:calc(var(--site-mobile-nav-height) + 76px) 16px 42px;overflow:visible}
-      .heading{position:relative;top:auto;left:auto;width:100%;margin:0 0 20px}
+      .hero{align-items:stretch;justify-content:flex-start;min-height:auto;padding:18px 16px 42px;overflow:visible}
+      .heading{position:relative;top:auto;left:auto;width:100%;margin:0 0 10px}
       .heading-seal{top:6px;left:max(4px,calc(50% - 205px));width:42px}
       .heading h1{line-height:1.38;text-wrap:balance}
       .album-stage{width:100%;height:auto;perspective:none;animation:none}
@@ -190,17 +193,26 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
       .panel-highlights li{flex:none;width:auto;height:auto;padding:0 0 0 15px;white-space:normal;text-align:left;writing-mode:horizontal-tb;text-orientation:mixed}
       .panel-highlights li::before{top:.7em;left:2px;width:4px;height:4px;transform:none}
       .foot{margin-top:20px;flex-wrap:wrap}
-      .story-next{position:relative;left:auto;bottom:auto;align-self:center;width:max-content;max-width:100%;margin:30px auto 0;transform:none;text-align:center;white-space:normal}
+      .story-next{position:relative;left:auto;bottom:auto;z-index:100;display:inline-flex;align-self:center;width:max-content;max-width:100%;margin:30px auto 0;padding:8px 10px;pointer-events:auto;touch-action:manipulation;transform:none;text-align:center;white-space:normal;isolation:isolate}
+      .story-next::before{content:"";position:absolute;inset:-8px -12px}
       .story-next:hover,.story-next:focus-visible{transform:translateY(-3px)}
       dialog{width:calc(100vw - 18px);max-height:calc(100svh - 18px)}
       .paper{height:calc(100svh - 18px);max-height:calc(100svh - 18px);aspect-ratio:auto;padding:50px 30px 38px;background-size:auto 100%;overscroll-behavior:contain}
       .d-title{font-size:clamp(1.45rem,6vw,2rem);line-height:1.45;text-wrap:balance}
     }
     @media (max-width:600px) {
-      .album{grid-template-columns:1fr}
-      .panel,.panel:nth-child(odd),.panel:nth-child(even){min-height:0}
+      .album{grid-template-columns:1fr;width:min(350px,calc(100% - 24px));margin-inline:auto}
+      .panel,.panel:nth-child(odd),.panel:nth-child(even){min-height:0;padding:15px 16px}
+      .idx{margin-bottom:7px;font-size:.6rem}
+      .panel h2{font-size:.96rem;line-height:1.35}
+      .company{margin-top:5px;font-size:.68rem;line-height:1.4}
+      .panel-highlights,.panel:nth-child(n+2) .panel-highlights{margin-top:8px;gap:3px;font-size:.68rem;line-height:1.4}
+      .panel-highlights li{padding-left:12px}
+      .panel-highlights li::before{top:.58em}
+      .foot{margin-top:9px;font-size:.56rem}
     }
-    @media (max-width:520px) { .hero{padding-inline:12px}.heading-seal{display:none}.panel{padding:23px 18px}.paper{padding:48px 24px 34px}.leaves{display:none} }
+    @media (max-width:520px) { .hero{padding-inline:12px}.heading-seal{top:27px;left:max(10px,calc(50% - 170px));display:block;width:42px}.panel{padding:15px 16px}.paper{padding:48px 24px 34px}.leaves{display:block} }
+    @media (max-width:820px) { dialog{overflow:hidden}dialog[open]{display:flex;align-items:center;justify-content:center}.paper{box-sizing:border-box;width:min(390px,calc(100vw - 34px));height:calc(100svh - 72px);max-height:760px;overflow:hidden;padding:0;background:none;box-shadow:0 26px 58px rgba(52,42,31,.2)}.paper-bg{display:block}.paper-content{position:absolute;inset:10.2% 30px 11.8%;box-sizing:border-box;height:auto;min-width:0;overflow-x:hidden;overflow-y:auto;overflow-wrap:anywhere;padding:0 2px 18px 0;overscroll-behavior:contain;scrollbar-gutter:stable}.d-summary{font-size:.82rem;line-height:1.72}.detail-list{font-size:.77rem;line-height:1.66;padding-left:1.15em}.detail-list li+li{margin-top:5px}.meta{gap:6px 14px}.tags{margin-top:16px;padding-bottom:8px}.tag{font-size:.6rem;padding:5px 9px}.close{top:22px;right:24px;outline:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent}.close:focus,.close:focus-visible{outline:none!important;box-shadow:none!important} }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}.heading .note span{opacity:1!important;animation:none!important}.background-frame{opacity:0!important;visibility:hidden!important}.background-frame:first-child{opacity:1!important;visibility:visible!important} }
   </style>
 </head>
@@ -227,7 +239,6 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
     </div>
     <SplashCursor client:load RAINBOW_MODE={false} COLOR="#fff8df" SECONDARY_COLOR="#ffffff" COLOR_INTENSITY={0.24} SPLAT_RADIUS={0.32} DENSITY_DISSIPATION={1.8} VELOCITY_DISSIPATION={1.2} />
     <Ribbons client:load colors={['#aab99d']} baseSpring={0.16} baseFriction={0.58} baseThickness={7.5} offsetFactor={0} maxAge={76} pointCount={9} speedMultiplier={0.42} maxSegmentLength={0.015} enableFade={true} />
-    <SkillFan client:load items={['Python', 'SQL', 'JavaScript', 'TypeScript', 'React', 'HTML', 'CSS / Sass', 'Unity', 'C#', 'Git / GitHub', 'Astro', 'Taro', 'Figma']} />
     <section class="hero">
       <header class="heading">
         <img class="heading-seal" src="/images/home/home-bg-yin.webp" alt="云岫印" />
@@ -235,6 +246,7 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
         <h1 aria-label="行远自迩，笃行不怠">{[...'行远自迩，笃行不怠'].map((char, i) => <span style={`--i:${i}`}>{char}</span>)}</h1>
         <p class="note" aria-label="轻触册页，展开一段经历">{[...'轻触册页，展开一段经历'].map((char, i) => <span aria-hidden="true" style={`--i:${i};--drop-x:${(i % 3 - 1) * 7}px;--drop-rotate:${i % 2 === 0 ? -7 : 7}deg`}>{char}</span>)}</p>
       </header>
+      <SkillFan client:load items={['Python', 'SQL', 'JavaScript', 'TypeScript', 'React', 'HTML', 'CSS / Sass', 'Unity', 'C#', 'Git / GitHub', 'Astro', 'Taro', 'Figma']} />
       <div class="album-stage">
         <div class="album">
           {experiences.map((item, i) => (
@@ -244,11 +256,11 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
           ))}
         </div>
       </div>
-      <a class="story-next" href="/projects/">
+      <a class="story-next" href="/projects/" data-mobile-story-next>
         <span>继续阅读我的故事</span><span class="story-next__arrow" aria-hidden="true">→</span>
       </a>
     </section>
-    <dialog id="experience-dialog"><article class="paper"><button class="close" type="button" aria-label="关闭">×</button><div class="paper-content"><p class="d-idx"></p><h2 class="d-title"></h2><p class="d-company"></p><div class="meta"></div><div class="divider"></div><p class="d-summary"></p><ul class="detail-list"></ul><div class="tags"></div></div></article></dialog>
+    <dialog id="experience-dialog"><article class="paper"><img class="paper-bg" src={detailPaper.src} alt="" aria-hidden="true" /><button class="close" type="button" aria-label="关闭">×</button><div class="paper-content"><p class="d-idx"></p><h2 class="d-title"></h2><p class="d-company"></p><div class="meta"></div><div class="divider"></div><p class="d-summary"></p><ul class="detail-list"></ul><div class="tags"></div></div></article></dialog>
   </main>
   <script define:vars={{ experiences }}>
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -259,6 +271,13 @@ const fallingLeaves = Array.from({ length: 18 }, (_, i) => {
     const fill = (selector, value) => { const node=dialog?.querySelector(selector); if(node) node.textContent=value; };
     document.querySelectorAll('[data-exp]').forEach(button => button.addEventListener('click', () => { const item=experiences[Number(button.dataset.exp)]; if(!item || !dialog) return; last=button; fill('.d-idx',item.index); fill('.d-title',item.title); fill('.d-company',item.company); fill('.d-summary',item.summary); const meta=dialog.querySelector('.meta'); meta.replaceChildren(...[item.period,item.location,item.role].map(value=>{const span=document.createElement('span');span.textContent=value;return span})); const list=dialog.querySelector('.detail-list'); list.replaceChildren(...item.bullets.map(value=>{const li=document.createElement('li');li.textContent=value;return li})); const tags=dialog.querySelector('.tags'); tags.replaceChildren(...item.tags.map(value=>{const span=document.createElement('span');span.className='tag';span.textContent=value;return span})); dialog.showModal(); document.body.style.overflow='hidden'; }));
     close?.addEventListener('click',()=>dialog?.close()); dialog?.addEventListener('click',event=>{if(event.target===dialog)dialog.close()}); dialog?.addEventListener('close',()=>{document.body.style.overflow='';last?.focus()});
+    const mobileStoryLink = document.querySelector('[data-mobile-story-next]');
+    mobileStoryLink?.addEventListener('click', (event) => {
+      if (!matchMedia('(max-width: 820px)').matches) return;
+      event.preventDefault();
+      const href = mobileStoryLink.getAttribute('href');
+      if (href) window.location.assign(href);
+    });
   </script>
 </body>
 </html>
