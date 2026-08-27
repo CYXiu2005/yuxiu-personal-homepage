@@ -213,3 +213,15 @@
   50%{transform:translate3d(3px,-5px,0) rotate(var(--r))}
   100%{transform:translate3d(-2px,3px,0) rotate(calc(var(--r) + .7deg))}
 }
+
+/* Randomly draw another six approved letters without a hard visual swap. */
+.letter-sky{opacity:1;filter:blur(0);transition:opacity .32s ease,filter .32s ease}
+.letter-sky.is-switching{opacity:0;filter:blur(3px);pointer-events:none}
+.message-refresh{position:absolute;left:50%;bottom:calc(7% + clamp(112px,15vh,150px) + 102px);z-index:8;padding:6px 5px 9px;border:0;background:transparent;color:rgba(57,54,48,.58);font-family:var(--mb-font);font-size:.76rem;letter-spacing:.18em;cursor:pointer;transform:translateX(-50%);transition:color .24s ease,transform .28s cubic-bezier(.2,.78,.24,1),opacity .24s ease}
+.message-refresh::after{content:"";position:absolute;right:4px;bottom:2px;left:4px;height:1px;background:linear-gradient(90deg,transparent,rgba(166,78,66,.55),transparent);transform:scaleX(.65);transition:transform .28s ease}
+.message-refresh:hover,.message-refresh:focus-visible{color:var(--mb-red);outline:none;transform:translate(-50%,-2px)}
+.message-refresh:hover::after,.message-refresh:focus-visible::after{transform:scaleX(1)}
+.message-refresh:disabled{opacity:.42;cursor:wait;transform:translateX(-50%)}
+@media(max-width:820px){.message-refresh{bottom:calc(max(10px,env(safe-area-inset-bottom,0px)) + 92px + 96px);font-size:.7rem}}
+@media(max-width:380px), (max-height:620px){.message-refresh{bottom:calc(max(10px,env(safe-area-inset-bottom,0px)) + 78px + 84px)}}
+@media(prefers-reduced-motion:reduce){.letter-sky,.message-refresh{transition:none}}

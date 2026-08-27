@@ -12,11 +12,12 @@ import narrativeImage from '../../../design-assets/page3/叙构.webp';
 import teaImage from '../../../design-assets/page3/沐茗.webp';
 import personalWebsiteImage from '../../../design-assets/page3/个人网页.webp';
 import buildNotesVideo from '../../../design-assets/page3/营造手札展示视频.mp4?url';
+import faHaiPromoVideo from '../../../design-assets/page3/法海宣传视频.mp4?url';
 import MessageBoardLink from '../../components/MessageBoardLink.astro';
 import SiteNavigation from '../../components/SiteNavigation.astro';
 
 const awardAssetModules = import.meta.glob(
-  '../../../design-assets/ award/*.webp',
+  '../../../design-assets/ award/*.{webp,png,jpg,jpeg}',
   { eager: true, import: 'default' }
 ) as Record<string, ImageMetadata>;
 const awardImages = Object.entries(awardAssetModules).map(([path, image]) => ({
@@ -34,12 +35,13 @@ const projects = [
     detail: '针对小微企业出海过程中法律知识不足、专业服务成本高和跨境合规风险频发的问题，设计集出海前风险预警、经营中合规检测与法律信息查询于一体的智能服务平台。',
     points: ['整合 26 个国内外法律数据库，构建约 50 万条法律条文和 10 万份真实案例的核心知识库。', '基于 Dify 搭建法律风险分析工作流，并结合 RAG 提升回答准确性、可追溯性与依据展示能力。', '负责数据清洗、模型工作流、产品功能与网页落地，形成风险清单、类案推送和税务计算等模块。', '项目获中国国际大学生创新大赛省级银奖，初步上线后累计服务超过 100 家企业。'],
     tags: ['Dify', 'RAG', '法律知识库', 'AI Agent', '产品设计'],
+    links: [{ href: faHaiPromoVideo, label: '宣传视频' }],
   },
   {
     n: '02', title: 'Unity 国风叙事 RPG《营造手札》', sub: '传统营造文化与场景探索的互动游戏', role: '核心开发者', image: buildNotesImage.src,
     summary: '以 Unity 构建 2.5D 与 3D 融合的国风叙事空间，将传统营造文化转化为可探索体验。',
     detail: '以传统营造文化和空间探索为核心，独立完成国风叙事 RPG 的游戏设计、视觉营造与主要功能开发，让文化内容通过玩家行动和场景互动逐步展开。',
-    points: ['基于 Unity 完成 2.5D 叙事场景与 3D 可探索场景的融合搭建。', '使用 C# 开发角色移动、物品交互、动作触发、物理碰撞和视角相机等功能。', '负责角色动画调试、剧情流程、交互逻辑和整体国风视觉语言的统一。', '项目获全国大学生计算机设计大赛省赛一等奖并推荐国赛。'],
+    points: ['基于 Unity 完成 2.5D 叙事场景与 3D 可探索场景的融合搭建。', '使用 C# 开发角色移动、物品交互、动作触发、物理碰撞和视角相机等功能。', '负责角色动画调试、剧情流程、交互逻辑和整体国风视觉语言的统一。', '项目获中国大学生计算机设计大赛全国一等奖。'],
     tags: ['Unity', 'C#', '游戏设计', '场景搭建', '叙事交互'],
     links: [{ href: buildNotesVideo, label: '查看展示视频' }],
   },
@@ -69,6 +71,7 @@ const projects = [
     detail: '从信息架构、视觉风格到前端实现独立设计个人网站，将产品、技术、研究与文学创作经历组织成统一的个人叙事，并把网站本身作为持续迭代的数字作品。',
     points: ['规划首页、个人介绍、工作经历、项目经历、我的文字和日常小品等内容板块。', '采用 Astro、TypeScript 与 React Islands 组织页面结构和局部交互。', '实现宣纸肌理、三帧定格动画、折叠册页、纱幔、蝴蝶与鼠标烟雾轨迹等视觉效果。', '兼顾响应式布局、性能和可维护性，使传统文化视觉语言与现代网页交互自然结合。'],
     tags: ['Astro', 'TypeScript', 'React', 'CSS 动效', '视觉设计'],
+    links: [{ href: 'https://github.com/CYXiu2005/yuxiu-personal-homepage', label: '查看github链接' }],
   },
   {
     n: '06', title: '“沐茗而来”沐川特色健康茶品牌', sub: '地方特色茶种、健康价值与文旅资源融合的创业项目', role: '股东与公司法人', image: teaImage.src,
@@ -83,7 +86,7 @@ const frames = [bg01, bg02, bg03];
 
 const awards = [
   '全国大学生数学建模省二等奖（队长）',
-  '中国大学生计算机设计大赛省一等奖',
+  '中国大学生计算机设计大赛全国一等奖',
   '全国大学生统计建模大赛四川省三等奖',
   'MathorCup数学应用挑战赛赛区三等奖',
   '四川省大学生数据科学与统计建模竞赛三等奖',

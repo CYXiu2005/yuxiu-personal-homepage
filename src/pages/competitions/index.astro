@@ -5,7 +5,7 @@ import MessageBoardLink from '../../components/MessageBoardLink.astro';
 import SiteNavigation from '../../components/SiteNavigation.astro';
 
 const awardAssetModules = import.meta.glob(
-  '../../../design-assets/ award/*.webp',
+  '../../../design-assets/ award/*.{webp,png,jpg,jpeg}',
   { eager: true, import: 'default' }
 ) as Record<string, ImageMetadata>;
 
@@ -19,7 +19,7 @@ const awardImages = Object.entries(awardAssetModules).map(([path, image]) => ({
 
 const awards = [
   '全国大学生数学建模省二等奖（队长）',
-  '中国大学生计算机设计大赛省一等奖',
+  '中国大学生计算机设计大赛全国一等奖',
   '全国大学生统计建模大赛四川省三等奖',
   'MathorCup数学应用挑战赛赛区三等奖',
   '四川省大学生数据科学与统计建模竞赛三等奖',
