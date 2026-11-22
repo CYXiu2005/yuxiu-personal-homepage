@@ -1,7 +1,7 @@
 # personal-website
 
 这是一个基于 Astro、TypeScript、Tailwind CSS 4 和 Content Collections 的个人网页基础框架。
-直接访问地址：yuxiu-home.cn
+直接访问地址：yuxiu-home.cn (中国）
             yuxiu-home.vercel.app（海外）
 
 ## 开发
